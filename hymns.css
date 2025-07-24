@@ -1,0 +1,62 @@
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.serif {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+section {
+    width: 80vw;
+}
+
+.hymn {
+    display: flex;
+}
+
+.left {
+    min-width: 60%;
+}
+
+.left h2 {
+    margin-bottom: 3rem;
+}
+
+.left a img {
+    width: 70%;
+}
+
+.right {
+    margin-top: 2rem;
+    width: 40%;
+}
+
+.details {
+    margin-top: 5rem;
+}
+
+.details p {
+  margin: 0;
+}
+
+.lyrics {
+    font-size: 0.85rem;
+}
+
+.break-before {
+    margin-top: 1.5rem;
+}
+
+article {
+    margin: 4.5rem 0;
+}
+
+article div {
+    width: 70ch;
+    margin: auto;
+}
+
+a {
+    color: var(--dark-green)
+}

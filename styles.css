@@ -28,6 +28,10 @@ header {
     filter: drop-shadow(0px 7px 4px #003311);
 }
 
+.col-80 {
+    width: 80% !important;
+}
+
 @media screen and (width >= 769px) {
   header {
     position: sticky;
@@ -159,8 +163,81 @@ main {
     background-color: var(--tan);
 }
 
+#hymns .inner .right {
+    width: 70vw;
+    display: flex;
+    gap: 6rem;
+    font-size: 1.15rem;
+}
+
+.hymn-list {
+    margin-bottom: 1rem;
+    color: var(--dark-green);
+}
+
+.hymn-list a {
+    color: var(--dark-green);
+    transition: all ease 250ms;
+}
+.hymn-list a:hover {
+    color: var(--light-green);
+    transition: all ease 250ms;
+}
+.hymn-list a:visited {
+    color: var(--dark-green);
+}
+
+
 footer {
-    height: 80vh;
-    background-color: var(--dark-green);
+    min-height: 65vh;
+    background-image: -webkit-radial-gradient(var(--light-green), var(--dark-green));
+    background-image: radial-gradient(var(--light-green), var(--dark-green));
     color: var(--beige);
+    position: relative;
+}
+
+footer .inner {
+    margin: 0 auto;
+    width: 85vw;
+    padding-top: 2rem;
+}
+
+footer h2 {
+    color: var(--beige);
+}
+
+footer .content {
+    height: calc(100% - 12rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content p {
+    margin: 0;
+}
+
+.socials {
+    margin: 3rem 0;
+}
+
+.socials a {
+    text-decoration: none;
+    color: inherit;
+    font-size: clamp(0.8rem, 10vw, 4rem);
+    padding-right: 1.25rem;
+    transition: all ease 250ms;
+}
+
+.socials a:hover {
+    color: var(--tan);
+    filter: drop-shadow(0 4px var(--brown));
+    transition: all ease 250ms;
+}
+
+.public-domain {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 1rem;
 }
