@@ -58,5 +58,11 @@ article div {
 }
 
 a {
-    color: var(--dark-green)
+    color: var(--dark-green);
+    transition: all ease 250ms;
+}
+
+a:hover {
+    color: var(--light-green);
+    transition: all ease 250ms;
 }

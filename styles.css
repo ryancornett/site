@@ -64,6 +64,8 @@ header {
         inset: 50%;
         width:max-content;
         z-index: 500;
+        user-select: none;
+        cursor: default;
     }
 
     .hero-img {
@@ -149,6 +151,10 @@ main {
     min-height: 100vh;
 }
 
+.about-ryan, #hymns .inner .right {
+    margin-top: 4rem;
+}
+
 .no-blue-link {
     color: inherit;
     font-weight: bold;
@@ -175,21 +181,41 @@ main {
     color: var(--dark-green);
 }
 
-.hymn-list a {
+.hymn-list a, .project-list div a {
     color: var(--dark-green);
     transition: all ease 250ms;
 }
-.hymn-list a:hover {
+.hymn-list a:hover, .project-list div a:hover {
     color: var(--light-green);
     transition: all ease 250ms;
 }
-.hymn-list a:visited {
+.hymn-list a:visited, .project-list div a:visited {
     color: var(--dark-green);
 }
 
+.col-70 {
+    min-width: 70%;
+}
+
+.project-list {
+    display: flex;
+    flex: 1 1 50%;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.project-list div {
+    max-width: 45%;
+    position: relative;
+}
+
+.project-list div h3 {
+    color: var(--dark-green)
+}
 
 footer {
-    min-height: 65vh;
+    min-height: 75vh;
     background-image: -webkit-radial-gradient(var(--light-green), var(--dark-green));
     background-image: radial-gradient(var(--light-green), var(--dark-green));
     color: var(--beige);
