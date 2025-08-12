@@ -32,6 +32,10 @@ header {
     width: 80% !important;
 }
 
+#family-pic {
+    box-shadow: #003311 0 3px 10px;
+}
+
 @media screen and (width >= 769px) {
   header {
     position: sticky;

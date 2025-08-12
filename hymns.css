@@ -44,8 +44,12 @@ section {
     font-size: 0.85rem;
 }
 
+.lyrics p {
+    margin: 0.2rem 0;
+}
+
 .break-before {
-    margin-top: 1.5rem;
+    padding-top: 1.5rem;
 }
 
 article {
