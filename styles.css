@@ -28,6 +28,30 @@ header {
     filter: drop-shadow(0px 7px 4px #003311);
 }
 
+.share-bar {
+    margin: 2rem 0.5rem;
+    display:flex;
+    gap:.5rem;
+    align-items:center;
+    flex-wrap:wrap
+}
+
+.share-btn,.share-link {
+    display: flex;
+    gap: 0.25rem;
+    border:1px solid #ddd;
+    padding:.5rem .75rem;
+    border-radius:.5rem;
+    background:#fff;
+    cursor:pointer;
+    text-decoration:none;
+    font:600 14px/1 system-ui
+}
+
+.share-btn:hover,.share-link:hover {
+    background:#f5f5f5
+}
+
 .col-80 {
     width: 80% !important;
 }
@@ -255,7 +279,7 @@ footer .content {
 .socials a {
     text-decoration: none;
     color: inherit;
-    font-size: clamp(0.8rem, 10vw, 4rem);
+    font-size: clamp(0.8rem, 8.5vw, 3.5rem);
     padding-right: 1.25rem;
     transition: all ease 250ms;
 }

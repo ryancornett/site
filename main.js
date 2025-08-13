@@ -1,3 +1,51 @@
+(function () {
+  const bar = document.querySelector('.share-bar');
+  if (!bar) return;
+
+  const url   = bar.dataset.url   || location.href;
+  const title = bar.dataset.title || document.title;
+  const text  = bar.dataset.text  || '';
+
+  // Web Share API (native sheet on mobile)
+  const nativeBtn = bar.querySelector('.share-btn.native');
+  if (navigator.share && nativeBtn) {
+    nativeBtn.addEventListener('click', async () => {
+      try { await navigator.share({ title, text, url }); } catch {}
+    });
+  } else if (nativeBtn) {
+    nativeBtn.style.display = 'none'; // hide if not supported
+  }
+
+  // Copy link
+  const copyBtn = bar.querySelector('.share-btn.copy');
+  copyBtn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => copyBtn.textContent = 'Copy link', 1600);
+    } catch {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
+    }
+  });
+
+  // Prefilled links
+  const u = encodeURIComponent(url);
+  const t = encodeURIComponent(title);
+  const d = encodeURIComponent(text);
+
+  const x = bar.querySelector('.share-link.x');
+  if (x) x.href = `https://x.com/intent/tweet?text=${d}%20${t}&url=${u}`;
+
+  const fb = bar.querySelector('.share-link.facebook');
+  if (fb) fb.href = `https://www.facebook.com/sharer/sharer.php?u=${u}`;
+
+  const em = bar.querySelector('.share-link.email');
+  if (em) em.href = `mailto:?subject=${t}&body=${d}%0A%0A${u}`;
+})();
+
 const projects = [
     {
         "title": "21st Century Baptist Catechism",
@@ -70,6 +118,7 @@ const projects = [
 const projectList = document.querySelector(".project-list");
 
 function populateProjects() {
+    if (projectList === null) { return };
     projects.forEach(project => {
         const item = document.createElement('div');
         const title = document.createElement('h3');
@@ -87,8 +136,34 @@ function populateProjects() {
         desc.textContent = project.desc;
         item.appendChild(desc);
         projectList.appendChild(item);
-
     });
 }
 
 populateProjects();
+
+const socials = document.querySelector('.socials');
+
+socials.innerHTML = `
+<div class="socials">
+                    <a href="https://x.com/ryancornettky" target="_blank">
+                        <sl-icon name="twitter-x"></sl-icon>
+                    </a>
+                    <a href="https://www.youtube.com/@RyanCornett" target="_blank">
+                        <sl-icon name="youtube"></sl-icon>
+                    </a>
+                    <a href="https://github.com/ryancornett" target="_blank">
+                        <sl-icon name="github"></sl-icon>
+                    </a>
+                    <a href="https://discordapp.com/users/milestretch" target="_blank">
+                        <sl-icon name="discord"></sl-icon>
+                    </a>
+                    <a href="https://pota.app/#/profile/KR4BJN" target="_blank">
+                        <sl-icon name="broadcast-pin"></sl-icon>
+                    </a>
+                    <a href="https://patreon.com/ryancornett" target="_blank">
+                        <sl-icon name="person-heart"></sl-icon>
+                    </a>
+                    <a href="mailto:contact@ryandcornett.com" target="_blank">
+                        <sl-icon name="envelope"></sl-icon>
+                    </a>
+                </div>`
