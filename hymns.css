@@ -1,72 +1,87 @@
 main {
     display: flex;
-    justify-content: center;
-}
-
-.serif {
-    font-family: 'Times New Roman', Times, serif;
-}
-
-section {
-    width: 80vw;
-}
-
-.hymn {
-    display: flex;
-}
-
-.left {
-    min-width: 60%;
-}
-
-.left h2 {
-    margin-bottom: 3rem;
-}
-
-.left a img {
-    width: 70%;
-}
-
-.right {
-    margin-top: 2rem;
-    width: 40%;
-}
-
-.details {
-    margin-top: 5rem;
-}
-
-.details p {
-  margin: 0;
-}
-
-.lyrics {
-    font-size: 0.85rem;
-}
-
-.lyrics p {
-    margin: 0.2rem 0;
-}
-
-.break-before {
-    padding-top: 1.5rem;
-}
-
-article {
-    margin: 4.5rem 0;
-}
-
-article div {
-    width: 70ch;
+    flex-direction: column;
+    width: 90%;
     margin: auto;
 }
 
-a {
-    color: var(--dark-green);
-    transition: all ease 250ms;
+.left a img {
+        width: 90%;
 }
 
-a:hover {
-    color: var(--light-green);
-    transition: all ease 250ms;
+@media screen and (width >= 769px) {
+    main {
+        justify-content: center;
+        flex-direction: row;
+        width: unset;
+        margin: 0;
+    }
+
+    .serif {
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    section {
+        width: 80vw;
+    }
+
+    .hymn {
+        display: flex;
+    }
+
+    .left {
+        min-width: 60%;
+    }
+
+    .left h2 {
+        margin-bottom: 3rem;
+    }
+
+    .left a img {
+        width: 70%;
+    }
+
+    .right {
+        margin-top: 2rem;
+        width: 40%;
+    }
+
+    .details {
+        margin-top: 5rem;
+    }
+
+    .details p {
+    margin: 0;
+    }
+
+    .lyrics {
+        font-size: 0.85rem;
+    }
+
+    .lyrics p {
+        margin: 0.2rem 0;
+    }
+
+    .break-before {
+        padding-top: 1.5rem;
+    }
+
+    article {
+        margin: 4.5rem 0;
+    }
+
+    article div {
+        width: 70ch;
+        margin: auto;
+    }
+
+    a {
+        color: var(--dark-green);
+        transition: all ease 250ms;
+    }
+
+    a:hover {
+        color: var(--light-green);
+        transition: all ease 250ms;
+    }
 }

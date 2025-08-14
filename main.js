@@ -144,7 +144,6 @@ populateProjects();
 const socials = document.querySelector('.socials');
 
 socials.innerHTML = `
-<div class="socials">
                     <a href="https://x.com/ryancornettky" target="_blank">
                         <sl-icon name="twitter-x"></sl-icon>
                     </a>
@@ -165,5 +164,4 @@ socials.innerHTML = `
                     </a>
                     <a href="mailto:contact@ryandcornett.com" target="_blank">
                         <sl-icon name="envelope"></sl-icon>
-                    </a>
-                </div>`
+                    </a>`
