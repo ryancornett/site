@@ -1,3 +1,9 @@
+const year = new Date().getFullYear();
+const footerCredit = document.querySelector('.public-domain');
+if (footerCredit != null) {
+    footerCredit.textContent = `Creative Commons Zero 1.0 Universal: All works dedicated to public domain. 2019-${year}.`;
+}   
+
 (function () {
   const bar = document.querySelector('.share-bar');
   if (!bar) return;
@@ -92,7 +98,7 @@ const projects = [
     {
         "title": "Lofi Bible",
         "subtitle": "Bible text and audio with background music",
-        "link": "https://https://lofi.bible",
+        "link": "https://lofi.bible",
         "desc": "Read and listen to the BSB or KJV audio Bible with background lofi chill beats and/or lofi \"hymns.\" This was one of the first big hobby projects I finished and the first to garner a donation. (Thanks, Logan!)"
     },
     {
@@ -164,4 +170,134 @@ socials.innerHTML = `
                     </a>
                     <a href="mailto:contact@ryandcornett.com" target="_blank">
                         <sl-icon name="envelope"></sl-icon>
-                    </a>`
+                    </a>`;
+
+
+/* Lightweight YouTube lightbox
+   Usage: <div class="yt-card" data-ytid="VIDEO_ID" data-title="Title" [data-thumb="/path.jpg"] [data-caption="..."]></div>
+*/
+(function () {
+  const READY = 'DOMContentLoaded';
+  if (document.readyState === 'loading') document.addEventListener(READY, init);
+  else init();
+
+  function init() {
+    // render all cards
+    document.querySelectorAll('.yt-card').forEach(renderCard);
+    // create modal once
+    ensureModal();
+    // delegate clicks
+    document.addEventListener('click', onClick);
+  }
+
+  function renderCard(el) {
+    const id = el.dataset.ytid;
+    const title = el.dataset.title || 'Video';
+    const thumb = el.dataset.thumb || `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    const caption = el.dataset.caption;
+
+    const btn = document.createElement('button');
+    btn.className = 'yt-open';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', `Play video: ${title}`);
+    btn.dataset.ytid = id;
+    btn.dataset.title = title;
+
+    const img = document.createElement('img');
+    img.src = thumb;
+    img.alt = `Video thumbnail: ${title}`;
+    img.loading = 'lazy';
+    img.classList.add("yt-thumb");
+
+    const play = document.createElement('span');
+    play.className = 'yt-play';
+    play.setAttribute('aria-hidden', 'true');
+    play.innerHTML = `<svg viewBox="0 0 60 60" width="60" height="60">
+        <circle cx="30" cy="30" r="28" fill="rgba(0,0,0,0.6)"/>
+        <polygon points="24,18 24,42 44,30" fill="#fff"/>
+      </svg>`;
+
+    btn.append(img, play);
+    el.innerHTML = ''; // clear existing
+    el.append(btn);
+
+    if (caption) {
+      const cap = document.createElement('div');
+      cap.className = 'yt-caption';
+      cap.textContent = caption;
+      el.append(cap);
+    }
+  }
+
+  function ensureModal() {
+    if (document.getElementById('ytModal')) return;
+    const modal = document.createElement('div');
+    modal.className = 'yt-modal';
+    modal.id = 'ytModal';
+    modal.hidden = true;
+    modal.innerHTML = `
+      <div class="yt-backdrop" data-close></div>
+      <div class="yt-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+        <button class="yt-close" type="button" aria-label="Close video" data-close>✕</button>
+        <div class="yt-frame" id="ytFrame"></div>
+      </div>`;
+    document.body.appendChild(modal);
+  }
+
+  function onClick(e) {
+    // open
+    const btn = e.target.closest('.yt-open');
+    if (btn) {
+      openVideo(btn.dataset.ytid, btn.dataset.title, btn);
+      return;
+    }
+    // close
+    if (e.target.matches('[data-close]')) {
+      closeVideo();
+    }
+  }
+
+  let lastTrigger = null;
+
+  function embedUrl(id) {
+    return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+  }
+
+  function openVideo(id, title, triggerEl) {
+    lastTrigger = triggerEl || null;
+    const frameWrap = document.getElementById('ytFrame');
+    frameWrap.innerHTML =
+      `<iframe src="${embedUrl(id)}"
+               allow="autoplay; encrypted-media; picture-in-picture"
+               allowfullscreen
+               title="${title || 'Video'}"></iframe>`;
+
+    const modal = document.getElementById('ytModal');
+    modal.hidden = false;
+    modal.querySelector('.yt-close').focus();
+
+    document.addEventListener('keydown', onKeydown);
+  }
+
+  function closeVideo() {
+    const modal = document.getElementById('ytModal');
+    const frameWrap = document.getElementById('ytFrame');
+    modal.hidden = true;
+    frameWrap.innerHTML = ''; // stops playback
+    document.removeEventListener('keydown', onKeydown);
+    if (lastTrigger) lastTrigger.focus();
+  }
+
+  function onKeydown(e) {
+    if (e.key === 'Escape') closeVideo();
+
+    // simple focus trap
+    if (e.key === 'Tab') {
+      const modal = document.getElementById('ytModal');
+      const focusables = modal.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])');
+      const first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+    }
+  }
+})();

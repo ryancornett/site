@@ -230,6 +230,10 @@ nav li a {
     .socials a {
         font-size: clamp(0.8rem, 8.5vw, 3rem);
     }
+
+    .hymn-features li {
+        font-size: 0.9rem;
+    }
 }
 
 

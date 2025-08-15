@@ -6,7 +6,44 @@ main {
 }
 
 .left a img {
-        width: 90%;
+    width: 90%;
+}
+
+/* Card */
+.yt-card { display:inline-block; position:relative; margin:1rem 0; }
+.yt-card button { border:0; padding:0; background:transparent; cursor:pointer; display:block; }
+.yt-card img { display:block; width:100%; height:auto; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,.15); }
+.yt-card .yt-play {
+  position:absolute; inset:0; display:grid; place-items:center; pointer-events:none;
+}
+
+/* Caption (optional) */
+.yt-caption { font-size:.9rem; margin-top:.4rem; color:#666; }
+
+/* Modal */
+.yt-modal[hidden] { display:none; }
+.yt-modal { position:fixed; inset:0; z-index:1000; }
+.yt-backdrop { position:absolute; inset:0; background:rgba(0,0,0,.72); }
+.yt-dialog {
+  position:relative; width:min(92vw, 960px); aspect-ratio:16/9;
+  margin:6vh auto; background:#000; border-radius:16px; overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.yt-close {
+  position:absolute; top:.5rem; right:.5rem; z-index:2;
+  background:rgba(0,0,0,.6); color:#fff; border:0; border-radius:10px;
+  width:40px; height:40px; font-size:20px; cursor:pointer;
+}
+.yt-frame { position:absolute; inset:0; }
+.yt-frame iframe { width:100%; height:100%; border:0; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .yt-card img { transition:none; }
+}
+
+.yt-thumb {
+    min-width: 98%;
 }
 
 @media screen and (width >= 769px) {
@@ -30,14 +67,14 @@ main {
     }
 
     .left {
-        min-width: 60%;
+        min-width: 50%;
     }
 
     .left h2 {
         margin-bottom: 3rem;
     }
 
-    .left a img {
+    .sheet {
         width: 70%;
     }
 
