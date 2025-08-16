@@ -340,3 +340,34 @@ footer .content {
     bottom: 0;
     padding-bottom: 1rem;
 }
+
+ .to-top {
+    position: fixed;
+    right: 2%;
+    bottom: 0;
+    z-index: 10000;
+    height: 40px;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    transition: all ease-in-out 400ms;
+  }
+
+  .to-top:hover {
+    background-color: var(--tan);
+    opacity: .7;
+  }
+  
+  .to-top > a {  
+    text-decoration: none;
+    color: var(--light-green);
+    font-size: 1.85rem;
+  }
+
+  .visible {
+    opacity: 80%;
+    transition: all ease-in-out 500ms;
+  }
