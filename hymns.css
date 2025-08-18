@@ -118,7 +118,7 @@ main {
     }
 
     a:hover {
-        color: var(--light-green);
+        color: var(--blue);
         transition: all ease 250ms;
     }
 }

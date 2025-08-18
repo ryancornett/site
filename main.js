@@ -131,6 +131,7 @@ function populateProjects() {
         title.textContent = project.title;
         item.appendChild(title);
         link = document.createElement('a');
+        link.classList.add('project-link');
         link.textContent = project.link;
         link.href = project.link;
         link.target = "_blank";

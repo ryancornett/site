@@ -5,8 +5,9 @@ html, body {
     padding: 0;
     box-sizing: border-box;
     --dark-green: #053306;
-    --light-green: #556a2f;
-    --brown: #898257;
+    --gray: #6e7a6c;
+    --dark-blue: #00354f;
+    --blue: #006481;
     --beige: #fffcea;
     --tan: #eae6cb;
     scroll-behavior: smooth;
@@ -25,7 +26,7 @@ h2, h4, h6, p, a, div, span {
 header {
     width: 100%;
     background-image: -webkit-linear-gradient(#083421, #4a4c0d);
-    background-image: linear-gradient(var(--light-green), var(--dark-green));
+    background-image: linear-gradient(var(--dark-blue), var(--dark-green));
     filter: drop-shadow(0px 7px 4px #003311);
 }
 
@@ -101,9 +102,9 @@ nav li a {
     background:#f5f5f5
 }
 
-#family-pic {
+#ryan-pic {
     box-shadow: #003311 0 3px 10px;
-    width: 100%;
+    width: 70%;
 }
 
 .content p {
@@ -125,8 +126,8 @@ nav li a {
 }
 
 .socials a:hover {
-    color: var(--tan);
-    filter: drop-shadow(0 4px var(--brown));
+    color: var(--blue);
+    filter: drop-shadow(0 2px var(--gray));
     transition: all ease 250ms;
 }
 
@@ -143,7 +144,7 @@ nav li a {
 
     nav li a:hover, h1 a:hover {
         color: var(--tan);
-        filter: drop-shadow(0px 6px 6px var(--brown));
+        filter: drop-shadow(0px 6px 6px var(--gray));
         transition: all ease 250ms;
     }
 
@@ -167,8 +168,9 @@ nav li a {
         cursor: default;
     }
 
-    #family-pic {
-    width: unset;
+    #ryan-pic {
+    width: 36%;
+    margin: -1rem auto 4rem auto;
     }
 
     .col-80 {
@@ -176,7 +178,7 @@ nav li a {
     }
 
     section {
-        min-height: 90vh;
+        min-height: 100vh;
     }
 
     section > .inner {
@@ -188,6 +190,7 @@ nav li a {
     }
 
     .left {
+        position: relative;
         width: 60%;
         padding: 0;
     }
@@ -250,14 +253,22 @@ h1 a {
 }
 
 h2 {
-    font-size: 2rem;
-    text-transform: uppercase;
+    font-size: 3.25rem;
     cursor: default;
     user-select: none;
     color: var(--dark-green);
+    position: relative;
+    display: inline-block;
 }
 
-
+.left h2::before, article h2::before {
+    content: "";
+    height: 4px;
+    width: 100%;
+    background-color: var(--blue);
+    position: absolute;
+    top: -3px;
+}
 
 main {
     min-height: 100vh;
@@ -278,7 +289,7 @@ main {
 }
 
 #hymns {
-    background-color: var(--tan);
+    background-color: var(--beige);
 }
 
 #hymns .inner .right {
@@ -293,26 +304,23 @@ main {
     color: var(--dark-green);
 }
 
-.hymn-list a, .project-list div a {
-    color: var(--dark-green);
+.hymn-list a, .project-link {
+    color: var(--dark-blue);
     transition: all ease 250ms;
 }
-.hymn-list a:hover, .project-list div a:hover {
-    color: var(--light-green);
+.hymn-list a:hover, .project-link:hover {
+    color: var(--blue);
     transition: all ease 250ms;
-}
-.hymn-list a:visited, .project-list div a:visited {
-    color: var(--dark-green);
 }
 
 .project-list div h3 {
-    color: var(--dark-green)
+    color: var(--dark-blue)
 }
 
 footer {
     min-height: 75vh;
-    background-image: -webkit-radial-gradient(var(--light-green), var(--dark-green));
-    background-image: radial-gradient(var(--light-green), var(--dark-green));
+    background-image: -webkit-radial-gradient(var(--dark-blue), var(--dark-green));
+    background-image: radial-gradient(var(--dark-blue), var(--dark-green));
     color: var(--beige);
     position: relative;
 }
@@ -356,15 +364,17 @@ footer .content {
     transition: all ease-in-out 400ms;
   }
 
-  .to-top:hover {
-    background-color: var(--tan);
-    opacity: .7;
-  }
-  
   .to-top > a {  
     text-decoration: none;
-    color: var(--light-green);
+    color: var(--blue);
     font-size: 1.85rem;
+    transition: all ease-in-out 300ms;
+  }
+
+  .to-top a:hover {
+    color: var(--gray);
+    opacity: .7;
+    transition: all ease-in-out 300ms;
   }
 
   .visible {
