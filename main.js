@@ -151,25 +151,25 @@ populateProjects();
 const socials = document.querySelector('.socials');
 
 socials.innerHTML = `
-                    <a href="https://x.com/ryancornettky" target="_blank">
+                    <a href="https://x.com/ryancornettky" target="_blank" rel="noopener noreferrer" aria-label="Follow me on X (formerly Twitter)">
                         <sl-icon name="twitter-x"></sl-icon>
                     </a>
-                    <a href="https://www.youtube.com/@RyanCornett" target="_blank">
+                    <a href="https://www.youtube.com/@RyanCornett" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to my YouTube channel">
                         <sl-icon name="youtube"></sl-icon>
                     </a>
-                    <a href="https://github.com/ryancornett" target="_blank">
+                    <a href="https://github.com/ryancornett" target="_blank" rel="noopener noreferrer" aria-label="Find me on GitHub">
                         <sl-icon name="github"></sl-icon>
                     </a>
-                    <a href="https://discordapp.com/users/milestretch" target="_blank">
+                    <a href="https://discordapp.com/users/milestretch" target="_blank" rel="noopener noreferrer" aria-label="Find me on Discord">
                         <sl-icon name="discord"></sl-icon>
                     </a>
-                    <a href="https://pota.app/#/profile/KR4BJN" target="_blank">
+                    <a href="https://pota.app/#/profile/KR4BJN" target="_blank" rel="noopener noreferrer" aria-label="See my Parks on the Air amateur radio activity">
                         <sl-icon name="broadcast-pin"></sl-icon>
                     </a>
-                    <a href="https://patreon.com/ryancornett" target="_blank">
+                    <a href="https://patreon.com/ryancornett" target="_blank" rel="noopener noreferrer" aria-label="Support me on Patreon">
                         <sl-icon name="person-heart"></sl-icon>
                     </a>
-                    <a href="mailto:contact@ryandcornett.com" target="_blank">
+                    <a href="mailto:contact@ryancornett.com" aria-label="Email me">
                         <sl-icon name="envelope"></sl-icon>
                     </a>`;
 
