@@ -114,6 +114,12 @@ const projects = [
         "desc": "I was blessed to be able to make this a few years ago, thus getting us away from the Wordpress CMS (too expensive and unnecessary for our small church). I have learned a lot since then and look forward to making an even better site."
     },
     {
+        "title": "Read BSB",
+        "subtitle": "A simple BSB reader",
+        "link": "https://readbsb.com",
+        "desc": "A minimal Berean Standard Bible reader focused on providing a clean, inviting, and distraction-free user experience presented without advertisements & freely given in perpetuity."
+    },
+    {
         "title": "Saint & Assembly",
         "subtitle": "In Progress",
         "link": "https://saintandassembly.com",
