@@ -54,6 +54,12 @@ if (footerCredit != null) {
 
 const projects = [
     {
+        "title": "19point9",
+        "subtitle": "A game to test your timing skills",
+        "link": "https://19point9.com/",
+        "desc": "Tap (mouse click or space bar) as close to the target times as possible. Can you tap close enough to the targets for a delta less than one second? If so, you've got skills!"
+    },
+    {
         "title": "21st Century Baptist Catechism",
         "subtitle": "In Progress",
         "link": "https://thebaptistcatechism.org",
@@ -90,6 +96,18 @@ const projects = [
         "desc": "Choose your plan name, start date, end date, what days of the week you want to read, the time of day you want to be alerted, and the books of the Bible you want to read in your desired order. Pick from printed, CSV, and iCal formats (I use iCal and import to my Google calendar)."
     },
     {
+        "title": "Dot Dot Node",
+        "subtitle": "A daily strategy puzzle game",
+        "link": "https://dotdotnode.com/",
+        "desc": "Goal: fill every node with dots. But be careful! You can fill in only one direction at a time. You win if every node has a dot, but try to to do it with the lowest time and without assists."
+    },
+    {
+        "title": "Gridle",
+        "subtitle": "A daily logic puzzle grid game",
+        "link": "https://gridlegame.com",
+        "desc": "Guess the secret 5x5 layout in 6 attempts. Edge numbers show how many blocks are in that line except for one hidden row and one hidden column (marked with a \"?\"). Toggle squares purple, then Submit your guess."
+    },
+    {
         "title": "KR4BJN",
         "subtitle": "My amateur radio station site",
         "link": "https://kr4bjn.com",
@@ -101,12 +119,12 @@ const projects = [
         "link": "https://lofi.bible",
         "desc": "Read and listen to the BSB or KJV audio Bible with background lofi chill beats and/or lofi \"hymns.\" This was one of the first big hobby projects I finished and the first to garner a donation. (Thanks, Logan!)"
     },
-    {
-        "title": "Particular Baptist Publications",
-        "subtitle": "In Progress",
-        "link": "https://pbpublications.org",
-        "desc": "I'm excited to be working on the website for PBP, which is dedicated to preserving and retrieving the works of our 17th and 18th century Baptist forefathers. The currently available libraries cover 1) Baptism, 2) Covenant Theology, 3) Congregationalism, and 4) Liturgy & Worship."
-    },
+    // {
+    //     "title": "Particular Baptist Publications",
+    //     "subtitle": "In Progress",
+    //     "link": "https://pbpublications.org",
+    //     "desc": "I'm excited to be working on the website for PBP, which is dedicated to preserving and retrieving the works of our 17th and 18th century Baptist forefathers. The currently available libraries cover 1) Baptism, 2) Covenant Theology, 3) Congregationalism, and 4) Liturgy & Worship."
+    // },
     {
         "title": "Manchester Baptist Church",
         "subtitle": "My church!",
@@ -119,12 +137,12 @@ const projects = [
         "link": "https://readbsb.com",
         "desc": "A minimal Berean Standard Bible reader focused on providing a clean, inviting, and distraction-free user experience presented without advertisements & freely given in perpetuity."
     },
-    {
-        "title": "Saint & Assembly",
-        "subtitle": "In Progress",
-        "link": "https://saintandassembly.com",
-        "desc": "The goal of Saint & Assembly is to promote biblically robust and freely given music for the church and private worship, and to encourage and facilitate the sharing of talent and resources to build an exceptional library of God-honoring songs free in perpetuity."
-    }
+    // {
+    //     "title": "Saint & Assembly",
+    //     "subtitle": "In Progress",
+    //     "link": "https://saintandassembly.com",
+    //     "desc": "The goal of Saint & Assembly is to promote biblically robust and freely given music for the church and private worship, and to encourage and facilitate the sharing of talent and resources to build an exceptional library of God-honoring songs free in perpetuity."
+    // }
 ];
 
 const projectList = document.querySelector(".project-list");
@@ -136,7 +154,7 @@ function populateProjects() {
         const title = document.createElement('h3');
         title.textContent = project.title;
         item.appendChild(title);
-        link = document.createElement('a');
+        const link = document.createElement('a');
         link.classList.add('project-link');
         link.textContent = project.link;
         link.href = project.link;
