@@ -1,57 +1,34 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap&family=Felipa");
 
 html,
 body {
-  font-family: "Switzer", sans-serif;
-  --body-font: Switzer, sans-serif;
-  font-family: "Plein", sans-serif;
-  --heading-font: Plein, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  --dark-green: #053306;
-  --gray: #6e7a6c;
-  --dark-blue: #00354f;
-  --blue: #006481;
-  --beige: #fffcea;
-  --tan: #eae6cb;
-  --neutral-100: #eeeeee;
-  --neutral-900: #001a23;
-  --neutral-500: #a2abab;
-  --secondary-100: #e1e8f9;
-  --secondary-300: #7d869c;
-  --secondary-700: #586994;
-  --secondary-900: #2d3b61;
-  --accent: #cc3f0c;
-  --font-base: 1rem;
+  --body-font: "Lato", sans-serif;
+  --heading-font: "Oswald", sans-serif;
+  --cursive-font: "Felipa", cursive;
+  --blue-800: #132751;
+  --blue-500: #303c6a;
+  --blue-200: #118AB2;
+  --green: #7CD5C7;
+  --gray-100: #F2F2ED;
+  --gray-300: #c1c5cf;
+  --gray-500: #6e7a6c;
+  --gray-700: #373e4e;
+  --gray-900: #262a34;
+  --accent-dark: #cc3f0c;
+  --accent-light: #fc652e;
   scroll-behavior: smooth;
   scroll-padding-top: 2.5rem;
   overflow-x: hidden;
-  background: radial-gradient(
-      circle,
-      transparent 20%,
-      var(--neutral-100) 20%,
-      var(--neutral-100) 80%,
-      transparent 80%,
-      transparent
-    ),
-    radial-gradient(
-        circle,
-        transparent 20%,
-        var(--neutral-100) 20%,
-        var(--neutral-100) 80%,
-        transparent 80%,
-        transparent
-      )
-      5px 5px,
-    linear-gradient(rgba(174, 182, 201, 0.2) 1px, transparent 1px) 0 -1px,
-    linear-gradient(90deg, rgba(174, 182, 201, 0.3) 1px, var(--neutral-100) 1px) -1px 0;
-  background-size: 10px 10px, 10px 10px, 5px 5px, 5px 5px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
 h1 a,
-h2,
 h3,
 h4,
 h5,
@@ -63,36 +40,15 @@ h6 {
 
 p,
 a,
-div,
-span {
-  font-family: Lato, sans-serif;
+div {
+  font-family: var(--body-font);
   line-height: 1.3;
-}
-
-h6 {
-  font-size: calc(1.1 * var(--font-base));
-}
-h5 {
-  font-size: calc(pow(1.1, 2) * var(--font-base));
-}
-h4 {
-  font-size: calc(pow(1.1, 3) * var(--font-base));
-}
-h3 {
-  font-size: calc(pow(1.1, 4) * var(--font-base));
-}
-h2 {
-  font-size: calc(pow(1.1, 5) * var(--font-base));
-}
-h1 {
-  font-size: calc(pow(1.1, 6) * var(--font-base));
 }
 
 header {
   width: 100%;
   background-image: -webkit-linear-gradient(#083421, #4a4c0d);
-  background-image: linear-gradient(var(--secondary-300), var(--secondary-900));
-  filter: drop-shadow(0px 7px 4px var(--neutral-900));
+  background-image: linear-gradient(white, var(--gray-300));
 }
 
 nav ul {
@@ -114,19 +70,6 @@ nav li a {
   font-weight: bold;
   padding: 0.5rem;
   transition: all ease 250ms;
-}
-
-.hero-img {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  object-fit: cover;
-  filter: brightness(0.65) grayscale(0.65);
-}
-
-.hero-text {
-  margin: 1.5rem;
 }
 
 .inner {
@@ -199,10 +142,10 @@ nav li a {
 
 @media screen and (width >= 769px) {
   header {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 1000;
-    height: 10vh;
+    height: 7vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -217,22 +160,108 @@ nav li a {
   #hero {
     position: relative;
     width: 100%;
-    height: 98vh;
-    filter: brightness(0.8);
+    height: 100vh;
+    background-image: url("/img/choir-stand-stage.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
-  .hero-text {
-    margin: unset;
+  .inner-hero {
     position: absolute;
-    color: var(--secondary-100);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--gray-100);
     opacity: 0.8;
     font-weight: bold;
-    /* font-size: clamp(1.35rem, 2vw, 3rem); */
-    inset: 50%;
+    font-size: clamp(2rem, 5vw, 6.5rem);
+    font-family: var(--cursive-font);
     width: max-content;
     z-index: 500;
     user-select: none;
     cursor: default;
+  }
+
+  .accent-light {
+    color: var(--accent-light);
+  }
+
+  #songs {
+    margin: 4rem auto;
+  }
+
+  #songs-header {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  #songs-header h3 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 6vw, 4rem);
+    font-family: var(--heading-font);
+  }
+
+  #songs-header p a{
+    color: var(--blue-500);
+    transition: all ease 250ms;
+  }
+  
+  #songs-header p a:hover{
+    color: var(--blue-200);
+  }
+  
+  #songs-header h5 {
+    margin: 1rem 0;
+    font-size: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .hymn-features {
+    width: 50%;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;    
+  }
+
+  .songs-wrapper {
+    background-color: var(--blue-800);
+    padding: 2rem 0;
+  }
+
+  #songs-container {
+    color: white;
+    width: 65%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .song {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .song a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: all ease 250ms;
+  }
+
+  .song a:hover {
+    color: var(--gray-300);
+  }
+
+  .song-chip {
+    font-size: 0.8rem;
+    font-weight: bold;
+    background-color: var(--blue-500);
+    width: fit-content;
+    padding: 0.25rem 0.75rem;
+    border-radius: .8rem;
   }
 
   #ryan-pic {
@@ -360,10 +389,6 @@ main {
   transition: all ease 300ms;
 }
 
-#hymns {
-  background-color: var(--secondary-100);
-}
-
 #hymns .inner .right {
   width: 70vw;
   display: flex;
@@ -394,11 +419,11 @@ main {
 footer {
   min-height: 75vh;
   background-image: -webkit-radial-gradient(
-    var(--secondary-900),
-    var(--secondary-700)
+    var(--blue-800),
+    var(--blue-500)
   );
-  background-image: radial-gradient(var(--secondary-900), var(--secondary-700));
-  color: var(--beige);
+  background-image: radial-gradient(var(--blue-800), var(--blue-500));
+  color: var(--gray-100);
   position: relative;
 }
 
@@ -429,7 +454,7 @@ footer .content {
 .to-top {
   position: fixed;
   right: 2%;
-  bottom: 0;
+  bottom: 2%;
   z-index: 10000;
   height: 40px;
   opacity: 0;
@@ -443,13 +468,13 @@ footer .content {
 
 .to-top > a {
   text-decoration: none;
-  color: var(--neutral-900);
+  color: var(--accent-light);
   font-size: 1.85rem;
   transition: all ease-in-out 300ms;
 }
 
 .to-top a:hover {
-  color: var(--neutral-500);
+  color: var(--blue-200);
   opacity: 0.7;
   transition: all ease-in-out 300ms;
 }

@@ -4,6 +4,7 @@ if (footerCredit != null) {
     footerCredit.textContent = `Creative Commons Zero 1.0 Universal: All works dedicated to public domain. 2019-${year}.`;
 }   
 
+// SHARE BAR
 (function () {
   const bar = document.querySelector('.share-bar');
   if (!bar) return;
@@ -52,6 +53,532 @@ if (footerCredit != null) {
   if (em) em.href = `mailto:?subject=${t}&body=${d}%0A%0A${u}`;
 })();
 
+class Song {
+  constructor(title, link, type = "Hymn", tune = null, meter = null, wordsBy = "Ryan Cornett, 2026", musicBy = "Ryan Cornett, 2026", mp3 = null, pdf = null, png = null, video = "youtube.com/RyanC/videos", about = "TBD", forGuitar = false) {
+    this.title = title;
+    this.link = link;
+    this.type = type;
+    this.tune = tune;
+    this.meter = meter;
+    this.wordsBy = wordsBy;
+    this.musicBy = musicBy;
+    this.mp3 = mp3;
+    this.pdf = pdf;
+    this.png = png;
+    this.video = video;
+    this.about = about;
+    this.forGuitar = forGuitar;
+  }
+}
+
+const songs = [
+  new Song(
+    "A Call Comes Ringing",
+    "/songs/a-call-comes-ringing",
+    "Hymn",
+    "INVITATUS",
+    "C.M.D.",
+    "Harriet E. Jones, 1908; rev. Ryan Daniel Cornett, 2024",
+    "William Walker, 1854; ad. Ryan Daniel Cornett, 2024",
+    "https://drive.google.com/file/d/1eL73vcEAw4C1VheD4Ojq4CpY0hotdqBu",
+    "https://drive.google.com/file/d/1A1PQfA2VPyN803IKFK1_tTaDC7ksdUaZ",
+    "https://drive.google.com/file/d/1RE5a6Pb0IwfXIIyaX1eDrLVloGHDmHbO",
+    "https://www.youtube.com/watch?v=8ziDaBk6p74",
+    "I found Jones's lyrics and Walker's tune too good not to be heard, and together they make a beautiful hymn. I have made some minor adjustments to the lyrics and tune for modern use, but the original works are still very much intact.",
+    true
+  ),
+  new Song(
+    "Abiding in Jesus, the Vine",
+    "/songs/abiding-in-jesus-the-vine",
+    "Hymn",
+    "ABIDING",
+    "Irregular",
+    "Ryan Cornett, 2026",
+    "Ryan Cornett, 2026",
+    "https://drive.google.com/file/d/12NRf6ZGZjvO2_-JUijfQczoLu9MajXZp",
+    "https://drive.google.com/file/d/1SJSgoave3nC57iW80sBFEjeHIz6p2W-f",
+    "https://drive.google.com/file/d/1EJNqRszwwlrffQql3vuYTvhotvMThnOI",
+    "youtube.com/RyanC/videos",
+    "A hymn for everyday Christian life centered around the believer's dependence upon Christ, drawing on the imagery of the vine and branches to express His sustaining grace through every season and the faithful care of the Vinedresser."
+  ),
+  new Song(
+    "All My Ways Are in Thy Hand",
+    "/songs/all-my-ways-are-in-thy-hand",
+    "Psalm",
+    "QUAERES ME",
+    "8.8.8.7 w/ repeat & refrain",
+    "The New Metrical Version of the Psalms, 1909; alt.",
+    "Ryan Cornett, 2024",
+    "https://drive.google.com/file/d/1VnDbDDywBF2LIx_IeIwfVf_CXf0B_H_o",
+    "https://drive.google.com/file/d/1MwHup5Z7vSk7RbRtsQ9nEhfJhkWMRApX",
+    "https://drive.google.com/file/d/1RHVCKDDCmo6zGhoLyX_8PCkYFPK3NHkN",
+    "youtube.com/RyanC/videos",
+    "One of my favorite Psalms in meter, it is paired witha memorable style lacking in much of English hymnody: the sea shanty. Fun but reverent, this melody is intended to serve the incredible biblical truths. I made very slight changes to the language for modern use and to fit the meter.",
+    true
+  ),
+  new Song(
+    "Christ, Our Abiding Cornerstone",
+    "/songs/christ-our-abiding-cornerstone",
+    "Hymn",
+    "ELLACOMBE",
+    "C.M.D.",
+    "Ryan Cornett, 2025",
+    "Traditional German Melody",
+    "https://drive.google.com/file/d/1aY7IWve6yDzyKLZUwMwFscVyesWZPgll",
+    "https://drive.google.com/file/d/1QdyOHrJkVaD3yJNmkzu5q-9l3xNN3xjN",
+    "https://drive.google.com/file/d/1QY-DImGUDy2GzkQvzGgs7aTUO8TKj1K7",
+    "https://www.youtube.com/watch?v=e7CG9k1H_6c",
+    "I wrote this text for a men's retreat in October, 2025, shaping the hymn around the three major themes of the retreat: unity, salvation, and sanctification from 1 Corinthians. I selected ELLACOMBE for its strong, jubilant character and familiarity since I wanted as many men as possible ready to sing it.",
+    true
+  ),
+  new Song(
+    "Christ, the Prize All Wealth Exceeding",
+    "/songs/christ-the-prize-all-wealth-exceeding",
+    "Hymn",
+    "REDEEMER",
+    "8.7.8.7",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    "https://drive.google.com/file/d/1F7ydcJZOafbeyb9237yJXrZif7JPFCXm/view?usp=sharing",
+    "https://drive.google.com/file/d/14j3f-eHvtpBuUgz2D3LCxLdkAng4JTxY/view?usp=sharing",
+    "https://drive.google.com/file/d/1WuZH0NM0KhurMhRIVUYanSoEB9-bAHHD/view?usp=sharing",
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  // BELOW ARE PLACEHOLDERS ***** ADD REAL INFORMATION LATER *****
+  new Song(
+    "Heaven's Filled with Prayers for You",
+    "/songs/heavens-filled-with-prayers-for-you",
+    "Hymn",
+    "HEAVEN'S FILLED",
+    "8.6.8.6",
+    "Ryan Cornett, 2026",
+    "John B. Dykes, 1863",
+        null,
+        null,
+        null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "His Goodness Will Carry Me",
+    "/songs/his-goodness-will-carry-me",
+    "Hymn",
+    "HIS GOODNESS",
+    "8.7.8.7",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "In Glory Rests a Grand Receipt",
+    "/songs/in-glory-rests-a-grand-receipt",
+    "Hymn",
+    "OSTEND",
+    "8.8.8.8",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "In Jesus' Name",
+    "/songs/in-jesus-name",
+    "Folk Spiritual",
+    "IN JESUS' NAME",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "Laid Up for Us Is a Crown",
+    "/songs/laid-up-for-us-is-a-crown",
+    "Hymn",
+    "LAID UP FOR US",
+    "8.7.8.7",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "Let Not My Soul Thy Works Forget",
+    "/songs/let-not-my-soul-thy-works-forget",
+    "Hymn",
+    "LET NOT MY SOUL",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "Let There Be Light",
+    "/songs/let-there-be-light",
+    "Hymn",
+    "LET THERE BE LIGHT",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "My Days Like Shadows Fade",
+    "/songs/my-days-like-shadows-fade",
+    "Hymn",
+    "MY DAYS LIKE SHADOWS FADE",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "My Help and My Hope",
+    "/songs/my-help-and-my-hope",
+    "Hymn",
+    "MY HELP AND MY HOPE",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "O Father of the Found and Freed",
+    "/songs/o-father-of-the-found-and-freed",
+    "Hymn",
+    "O FATHER OF THE FOUND AND FREED",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "O God, Arise to Do Your Will",
+    "/songs/o-god-arise-to-do-your-will",
+    "Hymn",
+    "O GOD, ARISE TO DO YOUR WILL",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "O Great and Glorious King",
+    "/songs/o-great-and-glorious-king",
+    "Hymn",
+    "O GREAT AND GLORIOUS KING",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "O Risen Lord, Once Perished One",
+    "/songs/o-risen-lord-once-perished-one",
+    "Hymn",
+    "O RISEN LORD, ONCE PERISHED ONE",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "Rise Up Saints, Raise a Song",
+    "/songs/rise-up-saints-raise-a-song",
+    "Hymn",
+    "RISE UP SAINTS, RAISE A SONG",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "The Hands I Nailed to the Cross",
+    "/songs/the-hands-i-nailed-to-the-cross",
+    "Praise Song",
+    "THE HANDS I NAILED TO THE CROSS",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "The Sun Is Sinking",
+    "/songs/the-sun-is-sinking",
+    "Folk Spiritual",
+    "THE SUN IS SINKING",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "The Ways of God Are Higher",
+    "/songs/the-ways-of-god-are-higher",
+    "Folk Spiritual",
+    "THE WAYS OF GOD ARE HIGHER",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "To Know Him More",
+    "/songs/to-know-him-more",
+    "Hymn",
+    "TO KNOW HIM MORE",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "Welcomed to the Table",
+    "/songs/welcomed-to-the-table",
+    "Hymn",
+    "WELCOMED TO THE TABLE",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "What Vastness the Redeemer Crossed",
+    "/songs/what-vastness-the-redeemer-crossed",
+    "Hymn",
+    "WHAT VASTNESS THE REDEEMER CROSSED",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "When the Risen Christ Ascended",
+    "/songs/when-the-risen-christ-ascended",
+    "Hymn",
+    "WHEN THE RISEN CHRIST ASCENDED",
+    "IRREGULAR",
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+  ),
+  new Song(
+    "As the Lord Lives",
+    "/songs/as-the-lord-lives",
+    "Praise Song",
+    null,
+    null,
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "Awake, My Soul (Warrior King)",
+    "/songs/awake-my-soul-warrior-king",
+    "Praise Song",
+    null,
+    null,
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "Forgotten in the Sea",
+    "/songs/forgotten-in-the-sea",
+    "Kids/VBS Song",
+    null,
+    null,
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "From the Depths",
+    "/songs/from-the-depths",
+    "Hymn",
+    null,
+    null,
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "His Love Endures",
+    "/songs/his-love-endures",
+    "Praise Song",
+    null,
+    null,
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "I Will Rest",
+    "/songs/i-will-rest",
+    "Praise Song",
+    null,
+    null,
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  ),
+  new Song(
+    "My Hope Is Found in This",
+    "/songs/my-hope-is-found-in-this",
+    "Praise Song",
+    null,
+    null,
+    "Ryan Cornett, 2026",
+    "Luther O. Emerson, 1863",
+    null,
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    true
+  )
+];
+
+const songsContainer = document.getElementById("songs-container");
+if (songsContainer) {
+    songs.forEach(song => {
+        const songElement = document.createElement("div");
+        songElement.classList.add("song");
+        const link = document.createElement("a");
+        if (song.pdf !== null) { link.href = song.link; }
+        else { link.href = "#"; }
+        link.textContent = song.title;
+        songElement.appendChild(link);
+        const type = document.createElement("span");
+        type.classList.add("song-chip");
+        type.textContent = song.type;
+        songElement.appendChild(type);
+        if (song.forGuitar) {
+          const guitarFriendly = document.createElement("p");
+          guitarFriendly.classList.add("accent-light");
+          guitarFriendly.textContent = "Guitar-friendly";
+          songElement.appendChild(guitarFriendly);
+        }
+        songsContainer.appendChild(songElement);
+    });
+}
+
 const projects = [
     {
         "title": "19point9",
@@ -60,28 +587,10 @@ const projects = [
         "desc": "Tap (mouse click or space bar) as close to the target times as possible. Can you tap close enough to the targets for a delta less than one second? If so, you've got skills!"
     },
     {
-        "title": "21st Century Baptist Catechism",
-        "subtitle": "In Progress",
-        "link": "https://thebaptistcatechism.org",
-        "desc": "The historic 1695 Baptist Catechism with updated language and resources such as children's songs, coloring sheets, and more."
-    },
-    {
-        "title": "Background Bible",
-        "subtitle": "(In Progress) Bible text and audio, ambient sounds, music",
-        "link": "https://backgroundbible.com",
-        "desc": "Read and listen to the BSB or KJV audio Bible with background sounds like city rain, autumn leaves, lofi tracks, classical music, and more!"
-    },
-    {
         "title": "The Baptist Hymnal",
         "subtitle": "(In Progress) Freely given, public domain hymns and psalms",
         "link": "https://baptisthymnal.org",
         "desc": "\"The goal of BaptistHymnal.org is simple: to provide public domain hymns & psalms for use in Jesus Christ's churches and believer's homes. We strongly believe that the materials to accomplish that should be free, in the public domain, and easily accessible.\""
-    },
-    {
-        "title": "Bible & Song",
-        "subtitle": "Ongoing with new songs every month",
-        "link": "https://bibleandsong.com",
-        "desc": "Freely given memory verse songs created for kids, but adults love them too! We use the Berean Standard Bible (BSB), and will attempt to accommodate requests for specific verses to be put to music."
     },
     {
         "title": "BSB Audio on Youtube",
@@ -119,12 +628,6 @@ const projects = [
         "link": "https://lofi.bible",
         "desc": "Read and listen to the BSB or KJV audio Bible with background lofi chill beats and/or lofi \"hymns.\" This was one of the first big hobby projects I finished and the first to garner a donation. (Thanks, Logan!)"
     },
-    // {
-    //     "title": "Particular Baptist Publications",
-    //     "subtitle": "In Progress",
-    //     "link": "https://pbpublications.org",
-    //     "desc": "I'm excited to be working on the website for PBP, which is dedicated to preserving and retrieving the works of our 17th and 18th century Baptist forefathers. The currently available libraries cover 1) Baptism, 2) Covenant Theology, 3) Congregationalism, and 4) Liturgy & Worship."
-    // },
     {
         "title": "Manchester Baptist Church",
         "subtitle": "My church!",
@@ -136,13 +639,7 @@ const projects = [
         "subtitle": "A simple BSB reader",
         "link": "https://readbsb.com",
         "desc": "A minimal Berean Standard Bible reader focused on providing a clean, inviting, and distraction-free user experience presented without advertisements & freely given in perpetuity."
-    },
-    // {
-    //     "title": "Saint & Assembly",
-    //     "subtitle": "In Progress",
-    //     "link": "https://saintandassembly.com",
-    //     "desc": "The goal of Saint & Assembly is to promote biblically robust and freely given music for the church and private worship, and to encourage and facilitate the sharing of talent and resources to build an exceptional library of God-honoring songs free in perpetuity."
-    // }
+    }
 ];
 
 const projectList = document.querySelector(".project-list");
@@ -198,9 +695,6 @@ socials.innerHTML = `
                     </a>`;
 
 
-/* Lightweight YouTube lightbox
-   Usage: <div class="yt-card" data-ytid="VIDEO_ID" data-title="Title" [data-thumb="/path.jpg"] [data-caption="..."]></div>
-*/
 (function () {
   const READY = 'DOMContentLoaded';
   if (document.readyState === 'loading') document.addEventListener(READY, init);
@@ -338,3 +832,20 @@ function displayTopButton() {
 }
 
 document.addEventListener('scroll', displayTopButton);
+
+const hero = document.querySelector("#hero");
+
+let ticking = false;
+
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      hero.style.backgroundPosition =
+        `center calc(50% + ${window.scrollY * 0.35}px)`;
+
+      ticking = false;
+    });
+
+    ticking = true;
+  }
+});
