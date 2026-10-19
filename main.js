@@ -1,6 +1,5 @@
 /* Homepage interactions. Static song markup is a fallback; songs.js refreshes it on load. */
 (() => {
-  const config = window.SITE_CONFIG || {};
   const search = document.getElementById('song-search');
   let songs = [...document.querySelectorAll('.song')];
   const filters = [...document.querySelectorAll('[data-filter]')];
@@ -46,23 +45,5 @@
         count.setAttribute('data-error', 'true');
       }
     });
-  }
-
-  const newsletter = document.getElementById('newsletter-form');
-  if (newsletter && config.newsletterAction) {
-    try {
-      const endpoint = new URL(config.newsletterAction);
-      if (endpoint.protocol !== 'https:') throw new Error('HTTPS required');
-      newsletter.action = endpoint.href;
-      const input = newsletter.querySelector('input[type="email"]');
-      input.name = config.newsletterEmailField || 'email';
-      input.disabled = false;
-      newsletter.querySelector('button').disabled = false;
-      if (endpoint.hostname === 'buttondown.com' || endpoint.hostname === 'www.buttondown.com') {
-        const embed = document.createElement('input'); embed.type = 'hidden'; embed.name = 'embed'; embed.value = '1'; newsletter.append(embed);
-      }
-      document.getElementById('newsletter-note').textContent = 'Occasional updates. Unsubscribe whenever you like.';
-      // Native HTML form navigation supports the provider's confirmation and CAPTCHA flows.
-    } catch { /* Keep signup visibly unavailable until a valid endpoint is provided. */ }
   }
 })();

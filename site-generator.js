@@ -90,14 +90,14 @@ function shareFor(canonical, title) {
   return `<div class="share" aria-label="Share this song"><button type="button" data-share hidden>Share</button><button type="button" data-copy>Copy link</button><a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonical)}">Facebook</a><a href="mailto:?subject=${encodeURIComponent(title)}&amp;body=${encodeURIComponent(canonical)}">Email</a><span class="share-status" role="status" aria-live="polite"></span></div>`;
 }
 
+const isPraise = song.songMetadata.type === 'Praise Song';
+const directory = isPraise ? "songs" : "hymns";
 const rendered = [];
 for (const song of published) {
   const canonical = absolute(`/${directory}/${song.slug}/`);
   const imagePath = song.previewImage || '/img/Ryan_2-1.jpg';
   const image = new URL(safeUrl(imagePath, base.href), base).href;
   if (!image.startsWith('https://')) throw new Error(`Preview image must use HTTPS: ${song.title}`);
-  const isPraise = song.songMetadata.type === 'Praise Song';
-  const directory = isPraise ? "songs" : "hymns";
   const content = fill(isPraise ? praiseTemplate : hymnTemplate, {
     title: e(song.title), type: e(song.songMetadata.type), details: detailsFor(song),
     lyrics: song.lyrics?.length ? renderLyrics(song.lyrics) : song.lyricsHtml || '<p>Lyrics and resources are coming soon.</p>',

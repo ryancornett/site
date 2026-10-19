@@ -369,6 +369,8 @@ const songs = [
                 "The Spirit, within residing,",
                 "I'm growing in gifts of grace."
             ],
+          },
+          {
             type: "refrain",
             number: 1,
             lines: [
@@ -377,6 +379,8 @@ const songs = [
                 "Sustained by the Root, and bearing the Fruit,",
                 "Abiding in Jesus, the Vine."
             ],
+          },
+          {
             type: "stanza",
             number: 2,
             lines: [
@@ -385,6 +389,8 @@ const songs = [
                 "The Vinedresser, my heart, pleases",
                 "When His tending hand appears."
             ],
+          },
+          {
             type: "stanza",
             number: 3,
             lines: [
@@ -393,6 +399,8 @@ const songs = [
                 "The flow from the Root, sustaining,",
                 "Exceeds earth's deceitful vines."
             ],
+          },
+          {
             type: "stanza",
             number: 4,
             lines: [
@@ -401,8 +409,7 @@ const songs = [
                 "Engrafted, I flourish, far blest",
                 "Beyond every song could tell."
             ],
-
-        }
+          }
     ],
     new Arrangement("SATB", "E flat major", "6/8", null, "SATB", "https://drive.google.com/file/d/1SJSgoave3nC57iW80sBFEjeHIz6p2W-f", null, "https://drive.google.com/file/d/1EJNqRszwwlrffQql3vuYTvhotvMThnOI", [null]),
     [null],
@@ -884,10 +891,10 @@ const songs = [
         ]
       }
     ],
-    new Arrangement("SATB", "D major", "3/4", null, "SATB", "https://drive.google.com/file/d/1z1G2To6h64UH1C9xIHNet5Enb1iaP3IP", null, "https://drive.google.com/file/d/1zf9LvIviYRiuSc9wAKGsbwpbo7J5J-Vp/view?usp=sharing", [null],
+    new Arrangement("SATB", "D major", "3/4", null, "SATB", "https://drive.google.com/file/d/1z1G2To6h64UH1C9xIHNet5Enb1iaP3IP", null, "https://drive.google.com/file/d/1zf9LvIviYRiuSc9wAKGsbwpbo7J5J-Vp/view?usp=sharing", [null],),
     new StreamingLink("YouTube", "https://www.youtube.com/watch?v=0g1k5J6X7xM", null),
     new HelpfulSongInfo("A prayer for enduring mercy, salvation, spiritual fruitfulness, and faithful witness.", ["hope", "divine help", "salvation", "abiding", "witness"], ["Psalm 103:15-17", "Lamentations 3:22-23", "Isaiah 58:11", "Psalm 32:6-7", "1 Peter 3:20-21", "John 15:1-5", "Isaiah 35:1-2", "John 15:2-5", "Psalm 66:16"], 2022, null, true)
-  )),
+  ),
 
   new Song(
     "O Great and Glorious King",

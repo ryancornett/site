@@ -20,7 +20,6 @@
   <link rel="preload" as="image" href="/img/choir-stand-stage.png">
   <link rel="stylesheet" href="/styles.css?v=20261019-redesign">
   <script>document.documentElement.classList.add('js');</script>
-  <script src="/site-config.js?v=20261019-redesign" defer></script>
   <script src="/site-ui.js?v=20261019-redesign" defer></script>
   <script src="/main.js?v=20261019-redesign" defer></script>
   <script
@@ -71,6 +70,8 @@
         </div>
         <div class="collection-meta"><p id="song-count" role="status" aria-live="polite"><!-- SONG_COUNT_START -->17<!-- SONG_COUNT_END --> songs</p><p>Lyrics &amp; resources, as available</p></div>
         <div id="songs-container" class="song-list">
+          <!-- SONGS_START -->
+          <!-- SONGS_END -->
         </div>
         <div class="empty-state" id="song-empty" hidden><h3>No songs found.</h3><p>Try a different title, theme, or Scripture reference.</p><button class="button button-outline" type="button" id="reset-songs">Show all songs</button></div>
       </div>
@@ -201,7 +202,6 @@
     <section id="contact" class="section contact" aria-labelledby="contact-title">
       <div class="container contact-grid"><div><p class="eyebrow">05 / Let's talk</p><h2 id="contact-title">Have something<br><em>in mind?</em></h2><p class="lead">A question about a hymn, a collaboration idea, or a song for a special project?</p><p>I'd be glad to hear from you.</p><a class="contact-email" href="mailto:contact@ryancornett.com">contact@ryancornett.com <span aria-hidden="true">↗</span></a></div>
         <form id="contact-form" class="contact-form" name="contact" method="post" action="https://formspree.io/f/xvkznqjp" aria-describedby="contact-note">
-          <input type="hidden" name="form-name" value="contact"><p hidden><label>Leave this field empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <fieldset id="contact-fields"><legend class="sr-only">Send Ryan a message</legend><div class="form-row"><div class="field"><label for="contact-name">Name</label><input id="contact-name" name="name" autocomplete="name" required maxlength="120"></div><div class="field"><label for="contact-email">Email address</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></div></div><div class="field"><label for="contact-message">Message</label><textarea id="contact-message" name="message" rows="5" required maxlength="5000"></textarea></div><button class="button button-dark" type="submit" id="contact-submit">Submit Message <span aria-hidden="true">↗</span></button></fieldset>
           <p id="contact-note" class="form-note" role="status" aria-live="polite">You can also use the email link to get in touch.</p>
           <noscript><p>Please use the email link to contact Ryan.</p></noscript>
