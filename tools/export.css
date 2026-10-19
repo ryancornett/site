@@ -1,0 +1,10 @@
+.export-tool { max-width: 850px; }
+.export-tool h1 { font-size: clamp(2.7rem, 6vw, 4rem); margin-bottom: 1.5rem; }
+.export-tool h1 em { color: #376a72; }
+.export-tool p { color: var(--muted); margin-bottom: 1.5rem; }
+.export-tool ol { padding-left: 1.3rem; margin-block: 2rem; }
+.export-tool li { margin-bottom: 1rem; padding-left: .5rem; }
+.export-tool code { font-size: .85em; background: #e3eee8; padding: .2rem .3rem; overflow-wrap: anywhere; }
+.export-tool details { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.export-tool summary { cursor: pointer; margin-bottom: 1rem; }
+#export-status { margin-top: 1rem; font-size: .85rem; }

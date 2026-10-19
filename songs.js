@@ -404,9 +404,9 @@ const songs = [
 
         }
     ],
-    new Arrangement("SATB", "E flat major", "6/8", null, "SATB", "https://drive.google.com/file/d/1SJSgoave3nC57iW80sBFEjeHIz6p2W-f", null, "https://drive.google.com/file/d/1EJNqRszwwlrffQql3vuYTvhotvMThnOI", accompanimentTracks = null),
-    streamingLinks = [null],
-    new HelpfulSongInfo("A hymn for everyday Christian life centered around the believer's dependence upon Christ, drawing on the imagery of the vine and branches to express His sustaining grace through every season and the faithful care of the Vinedresser.", ["union with Christ", "abiding", "spiritual growth", "perseverance"], ["John 15:1-8", "Galatians 5:22-23", "Romans 11:17"], 2026, lyricVideoUrl = null, false)
+    new Arrangement("SATB", "E flat major", "6/8", null, "SATB", "https://drive.google.com/file/d/1SJSgoave3nC57iW80sBFEjeHIz6p2W-f", null, "https://drive.google.com/file/d/1EJNqRszwwlrffQql3vuYTvhotvMThnOI", [null]),
+    [null],
+    new HelpfulSongInfo("A hymn for everyday Christian life centered around the believer's dependence upon Christ, drawing on the imagery of the vine and branches to express His sustaining grace through every season and the faithful care of the Vinedresser.", ["union with Christ", "abiding", "spiritual growth", "perseverance"], ["John 15:1-8", "Galatians 5:22-23", "Romans 11:17"], 2026, null, false)
   ),
   
   new Song(
@@ -473,10 +473,10 @@ const songs = [
       }
     ],
     [
-      new Arrangement("SATB", "E major", "4/4", null, "SATB", "https://drive.google.com/file/d/1MwHup5Z7vSk7RbRtsQ9nEhfJhkWMRApX", null, "https://drive.google.com/file/d/1RHVCKDDCmo6zGhoLyX_8PCkYFPK3NHkN", accompanimentTracks = [null])
+      new Arrangement("SATB", "E major", "4/4", null, "SATB", "https://drive.google.com/file/d/1MwHup5Z7vSk7RbRtsQ9nEhfJhkWMRApX", null, "https://drive.google.com/file/d/1RHVCKDDCmo6zGhoLyX_8PCkYFPK3NHkN", [null])
     ],
-    streamingLinks = [null],
-    new HelpfulSongInfo("A metrical treatment of Psalm 139 celebrating God's knowledge, presence, and guiding hand.", ["omniscience", "omnipresence", "providence", "guidance"], ["Psalm 139:1-12"], 2024, lyricVideoUrl = null, true)
+    [null],
+    new HelpfulSongInfo("A metrical treatment of Psalm 139 celebrating God's knowledge, presence, and guiding hand.", ["omniscience", "omnipresence", "providence", "guidance"], ["Psalm 139:1-12"], 2024, null, true)
   ),
   
   new Song(
@@ -544,12 +544,12 @@ const songs = [
       }
     ],
     [
-    new Arrangement("SATB", "A major", "4/4", null, "SATB", "https://drive.google.com/file/d/1QdyOHrJkVaD3yJNmkzu5q-9l3xNN3xjN", null, "https://drive.google.com/file/d/1QY-DImGUDy2GzkQvzGgs7aTUO8TKj1K7", accompanimentTracks = [null])
+    new Arrangement("SATB", "A major", "4/4", null, "SATB", "https://drive.google.com/file/d/1QdyOHrJkVaD3yJNmkzu5q-9l3xNN3xjN", null, "https://drive.google.com/file/d/1QY-DImGUDy2GzkQvzGgs7aTUO8TKj1K7", [null])
     ],
-    streamingLinks = [
-      new StreamingLink("YouTube", "https://music.youtube.com/watch?v=e7CG9k1H_6c&si=sEqVVcUHlGp98DQn", albumArt = null)
+    [
+      new StreamingLink("YouTube", "https://music.youtube.com/watch?v=e7CG9k1H_6c&si=sEqVVcUHlGp98DQn", null)
     ],
-    new HelpfulSongInfo("I wrote this text for a men's retreat, shaping the hymn around the three major themes of the retreat: unity, salvation, and sanctification from 1 Corinthians. I selected ELLACOMBE for its strong, jubilant character and familiarity since I wanted as many men as possible ready to sing it.", ["unity", "salvation", "sanctification"], ["1 Corinthians 5:7", "1 Corinthians 15:3-4 & 55-57", "Romans 5:9", "Isaiah 53:5", "1 Corinthians 3:11-15", "1 Corinthians 6:19-20", "James 1:12", "Malachi 3:2-3", "1 Peter 1:6-7", "1 Corinthians 10:16-17", "1 Corinthians 11:3", "1 Corinthians 12:12-13", "Ephesians 2:20-22", "1 Peter 2:4-5", "1 Corinthians 1:30-31", "Matthew 5:14-16", "Philippians 2:15", "Isaiah 61:10"], 2025, lyricVideoUrl = "https://youtu.be/e7CG9k1H_6c?si=Nb2LcntF9vFHP691", playableOnGuitar = true)
+    new HelpfulSongInfo("I wrote this text for a men's retreat, shaping the hymn around the three major themes of the retreat: unity, salvation, and sanctification from 1 Corinthians. I selected ELLACOMBE for its strong, jubilant character and familiarity since I wanted as many men as possible ready to sing it.", ["unity", "salvation", "sanctification"], ["1 Corinthians 5:7", "1 Corinthians 15:3-4 & 55-57", "Romans 5:9", "Isaiah 53:5", "1 Corinthians 3:11-15", "1 Corinthians 6:19-20", "James 1:12", "Malachi 3:2-3", "1 Peter 1:6-7", "1 Corinthians 10:16-17", "1 Corinthians 11:3", "1 Corinthians 12:12-13", "Ephesians 2:20-22", "1 Peter 2:4-5", "1 Corinthians 1:30-31", "Matthew 5:14-16", "Philippians 2:15", "Isaiah 61:10"], 2025, "https://youtu.be/e7CG9k1H_6c?si=Nb2LcntF9vFHP691", true)
   ),
   
   new Song(
@@ -884,9 +884,9 @@ const songs = [
         ]
       }
     ],
-    new Arrangement("SATB", "D major", "3/4", null, "SATB", "https://drive.google.com/file/d/1z1G2To6h64UH1C9xIHNet5Enb1iaP3IP", null, "https://drive.google.com/file/d/1zf9LvIviYRiuSc9wAKGsbwpbo7J5J-Vp/view?usp=sharing", accompanimentTracks = [null],
-    new StreamingLink("YouTube", "https://www.youtube.com/watch?v=0g1k5J6X7xM", albumArt = null),
-    new HelpfulSongInfo("A prayer for enduring mercy, salvation, spiritual fruitfulness, and faithful witness.", ["hope", "divine help", "salvation", "abiding", "witness"], ["Psalm 103:15-17", "Lamentations 3:22-23", "Isaiah 58:11", "Psalm 32:6-7", "1 Peter 3:20-21", "John 15:1-5", "Isaiah 35:1-2", "John 15:2-5", "Psalm 66:16"], 2022, lyricVideoUrl = null, playableOnGuitar = true)
+    new Arrangement("SATB", "D major", "3/4", null, "SATB", "https://drive.google.com/file/d/1z1G2To6h64UH1C9xIHNet5Enb1iaP3IP", null, "https://drive.google.com/file/d/1zf9LvIviYRiuSc9wAKGsbwpbo7J5J-Vp/view?usp=sharing", [null],
+    new StreamingLink("YouTube", "https://www.youtube.com/watch?v=0g1k5J6X7xM", null),
+    new HelpfulSongInfo("A prayer for enduring mercy, salvation, spiritual fruitfulness, and faithful witness.", ["hope", "divine help", "salvation", "abiding", "witness"], ["Psalm 103:15-17", "Lamentations 3:22-23", "Isaiah 58:11", "Psalm 32:6-7", "1 Peter 3:20-21", "John 15:1-5", "Isaiah 35:1-2", "John 15:2-5", "Psalm 66:16"], 2022, null, true)
   )),
 
   new Song(
@@ -1198,8 +1198,8 @@ const songs = [
         ]
       }
     ],
-    [new Arrangement("Chord Chart", "C major", "4/4", null, "Chord Chart", null, null, null, accompanimentTracks = [null])],
-    streamingLinks = [null],
+    [new Arrangement("Chord Chart", "C major", "4/4", null, "Chord Chart", null, null, null, [null])],
+    [null],
     new HelpfulSongInfo("There Is Rest is a confession of faith amid doubt, suffering, guilt, and the apparent silence of God, finding unshakable assurance not in our circumstances or strength but in His immutable character. When every earthly foundation gives way, the believer can rest in the goodness, faithfulness, love, and enduring promises of God.", ["assurance", "hope", "faithfulness", "God's presence"], ["Psalm 34:15-19", "Psalm 119:11", "Psalm 119:49-50", "Psalm 73:25-26", "Job 13:15", "Isaiah 40:8", "Isaiah 54:10", "Lamentations 3:21-26", "Matthew 7:24-27", "Matthew 24:35", "Romans 8:35-39", "1 Corinthians 3:11", "2 Corinthians 1:20", "Hebrews 6:17-19", "Hebrews 13:8", "James 1:17", "1 Peter 5:7"], 2021, null, true)
   ),
   new Song(
@@ -1282,8 +1282,8 @@ const songs = [
         ]
       }
     ],
-    arrangements = [new Arrangement("Chord Chart", "C major", "4/4", null, "Chord Chart", null, null, null, accompanimentTracks = [null])],
-    streamingLinks = [null],
+    [new Arrangement("Chord Chart", "C major", "4/4", null, "Chord Chart", null, null, null, [null])],
+    [null],
     new HelpfulSongInfo("The believer's hope is anchored in adoption, atonement, justification, and assurance of God's preservation of His saints.", ["salvation", "redemption", "substitutionary atonement", "justification", "reconciliation", "adoption", "assurance", "perseverance"], ["Hebrews 2:9-11", "Isaiah 53:4-7", "2 Corinthians 5:18-21", "Romans 5:8-11", "1 Peter 3:18", "Galatians 2:20", "Romans 8:31-39", "1 Corinthians 6:19-20"], 2026, null, true)
   )
 ];

@@ -1,0 +1,41 @@
+/* Song layouts extend the shared styles.css; the site header stays consistent. */
+.song-page main { width: min(1160px, calc(100% - 2.5rem)); margin-inline: auto; padding-block: 2rem 5rem; }
+.back-link { display: inline-flex; font-size: .8rem; text-decoration: none; padding-block: .7rem; margin-bottom: 2rem; color: var(--muted); }
+.back-link:hover { color: var(--blue); }
+.song-heading { border-bottom: 1px solid var(--line); padding-bottom: 2rem; margin-bottom: 2.5rem; }
+.song-heading h1 { font-size: clamp(2.6rem, 6vw, 5rem); max-width: 21ch; color: var(--navy); margin-bottom: 1.5rem; }
+.song-details { color: var(--muted); font-size: .8rem; }
+.song-details p { margin: .2rem 0; }
+.song-layout { display: grid; gap: 3rem; }
+.song-text { order: 1; min-width: 0; }
+.resources { order: 2; min-width: 0; align-self: start; background: var(--cream); padding: 1.5rem; border-top: 3px solid var(--mint); }
+.resources h2 { font-size: 1.7rem; margin-bottom: 1.5rem; }
+.resources audio { width: 100%; max-width: 100%; margin-bottom: 1rem; }
+.resources ul { padding-left: 1.2rem; font-size: .85rem; }
+.resources li { margin-bottom: .8rem; overflow-wrap: anywhere; }
+.resources > p { font-size: .85rem; color: var(--muted); }
+.sheet-preview { display: block; margin-top: 1.5rem; }
+.lyrics { font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.85; overflow-wrap: break-word; }
+.lyric-section { margin-bottom: 2rem; }
+.lyric-section h3, .lyrics .break-before { font-family: var(--sans); color: var(--muted); font-weight: 650; font-size: .75rem; margin-bottom: .65rem; }
+.lyrics > p { margin: 0; }
+.lyrics .break-before { margin-top: 2rem; margin-bottom: .65rem; }
+.about-song { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); max-width: 65ch; }
+.about-song h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+.about-song p { font-size: .95rem; color: var(--muted); line-height: 1.8; }
+.references { margin-top: 2rem; }
+.references h2 { font-size: 1.7rem; margin-bottom: 1rem; }
+.references p { font-size: .85rem; color: var(--muted); }
+.tags { display: flex; gap: .5rem; flex-wrap: wrap; list-style: none; padding: 0; }
+.tags li { border-radius: 2rem; padding: .3rem .75rem; background: #e3eee8; font-size: .7rem; color: #315c65; }
+.share { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+.share a, .share button { font-size: .75rem; border: 1px solid #bdc8cf; border-radius: 2px; background: var(--paper); color: var(--navy); padding: .65rem; text-decoration: none; }
+.share a:hover, .share button:hover { background: #e3eee8; }
+.share-status { flex-basis: 100%; font-size: .75rem; overflow-wrap: anywhere; }
+@media (min-width: 760px) {
+  .song-page main { width: min(1160px, calc(100% - 3.5rem)); padding-block: 3rem 6rem; }
+  .song-layout { grid-template-columns: minmax(240px, 1fr) minmax(0, 1.8fr); gap: 4rem; }
+  .praise-layout { grid-template-columns: minmax(0, 1.8fr) minmax(240px, 1fr); }
+  .resources, .song-text { order: initial; }
+  .resources { padding: 2rem; }
+}
