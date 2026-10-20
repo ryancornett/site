@@ -7,7 +7,17 @@ class AccompanimentTrack {
 }
 
 class Arrangement {
-  constructor(label, key, timeSignature = null, modulation = null, format = "SATB", pdf = null, chordChart = null, png = null, accompanimentTracks = []) {
+  constructor(
+    label,
+    key,
+    timeSignature = null,
+    modulation = null,
+    format = "SATB",
+    pdf = null,
+    chordChart = null,
+    png = null,
+    accompanimentTracks = [],
+  ) {
     this.label = label;
     this.key = key;
     this.timeSignature = timeSignature;
@@ -29,7 +39,13 @@ class StreamingLink {
 }
 
 class SongMetadata {
-  constructor(type = "Hymn", tune = null, meter = null, wordsBy = "Ryan Cornett, 2026", musicBy = "Ryan Cornett, 2026") {
+  constructor(
+    type = "Hymn",
+    tune = null,
+    meter = null,
+    wordsBy = "Ryan Cornett, 2026",
+    musicBy = "Ryan Cornett, 2026",
+  ) {
     this.type = type;
     this.tune = tune;
     this.meter = meter;
@@ -39,18 +55,35 @@ class SongMetadata {
 }
 
 class HelpfulSongInfo {
-  constructor(about = null, themes = [], scriptureReferences = [], yearWritten = 2026, lyricVideoUrl = null, playableOnGuitar = false) {
+  constructor(
+    about = null,
+    themes = [],
+    scriptureReferences = [],
+    yearWritten = 2026,
+    lyricVideoUrl = null,
+    playableOnGuitar = false,
+  ) {
     this.about = about;
     this.themes = themes;
     this.scriptureReferences = scriptureReferences;
     this.yearWritten = yearWritten;
     this.lyricVideoUrl = lyricVideoUrl;
     this.playableOnGuitar = playableOnGuitar;
-  } 
+  }
 }
 
 class Song {
-  constructor(title, id, slug, demo_mp3 = null, songMetadata = new SongMetadata(), lyrics = [], arrangements = [], streamingLinks = [], helpfulSongInfo = new HelpfulSongInfo()) {
+  constructor(
+    title,
+    id,
+    slug,
+    demo_mp3 = null,
+    songMetadata = new SongMetadata(),
+    lyrics = [],
+    arrangements = [],
+    streamingLinks = [],
+    helpfulSongInfo = new HelpfulSongInfo(),
+  ) {
     this.title = title;
     this.id = id;
     this.slug = slug;
@@ -60,11 +93,12 @@ class Song {
     this.arrangements = arrangements;
     this.streamingLinks = streamingLinks;
     this.helpfulSongInfo = helpfulSongInfo;
+    this.sheetImage = null;
   }
 }
 
 const songsNotReady = [
-    new Song(
+  new Song(
     "A Call Comes Ringing",
     "/songs/a-call-comes-ringing",
     "Hymn",
@@ -77,7 +111,7 @@ const songsNotReady = [
     "https://drive.google.com/file/d/1RE5a6Pb0IwfXIIyaX1eDrLVloGHDmHbO",
     "https://www.youtube.com/watch?v=8ziDaBk6p74",
     "I found Jones's lyrics and Walker's tune too good not to be heard, and together they make a beautiful hymn. I have made some minor adjustments to the lyrics and tune for modern use, but the original works are still very much intact.",
-    true
+    true,
   ),
 
   new Song(
@@ -88,11 +122,11 @@ const songsNotReady = [
     "8.6.8.6",
     "Ryan Cornett, 2026",
     "John B. Dykes, 1863",
-        null,
-        null,
-        null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    null,
+    null,
+    null,
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
 
   new Song(
@@ -107,9 +141,9 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
-  
+
   new Song(
     "Laid Up for Us Is a Crown",
     "/songs/laid-up-for-us-is-a-crown",
@@ -123,9 +157,9 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
-  
+
   new Song(
     "Let Not My Soul Thy Works Forget",
     "/songs/let-not-my-soul-thy-works-forget",
@@ -138,7 +172,7 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
 
   new Song(
@@ -153,7 +187,7 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
 
   new Song(
@@ -168,7 +202,7 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
   new Song(
     "O God, Arise to Do Your Will",
@@ -182,7 +216,7 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
 
   new Song(
@@ -197,9 +231,9 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
-  
+
   new Song(
     "The Hands I Nailed to the Cross",
     "/songs/the-hands-i-nailed-to-the-cross",
@@ -213,7 +247,7 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
 
   new Song(
@@ -229,7 +263,7 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
   new Song(
     "To Know Him More",
@@ -243,7 +277,7 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
   new Song(
     "Welcomed to the Table",
@@ -258,7 +292,7 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
 
   new Song(
@@ -273,7 +307,7 @@ const songsNotReady = [
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
   new Song(
     "As the Lord Lives",
@@ -288,7 +322,7 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
   new Song(
     "Awake, My Soul (Warrior King)",
@@ -303,7 +337,7 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
   new Song(
     "Forgotten in the Sea",
@@ -318,7 +352,7 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
   new Song(
     "From the Depths",
@@ -333,7 +367,7 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
   new Song(
     "His Love Endures",
@@ -348,80 +382,109 @@ const songsNotReady = [
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
-  )
-]
+    true,
+  ),
+];
 
 const songs = [
   new Song(
     "Abiding in Jesus, the Vine",
-    103, 
+    103,
     "abiding-in-jesus-the-vine",
     "https://drive.google.com/file/d/1yA-gmT7amTm0DWhHyy0dfttOgGAjIGJA",
-    new SongMetadata("Hymn", "ABIDING", "Irregular", "Ryan Cornett", "Ryan Cornett"),
+    new SongMetadata(
+      "Hymn",
+      "ABIDING",
+      "Irregular",
+      "Ryan Cornett",
+      "Ryan Cornett",
+    ),
     [
-        {
-            type: "stanza",
-            number: 1,
-            lines: [
-                "In Jesus, the Vine, abiding,",
-                "My soul finds its dearest place;",
-                "The Spirit, within residing,",
-                "I'm growing in gifts of grace."
-            ],
-          },
-          {
-            type: "refrain",
-            number: 1,
-            lines: [
-                "In Jesus, the Vine, in Jesus, the Vine,",
-                "In Jesus, the Vine, abiding;",
-                "Sustained by the Root, and bearing the Fruit,",
-                "Abiding in Jesus, the Vine."
-            ],
-          },
-          {
-            type: "stanza",
-            number: 2,
-            lines: [
-                "Though pestilence, drought, diseases,",
-                "And deep winter tarry fierce,",
-                "The Vinedresser, my heart, pleases",
-                "When His tending hand appears."
-            ],
-          },
-          {
-            type: "stanza",
-            number: 3,
-            lines: [
-                "In Him, my supply, remaining,",
-                "His light on me ever shines;",
-                "The flow from the Root, sustaining,",
-                "Exceeds earth's deceitful vines."
-            ],
-          },
-          {
-            type: "stanza",
-            number: 4,
-            lines: [
-                "The Lord of the plenteous harvest,",
-                "In His vineyard now, I dwell;",
-                "Engrafted, I flourish, far blest",
-                "Beyond every song could tell."
-            ],
-          }
+      {
+        type: "stanza",
+        number: 1,
+        lines: [
+          "In Jesus, the Vine, abiding,",
+          "My soul finds its dearest place;",
+          "The Spirit, within residing,",
+          "I'm growing in gifts of grace.",
+        ],
+      },
+      {
+        type: "refrain",
+        number: 1,
+        lines: [
+          "In Jesus, the Vine, in Jesus, the Vine,",
+          "In Jesus, the Vine, abiding;",
+          "Sustained by the Root, and bearing the Fruit,",
+          "Abiding in Jesus, the Vine.",
+        ],
+      },
+      {
+        type: "stanza",
+        number: 2,
+        lines: [
+          "Though pestilence, drought, diseases,",
+          "And deep winter tarry fierce,",
+          "The Vinedresser, my heart, pleases",
+          "When His tending hand appears.",
+        ],
+      },
+      {
+        type: "stanza",
+        number: 3,
+        lines: [
+          "In Him, my supply, remaining,",
+          "His light on me ever shines;",
+          "The flow from the Root, sustaining,",
+          "Exceeds earth's deceitful vines.",
+        ],
+      },
+      {
+        type: "stanza",
+        number: 4,
+        lines: [
+          "The Lord of the plenteous harvest,",
+          "In His vineyard now, I dwell;",
+          "Engrafted, I flourish, far blest",
+          "Beyond every song could tell.",
+        ],
+      },
     ],
-    new Arrangement("SATB", "E flat major", "6/8", null, "SATB", "https://drive.google.com/file/d/1SJSgoave3nC57iW80sBFEjeHIz6p2W-f", null, "https://drive.google.com/file/d/1EJNqRszwwlrffQql3vuYTvhotvMThnOI", [null]),
+    new Arrangement(
+      "SATB",
+      "E flat major",
+      "6/8",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1SJSgoave3nC57iW80sBFEjeHIz6p2W-f",
+      null,
+      "https://drive.google.com/file/d/1EJNqRszwwlrffQql3vuYTvhotvMThnOI",
+      [null],
+    ),
     [null],
-    new HelpfulSongInfo("A hymn for everyday Christian life centered around the believer's dependence upon Christ, drawing on the imagery of the vine and branches to express His sustaining grace through every season and the faithful care of the Vinedresser.", ["union with Christ", "abiding", "spiritual growth", "perseverance"], ["John 15:1-8", "Galatians 5:22-23", "Romans 11:17"], 2026, null, false)
+    new HelpfulSongInfo(
+      "A hymn for everyday Christian life centered around the believer's dependence upon Christ, drawing on the imagery of the vine and branches to express His sustaining grace through every season and the faithful care of the Vinedresser.",
+      ["union with Christ", "abiding", "spiritual growth", "perseverance"],
+      ["John 15:1-8", "Galatians 5:22-23", "Romans 11:17"],
+      2026,
+      null,
+      false,
+    ),
   ),
-  
+
   new Song(
     "All My Ways Are in Thy Hand",
     104,
     "all-my-ways-are-in-thy-hand",
     "https://drive.google.com/file/d/1LfWc1D4LfMgZZHVLJUauxH2fxzazn77A",
-    new SongMetadata("Psalm", "QUAERES ME", "8.8.8.7. w/ repeat and refrain", "The New Metrical Version of the Psalms, 1909; alt.", "Ryan Cornett"),
+    new SongMetadata(
+      "Psalm",
+      "QUAERES ME",
+      "8.8.8.7. w/ repeat and refrain",
+      "The New Metrical Version of the Psalms, 1909; alt.",
+      "Ryan Cornett",
+    ),
     [
       {
         type: "refrain",
@@ -431,8 +494,8 @@ const songs = [
           "where'er I rest, where'er I go;",
           "Thou knowest all that I have planned,",
           "All my ways are in Thy hand,",
-          "All my ways are in Thy hand."
-        ]
+          "All my ways are in Thy hand.",
+        ],
       },
       {
         type: "stanza",
@@ -442,8 +505,8 @@ const songs = [
           "I feel Thy pow'r on ev'ry side;",
           "O wondrous knowledge, awesome might,",
           "Plumbless depth, unmeasured height!",
-          "Plumbless depth, unmeasured height!"
-        ]
+          "Plumbless depth, unmeasured height!",
+        ],
       },
       {
         type: "stanza",
@@ -453,8 +516,8 @@ const songs = [
           "Or whither from Thy presence flee?",
           "In heav'n? it is Thy dwelling fair;",
           "Death's abode? lo, Thou art there,",
-          "Death's abode? lo, Thou art there."
-        ]
+          "Death's abode? lo, Thou art there.",
+        ],
       },
       {
         type: "stanza",
@@ -464,8 +527,8 @@ const songs = [
           "And far away my dwelling make,",
           "The hand that leadeth me is Thine,",
           "My support, Thy pow'r divine,",
-          "My support, Thy pow'r divine."
-        ]
+          "My support, Thy pow'r divine.",
+        ],
       },
       {
         type: "stanza",
@@ -475,23 +538,46 @@ const songs = [
           "The darkness hideth not from Thee;",
           "To Thee both night and day are bright,",
           "Darkness shineth as the light,",
-          "Darkness shineth as the light."
-        ]
-      }
+          "Darkness shineth as the light.",
+        ],
+      },
     ],
     [
-      new Arrangement("SATB", "E major", "4/4", null, "SATB", "https://drive.google.com/file/d/1MwHup5Z7vSk7RbRtsQ9nEhfJhkWMRApX", null, "https://drive.google.com/file/d/1RHVCKDDCmo6zGhoLyX_8PCkYFPK3NHkN", [null])
+      new Arrangement(
+        "SATB",
+        "E major",
+        "4/4",
+        null,
+        "SATB",
+        "https://drive.google.com/file/d/1MwHup5Z7vSk7RbRtsQ9nEhfJhkWMRApX",
+        null,
+        "https://drive.google.com/file/d/1RHVCKDDCmo6zGhoLyX_8PCkYFPK3NHkN",
+        [null],
+      ),
     ],
     [null],
-    new HelpfulSongInfo("A metrical treatment of Psalm 139 celebrating God's knowledge, presence, and guiding hand.", ["omniscience", "omnipresence", "providence", "guidance"], ["Psalm 139:1-12"], 2024, null, true)
+    new HelpfulSongInfo(
+      "A metrical treatment of Psalm 139 celebrating God's knowledge, presence, and guiding hand.",
+      ["omniscience", "omnipresence", "providence", "guidance"],
+      ["Psalm 139:1-12"],
+      2024,
+      null,
+      true,
+    ),
   ),
-  
+
   new Song(
     "Christ, Our Abiding Cornerstone",
     107,
     "christ-our-abiding-cornerstone",
     "https://drive.google.com/file/d/1Nm8wNVbmhDJwjiHwXgYy_-cy2VRAQSuW",
-    new SongMetadata("Hymn", "ELLACOMBE", "C.M.D.", "Ryan Cornett", "Traditional German Melody"),
+    new SongMetadata(
+      "Hymn",
+      "ELLACOMBE",
+      "C.M.D.",
+      "Ryan Cornett",
+      "Traditional German Melody",
+    ),
     [
       {
         type: "stanza",
@@ -504,8 +590,8 @@ const songs = [
           "Death has no vict'ry nor a sting,",
           "Hushed is the Law's fierce roar;",
           "Ours is the triumph by the King",
-          "Who reigns forevermore."
-        ]
+          "Who reigns forevermore.",
+        ],
       },
       {
         type: "stanza",
@@ -518,8 +604,8 @@ const songs = [
           "By holy flame, as gold refined,",
           "He burns away the dross;",
           "His chosen treasure He has mined,",
-          "Unearthed upon the cross."
-        ]
+          "Unearthed upon the cross.",
+        ],
       },
       {
         type: "stanza",
@@ -532,8 +618,8 @@ const songs = [
           "Stone laid on stone, our Lord will build,",
           "His Spirit will abide;",
           "God's house, in covenant, is sealed,",
-          "His temple, unified."
-        ]
+          "His temple, unified.",
+        ],
       },
       {
         type: "stanza",
@@ -543,28 +629,73 @@ const songs = [
           "In whom all worth is found,",
           "May voices raised to make Him known",
           "Through every land resound:",
-          "\"As stars by Your decree burn bright",
+          '"As stars by Your decree burn bright',
           "And summer flow'rs You dress,",
           "O make Your Church a tow'ring light",
-          "Adorned with righteousness.\""
-        ]
-      }
+          'Adorned with righteousness."',
+        ],
+      },
     ],
     [
-    new Arrangement("SATB", "A major", "4/4", null, "SATB", "https://drive.google.com/file/d/1QdyOHrJkVaD3yJNmkzu5q-9l3xNN3xjN", null, "https://drive.google.com/file/d/1QY-DImGUDy2GzkQvzGgs7aTUO8TKj1K7", [null])
+      new Arrangement(
+        "SATB",
+        "A major",
+        "4/4",
+        null,
+        "SATB",
+        "https://drive.google.com/file/d/1QdyOHrJkVaD3yJNmkzu5q-9l3xNN3xjN",
+        null,
+        "https://drive.google.com/file/d/1QY-DImGUDy2GzkQvzGgs7aTUO8TKj1K7",
+        [null],
+      ),
     ],
     [
-      new StreamingLink("YouTube", "https://music.youtube.com/watch?v=e7CG9k1H_6c&si=sEqVVcUHlGp98DQn", null)
+      new StreamingLink(
+        "YouTube",
+        "https://music.youtube.com/watch?v=e7CG9k1H_6c&si=sEqVVcUHlGp98DQn",
+        null,
+      ),
     ],
-    new HelpfulSongInfo("I wrote this text for a men's retreat, shaping the hymn around the three major themes of the retreat: unity, salvation, and sanctification from 1 Corinthians. I selected ELLACOMBE for its strong, jubilant character and familiarity since I wanted as many men as possible ready to sing it.", ["unity", "salvation", "sanctification"], ["1 Corinthians 5:7", "1 Corinthians 15:3-4 & 55-57", "Romans 5:9", "Isaiah 53:5", "1 Corinthians 3:11-15", "1 Corinthians 6:19-20", "James 1:12", "Malachi 3:2-3", "1 Peter 1:6-7", "1 Corinthians 10:16-17", "1 Corinthians 11:3", "1 Corinthians 12:12-13", "Ephesians 2:20-22", "1 Peter 2:4-5", "1 Corinthians 1:30-31", "Matthew 5:14-16", "Philippians 2:15", "Isaiah 61:10"], 2025, "https://youtu.be/e7CG9k1H_6c?si=Nb2LcntF9vFHP691", true)
+    new HelpfulSongInfo(
+      "I wrote this text for a men's retreat, shaping the hymn around the three major themes of the retreat: unity, salvation, and sanctification from 1 Corinthians. I selected ELLACOMBE for its strong, jubilant character and familiarity since I wanted as many men as possible ready to sing it.",
+      ["unity", "salvation", "sanctification"],
+      [
+        "1 Corinthians 5:7",
+        "1 Corinthians 15:3-4 & 55-57",
+        "Romans 5:9",
+        "Isaiah 53:5",
+        "1 Corinthians 3:11-15",
+        "1 Corinthians 6:19-20",
+        "James 1:12",
+        "Malachi 3:2-3",
+        "1 Peter 1:6-7",
+        "1 Corinthians 10:16-17",
+        "1 Corinthians 11:3",
+        "1 Corinthians 12:12-13",
+        "Ephesians 2:20-22",
+        "1 Peter 2:4-5",
+        "1 Corinthians 1:30-31",
+        "Matthew 5:14-16",
+        "Philippians 2:15",
+        "Isaiah 61:10",
+      ],
+      2025,
+      "https://youtu.be/e7CG9k1H_6c?si=Nb2LcntF9vFHP691",
+      true,
+    ),
   ),
-  
+
   new Song(
     "Christ, the Prize All Wealth Exceeding",
-    "/songs/christ-the-prize-all-wealth-exceeding",
-    "Hymn",
-    "REDEEMER",
-    "8.7.8.7",
+    108,
+    "christ-the-prize-all-wealth-exceeding",
+    new SongMetadata(
+      "Hymn",
+      "REDEEMER",
+      "8.7.8.7",
+      "Ryan Daniel Cornett",
+      "Luther O. Emerson",
+    ),
     [
       {
         type: "stanza",
@@ -574,7 +705,7 @@ const songs = [
           "Treasure of the Father's blest,",
           "Hear my lonely, midnight pleading",
           "That in Your supply I'll rest.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -584,7 +715,7 @@ const songs = [
           "To find joy in all Your ways;",
           "Both in poverty and plenty,",
           "May my tongue sustain Your praise.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -594,7 +725,7 @@ const songs = [
           "Greed and rashness to exclude;",
           "May I linger as Your student",
           "In the course of gratitude.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -604,7 +735,7 @@ const songs = [
           "Dwells above in Heaven fair;",
           "Though bereft of gold and silver,",
           "I am rich beyond compare.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -614,24 +745,48 @@ const songs = [
           "Grasp no good but Glory's strand;",
           "Christ, the prize all wealth exceeding,",
           "All I have is from Your hand.",
-        ]
-      }
+        ],
+      },
     ],
-    "Ryan Cornett, 2026",
-    "Luther O. Emerson, 1863",
-    "https://drive.google.com/file/d/1F7ydcJZOafbeyb9237yJXrZif7JPFCXm/view?usp=sharing",
-    "https://drive.google.com/file/d/14j3f-eHvtpBuUgz2D3LCxLdkAng4JTxY/view?usp=sharing",
-    "https://drive.google.com/file/d/1WuZH0NM0KhurMhRIVUYanSoEB9-bAHHD/view?usp=sharing",
+    [
+      new Arrangement(
+        "SATB",
+        "A flat major",
+        "3/4",
+        null,
+        "SATB",
+        "https://drive.google.com/file/d/1QdyOHrJkVaD3yJNmkzu5q-9l3xNN3xjN",
+        null,
+        "https://drive.google.com/file/d/14j3f-eHvtpBuUgz2D3LCxLdkAng4JTxY",
+        null,
+        "https://drive.google.com/file/d/1WuZH0NM0KhurMhRIVUYanSoEB9-bAHHD/view?usp=sharing",
+        [null],
+      ),
+    ],
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    new HelpfulSongInfo(
+      "A prayer for contentment, prudence, and gratitude in both poverty and plenty.",
+      ["contentment", "gratitude", "stewardship", "Christ as treasure"],
+      ["Philippians 4:11-13", "Matthew 6:19-21", "1 Timothy 6:6-10"],
+      2026,
+      NULL,
+      false,
+    ),
   ),
   // BELOW ARE PLACEHOLDERS ***** ADD REAL INFORMATION LATER *****
-  
+
   new Song(
     "His Goodness Will Carry Me",
-    "/songs/his-goodness-will-carry-me",
-    "Hymn",
-    "HIS GOODNESS",
+    111,
+    "his-goodness-will-carry-me",
+    "https://drive.google.com/file/d/1ui1Na2PvK173TZo_0RTw9uqTnhX7MFWR",
+    new SongMetadata(
+      "Hymn",
+      "HIS GOODNESS",
+      "8.8.8.7.D.",
+      "Ryan Daniel Cornett",
+      "Ryan Daniel Cornett",
+    ),
     [
       {
         type: "stanza",
@@ -645,7 +800,7 @@ const songs = [
           "It stands as it has ever stood,",
           "And so I answer as I should:",
           "His goodness will carry me.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -659,7 +814,7 @@ const songs = [
           "'Tis there blood drops are glist'ning red;",
           "I'll follow where my Lord has led,",
           "His goodness will carry me.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -673,7 +828,7 @@ const songs = [
           "But God, for ever and always,",
           "Will live and reign, thus I shall praise",
           "His goodness that carries me.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -687,13 +842,34 @@ const songs = [
           "It stands as it has ever stood,",
           "And so I'll answer as I should:",
           "His goodness has carried me.",
-        ]
-      }
+        ],
+      },
     ],
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    [
+      new Arrangement(
+        "SATB",
+        "G major",
+        "6/8",
+        null,
+        "SATB",
+        "https://drive.google.com/file/d/15eJYLtRm3q7IVkIl7DR75fgwz3X33VPG",
+        "https://drive.google.com/file/d/1H15zHANkQVzekngJgCaCYPXWN4E8QesI",
+        "https://drive.google.com/file/d/1MCZT3MvTzsFQ3XEvVN8on0YtQzC8B6cZ",
+        [null],
+      ),
+    ],
+    null,
+    new HelpfulSongInfo(
+      "A confession of God’s unchanging goodness through abundance, affliction, aging, and death.",
+      ["God's goodness", "providence", "trust", "perseverance"],
+      ["Psalm 23:6", "Romans 8:28", "Philippians 4:11–13", "James 4:14"],
+      2026,
+      null,
+      true,
+    ),
+    true,
   ),
-  
+
   new Song(
     "In Glory Rests a Grand Receipt",
     "/songs/in-glory-rests-a-grand-receipt",
@@ -715,7 +891,7 @@ const songs = [
           "Condemned God's only Son,",
           "He paid the price my sins accrued,",
           "And saw their claim undone.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -729,7 +905,7 @@ const songs = [
           "With nothing in my purse,",
           "Received the gold of countless weight",
           "That dispossessed the curse.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -738,12 +914,12 @@ const songs = [
           "My balance, stood in deficit",
           "All toil could not requite,",
           "Hark now, the Righteous Judge's writ:",
-          "\"My Son has set it right.\"",
+          '"My Son has set it right."',
           "Behold the One of matchless worth:",
           "The cross His mercy proved;",
           "The Son redeeming sons of earth,",
           "Their every charge, removed.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -757,7 +933,7 @@ const songs = [
           "This debtor need not fear;",
           "The ledger evermore will read",
           "That my account is clear.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -771,16 +947,16 @@ const songs = [
           "What seal of grace divine!",
           "Salvation to the uttermost!",
           "Such pardon now is mine.",
-        ]
-      }
+        ],
+      },
     ],
     null,
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
-  
+
   new Song(
     "Let There Be Light",
     "/songs/let-there-be-light",
@@ -794,7 +970,7 @@ const songs = [
         type: "stanza",
         number: 1,
         lines: [
-          "\"Let there be light,\" the Maker speaks,",
+          '"Let there be light," the Maker speaks,',
           "And darkness flies away.",
           "The morn is new as grace descends,",
           "Benighted heart sees day;",
@@ -802,7 +978,7 @@ const songs = [
           "As dawn of mercy breaks;",
           "From deathly slumber unto life,",
           "The ransomed soul awakes.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -816,7 +992,7 @@ const songs = [
           "By heat of holy wrath—",
           "The perfect sacrifice aflame—",
           "Revealed the righteous path.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -830,23 +1006,29 @@ const songs = [
           "For Christ in radiance beamed;",
           "From darkness, light shall ever shine",
           "On all who stand redeemed.",
-        ]
-      }
+        ],
+      },
     ],
     null,
     null,
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
-  
+
   new Song(
     "My Help and My Hope",
     119,
     "my-help-and-my-hope",
     "https://drive.google.com/file/d/1uCpLy0BiyreQHwslRad6bCoF4mfTDDWH",
-    new SongMetadata("Hymn", "LYDIA KATHERINE", "10.10.10.10.D.", "Ryan Daniel Cornett", "Ryan Daniel Cornett"),
+    new SongMetadata(
+      "Hymn",
+      "LYDIA KATHERINE",
+      "10.10.10.10.D.",
+      "Ryan Daniel Cornett",
+      "Ryan Daniel Cornett",
+    ),
     [
       {
         type: "stanza",
@@ -859,7 +1041,7 @@ const songs = [
           "Yet my voice You hear, my cry You attend,",
           "Your fresh mercies bloom each morn without end;",
           "What gardens of joy! What fountains of peace!",
-          "Your aid shall not fail, Your grace never cease."
+          "Your aid shall not fail, Your grace never cease.",
         ],
       },
       {
@@ -873,8 +1055,8 @@ const songs = [
           "If not for the Vine, felled that I be whole",
           "The thorn of the curse would cut through my soul;",
           "What favor abounds! What riches supplied",
-          "From storehouses grand, by arms open wide."
-        ]
+          "From storehouses grand, by arms open wide.",
+        ],
       },
       {
         type: "stanza",
@@ -887,13 +1069,44 @@ const songs = [
           "To stranger and kin will I testify",
           "Till unto the fields of Glory I fly,",
           "That You hear and have regarded my plea;",
-          "My help and my hope, You ever will be."
-        ]
-      }
+          "My help and my hope, You ever will be.",
+        ],
+      },
     ],
-    new Arrangement("SATB", "D major", "3/4", null, "SATB", "https://drive.google.com/file/d/1z1G2To6h64UH1C9xIHNet5Enb1iaP3IP", null, "https://drive.google.com/file/d/1zf9LvIviYRiuSc9wAKGsbwpbo7J5J-Vp/view?usp=sharing", [null],),
-    new StreamingLink("YouTube", "https://www.youtube.com/watch?v=0g1k5J6X7xM", null),
-    new HelpfulSongInfo("A prayer for enduring mercy, salvation, spiritual fruitfulness, and faithful witness.", ["hope", "divine help", "salvation", "abiding", "witness"], ["Psalm 103:15-17", "Lamentations 3:22-23", "Isaiah 58:11", "Psalm 32:6-7", "1 Peter 3:20-21", "John 15:1-5", "Isaiah 35:1-2", "John 15:2-5", "Psalm 66:16"], 2022, null, true)
+    new Arrangement(
+      "SATB",
+      "D major",
+      "3/4",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1z1G2To6h64UH1C9xIHNet5Enb1iaP3IP",
+      null,
+      "https://drive.google.com/file/d/1zf9LvIviYRiuSc9wAKGsbwpbo7J5J-Vp/view?usp=sharing",
+      [null],
+    ),
+    new StreamingLink(
+      "YouTube",
+      "https://www.youtube.com/watch?v=0g1k5J6X7xM",
+      null,
+    ),
+    new HelpfulSongInfo(
+      "A prayer for enduring mercy, salvation, spiritual fruitfulness, and faithful witness.",
+      ["hope", "divine help", "salvation", "abiding", "witness"],
+      [
+        "Psalm 103:15-17",
+        "Lamentations 3:22-23",
+        "Isaiah 58:11",
+        "Psalm 32:6-7",
+        "1 Peter 3:20-21",
+        "John 15:1-5",
+        "Isaiah 35:1-2",
+        "John 15:2-5",
+        "Psalm 66:16",
+      ],
+      2022,
+      null,
+      true,
+    ),
   ),
 
   new Song(
@@ -916,7 +1129,7 @@ const songs = [
           "What ills Your strength has brought us from!",
           "Thus far we, by Your help, have come,",
           "Thus far we, by Your help, have come.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -929,7 +1142,7 @@ const songs = [
           "When we lay helpless in the grave,",
           "Your mighty arm reached down to save,",
           "Your mighty arm reached down to save.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -942,16 +1155,16 @@ const songs = [
           "Where grateful praise from every tongue",
           "Resounds in one eternal song,",
           "Resounds in one eternal song.",
-        ]
-      }
+        ],
+      },
     ],
     null,
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
-  
+
   new Song(
     "O Risen Lord, Once Perished One",
     "/songs/o-risen-lord-once-perished-one",
@@ -969,7 +1182,7 @@ const songs = [
           "To whom I from the pit have flown,",
           "Blood-watered ground yields heark'ning bloom;",
           "Thy waking reckoned vain the tomb.",
-        ]
+        ],
       },
       {
         type: "refrain",
@@ -977,7 +1190,7 @@ const songs = [
         lines: [
           "Rise, now arise, O soul set free!",
           "Death's sting no longer pierces thee.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -987,7 +1200,7 @@ const songs = [
           "My soul awakened at Thy word;",
           "Thus 'tis for all Thy righteous dead:",
           "The grave is but a borrowed bed.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -997,7 +1210,7 @@ const songs = [
           "Wrought for Thy saints the death of Death?",
           "Yea we, as those in dust now lie,",
           "Wait for Thy day when Death shall die.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -1007,16 +1220,16 @@ const songs = [
           "Thou didst arise to life and throne;",
           "So shall we spring to glory won",
           "By Thee, O Lord, the Living One!",
-        ]
-      }
+        ],
+      },
     ],
     null,
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
-  
+
   new Song(
     "The Sun Is Sinking",
     "/songs/the-sun-is-sinking",
@@ -1034,7 +1247,7 @@ const songs = [
           "To shine in lands that lie beyond our sight;",
           "Thine own, O Father, all the nations are;",
           "O, give to them Thy Light.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -1044,7 +1257,7 @@ const songs = [
           "No shining sun like knowledge that Thou art.",
           "Shine forth, great Light! In every darkened place;",
           "Make glad the weary heart.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -1054,7 +1267,7 @@ const songs = [
           "Both near to us and those who dwell afar.",
           "Since Thou art with them, may they know no night;",
           "Be Thou their guiding star.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -1064,16 +1277,16 @@ const songs = [
           "With earthly sun and shade forever past,",
           "From ev'ry land Thou wilt Thy children call",
           "To dwell in light at last.",
-        ]
-      }
+        ],
+      },
     ],
     null,
     null,
     null,
     null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven."
+    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
   ),
-  
+
   new Song(
     "What Vastness the Redeemer Crossed",
     "/songs/what-vastness-the-redeemer-crossed",
@@ -1095,7 +1308,7 @@ const songs = [
           "From star to star, yet failing;",
           "Still further reached His hand to me,",
           "His saving arm prevailing.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -1109,7 +1322,7 @@ const songs = [
           "In miry clay, I wallowed",
           "Until the Shepherd called my name:",
           "I woke, arose, and followed.",
-        ]
+        ],
       },
       {
         type: "stanza",
@@ -1123,23 +1336,29 @@ const songs = [
           "To dwell with Christ, my Savior;",
           "In borrowed robes of purest white,",
           "Brought near to God forever.",
-        ]
-      }
+        ],
+      },
     ],
     null,
     null,
     null,
     null,
     "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true
+    true,
   ),
-  
+
   new Song(
     "There Is Rest",
     143,
     "there-is-rest",
     null,
-    new SongMetadata("Praise Song", null, null, "Ryan Daniel Cornett", "Ryan Daniel Cornett"),
+    new SongMetadata(
+      "Praise Song",
+      null,
+      null,
+      "Ryan Daniel Cornett",
+      "Ryan Daniel Cornett",
+    ),
     [
       {
         type: "verse",
@@ -1149,7 +1368,7 @@ const songs = [
           "Is all my hope in vain that I have such a Savior?",
           "A Lord who's near, near to the brokenhearted,",
           "Who hears the righteous cry, and saves the crushed in spirit?",
-        ]
+        ],
       },
       {
         type: "pre-chorus",
@@ -1157,7 +1376,7 @@ const songs = [
         lines: [
           "When all other ground gives way,",
           "Still my breaking voice will say:",
-        ]
+        ],
       },
       {
         type: "chorus",
@@ -1166,7 +1385,7 @@ const songs = [
           "There is rest in who You are, For who You are is sure;",
           "Though earth and heaven pass away, Your promises endure;",
           "When all I have is this, On who You are, God, I will rest.",
-        ]
+        ],
       },
       {
         type: "verse",
@@ -1176,7 +1395,7 @@ const songs = [
           "My feet can scarcely stand on Christ, the sure foundation.",
           "In my own strength, I'd fall in but a moment,",
           "The quakes of guilt assail and leave me bent and broken.",
-        ]
+        ],
       },
       {
         type: "pre-chorus",
@@ -1184,7 +1403,7 @@ const songs = [
         lines: [
           "When all other ground gives way,",
           "Though this mortal heart You slay,",
-        ]
+        ],
       },
       {
         type: "verse",
@@ -1194,7 +1413,7 @@ const songs = [
           "Are You not moved that I, Your child, feel so abandoned?",
           "I know You hear, I am not lost in silence;",
           "In my heart hides Your Word, a well of deep assurance.",
-        ]
+        ],
       },
       {
         type: "pre-chorus",
@@ -1202,19 +1421,62 @@ const songs = [
         lines: [
           "When all other ground gives way,",
           "You remain my hope and stay.",
-        ]
-      }
+        ],
+      },
     ],
-    [new Arrangement("Chord Chart", "C major", "4/4", null, "Chord Chart", null, null, null, [null])],
+    [
+      new Arrangement(
+        "Chord Chart",
+        "C major",
+        "4/4",
+        null,
+        "Chord Chart",
+        null,
+        null,
+        null,
+        [null],
+      ),
+    ],
     [null],
-    new HelpfulSongInfo("There Is Rest is a confession of faith amid doubt, suffering, guilt, and the apparent silence of God, finding unshakable assurance not in our circumstances or strength but in His immutable character. When every earthly foundation gives way, the believer can rest in the goodness, faithfulness, love, and enduring promises of God.", ["assurance", "hope", "faithfulness", "God's presence"], ["Psalm 34:15-19", "Psalm 119:11", "Psalm 119:49-50", "Psalm 73:25-26", "Job 13:15", "Isaiah 40:8", "Isaiah 54:10", "Lamentations 3:21-26", "Matthew 7:24-27", "Matthew 24:35", "Romans 8:35-39", "1 Corinthians 3:11", "2 Corinthians 1:20", "Hebrews 6:17-19", "Hebrews 13:8", "James 1:17", "1 Peter 5:7"], 2021, null, true)
+    new HelpfulSongInfo(
+      "There Is Rest is a confession of faith amid doubt, suffering, guilt, and the apparent silence of God, finding unshakable assurance not in our circumstances or strength but in His immutable character. When every earthly foundation gives way, the believer can rest in the goodness, faithfulness, love, and enduring promises of God.",
+      ["assurance", "hope", "faithfulness", "God's presence"],
+      [
+        "Psalm 34:15-19",
+        "Psalm 119:11",
+        "Psalm 119:49-50",
+        "Psalm 73:25-26",
+        "Job 13:15",
+        "Isaiah 40:8",
+        "Isaiah 54:10",
+        "Lamentations 3:21-26",
+        "Matthew 7:24-27",
+        "Matthew 24:35",
+        "Romans 8:35-39",
+        "1 Corinthians 3:11",
+        "2 Corinthians 1:20",
+        "Hebrews 6:17-19",
+        "Hebrews 13:8",
+        "James 1:17",
+        "1 Peter 5:7",
+      ],
+      2021,
+      null,
+      true,
+    ),
   ),
   new Song(
     "My Hope Is Found in This",
     142,
     "my-hope-is-found-in-this",
     null,
-    new SongMetadata("Praise Song", null, null, "Ryan Daniel Cornett", "Ryan Daniel Cornett"),
+    new SongMetadata(
+      "Praise Song",
+      null,
+      null,
+      "Ryan Daniel Cornett",
+      "Ryan Daniel Cornett",
+    ),
     [
       {
         type: "verse",
@@ -1224,7 +1486,7 @@ const songs = [
           "Faultless, for the great exchange: His life for sinful ones;",
           "The Founder of salvation for strangers beckoned near,",
           "Perfect through His suff'ring, brought to glory many sons.",
-        ]
+        ],
       },
       {
         type: "chorus",
@@ -1232,7 +1494,7 @@ const songs = [
         lines: [
           "My hope is found in this: I'm my Father's child;",
           "Once His foe, now family Christ has reconciled.",
-        ]
+        ],
       },
       {
         type: "verse",
@@ -1242,7 +1504,7 @@ const songs = [
           "God's own Son in bloody flesh sought out His wand'ring sheep;",
           "For like a lamb to slaughter the Suffering Servant went,",
           "Willingly made filthy so the filthy may be clean.",
-        ]
+        ],
       },
       {
         type: "chorus",
@@ -1250,7 +1512,7 @@ const songs = [
         lines: [
           "My hope is found in this: Jesus on the tree;",
           "By His sacrifice atoned, His blood covers me.",
-        ]
+        ],
       },
       {
         type: "verse",
@@ -1260,7 +1522,7 @@ const songs = [
           "Righteous for unrighteous that He might bring us to God;",
           "To die, His earthly mission, eternal life the prize:",
           "Credited to my account—no longer counted flawed.",
-        ]
+        ],
       },
       {
         type: "chorus",
@@ -1268,7 +1530,7 @@ const songs = [
         lines: [
           "My hope is found in this: God's wrath satisfied;",
           "When He looks on me He sees Jesus' blood applied.",
-        ]
+        ],
       },
       {
         type: "verse",
@@ -1278,7 +1540,7 @@ const songs = [
           "I no longer live, but it is Christ who lives in me;",
           "Of anything created or anything to come,",
           "None shall separate me from His love that set me free.",
-        ]
+        ],
       },
       {
         type: "chorus",
@@ -1286,13 +1548,78 @@ const songs = [
         lines: [
           "My hope is found in this: I am not my own;",
           "Purchased by His precious blood, I am His alone.",
-        ]
-      }
+        ],
+      },
     ],
-    [new Arrangement("Chord Chart", "C major", "4/4", null, "Chord Chart", null, null, null, [null])],
+    [
+      new Arrangement(
+        "Chord Chart",
+        "C major",
+        "4/4",
+        null,
+        "Chord Chart",
+        null,
+        null,
+        null,
+        [null],
+      ),
+    ],
     [null],
-    new HelpfulSongInfo("The believer's hope is anchored in adoption, atonement, justification, and assurance of God's preservation of His saints.", ["salvation", "redemption", "substitutionary atonement", "justification", "reconciliation", "adoption", "assurance", "perseverance"], ["Hebrews 2:9-11", "Isaiah 53:4-7", "2 Corinthians 5:18-21", "Romans 5:8-11", "1 Peter 3:18", "Galatians 2:20", "Romans 8:31-39", "1 Corinthians 6:19-20"], 2026, null, true)
-  )
+    new HelpfulSongInfo(
+      "The believer's hope is anchored in adoption, atonement, justification, and assurance of God's preservation of His saints.",
+      [
+        "salvation",
+        "redemption",
+        "substitutionary atonement",
+        "justification",
+        "reconciliation",
+        "adoption",
+        "assurance",
+        "perseverance",
+      ],
+      [
+        "Hebrews 2:9-11",
+        "Isaiah 53:4-7",
+        "2 Corinthians 5:18-21",
+        "Romans 5:8-11",
+        "1 Peter 3:18",
+        "Galatians 2:20",
+        "Romans 8:31-39",
+        "1 Corinthians 6:19-20",
+      ],
+      2026,
+      null,
+      true,
+    ),
+  ),
 ];
+
+// Praise songs with recordings.
+// Hymns receive these paths automatically.
+const songsWithAudio = new Set(["my-hope-is-found-in-this", "there-is-rest"]);
+
+// Praise songs with sheet-music previews.
+// These can differ from the songs with recordings.
+const songsWithSheetMusic = new Set([
+  "my-hope-is-found-in-this",
+  "there-is-rest",
+]);
+
+for (const song of songs) {
+  const isPraiseSong = song.songMetadata?.type === "Praise Song";
+
+  const hasAudio = !isPraiseSong || songsWithAudio.has(song.slug);
+
+  const hasSheetMusic = !isPraiseSong || songsWithSheetMusic.has(song.slug);
+
+  // Preserve an explicitly supplied URL; otherwise use the filename convention.
+  if (hasAudio && !song.demo_mp3) {
+    song.demo_mp3 = `/audio/${song.slug}.mp3`;
+  }
+
+  if (hasSheetMusic && !song.sheetImage) {
+    song.sheetImage = `/img/sheet-music/${song.slug}.png`;
+  }
+}
 
 export default songs;
