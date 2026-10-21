@@ -42,6 +42,19 @@ export function renderSongCards(songs) {
   return songs.map((song,index) => {
     const metadata = song.songMetadata || {};
     const info = song.helpfulSongInfo || {};
+    const recommendation = info.recommended
+  ? `<span
+       class="song-recommendation"
+       role="img"
+       aria-label="One of Ryan's top recommendations"
+       tabindex="0"
+     >
+       <span aria-hidden="true">★</span>
+       <span class="song-recommendation-tip" aria-hidden="true">
+         One of Ryan's top recommendations
+       </span>
+     </span>`
+  : "";
     const type = metadata.type === 'Praise Song' ? 'praise' : 'hymn';
     const directory =
   metadata.type === "Praise Song" ? "songs" : "hymns";
@@ -49,7 +62,10 @@ export function renderSongCards(songs) {
     return `<article class="song" data-type="${type}" data-search="${escapeHtml(search)}">
   <span class="song-number" aria-hidden="true">${String(index + 1).padStart(2,'0')}</span>
   <div>
-    <h3 class="song-title"><a href="/${directory}/${escapeHtml(song.slug)}/">${escapeHtml(song.title)}</a></h3>
+    <h3 class="song-title">
+  <a href="/${directory}/${escapeHtml(song.slug)}/">${escapeHtml(song.title)}</a>
+  ${recommendation}
+</h3>
     <p class="song-meta"><span class="song-chip">${escapeHtml(metadata.type || 'Hymn')}</span>${metadata.tune ? ` · ${escapeHtml(metadata.tune)}` : ''}${info.playableOnGuitar ? ' · <span class="song-guitar">Guitar-friendly</span>' : ''}</p>
   </div>
   <span class="song-arrow" aria-hidden="true">↗</span>

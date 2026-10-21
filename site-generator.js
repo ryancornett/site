@@ -1,4 +1,4 @@
-import { renderSongCards } from "./song-list.js";
+import { normalizeSongList, renderSongCards } from "./song-list.js";
 export { renderSongCards } from "./song-list.js";
 import {
   escapeHtml as e,
@@ -15,37 +15,15 @@ const fill = (template, values) =>
   });
 
 // One catalog resolver and card renderer serve both the live homepage and static export.
-export function getPublishedSongs(songs, legacy = []) {
-  const oldBySlug = new Map(legacy.map((song) => [song.slug, song]));
-  // Old positional constructors are work in progress. Do not publish their placeholder metadata.
-  // A migrated record has a numeric ID or a slug (rather than "Hymn" in its slug field).
-  const migrated = songs.filter(
-    (song) =>
-      typeof song.id === "number" ||
-      /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(song.slug),
-  );
-  const drafts = songs.filter((song) => !migrated.includes(song));
-  const catalog = new Map(legacy.map((song) => [song.slug, song]));
-  for (const song of migrated) {
-    if (song.published === false) {
-      catalog.delete(song.slug);
-      continue;
-    }
-    const old = oldBySlug.get(song.slug);
-    const merged = { ...old, ...song };
-    // Existing local MP3s play directly; a Drive sharing URL is offered as a link instead.
-    merged.demo_mp3 = song.demo_mp3 || old?.demo_mp3;
-    merged.sheetImage = song.sheetImage || old?.sheetImage;
-    merged.lyricVideoUrl =
-      song.helpfulSongInfo?.lyricVideoUrl || old?.lyricVideoUrl;
-    catalog.set(song.slug, merged);
-  }
-  validateSongs(migrated);
-  const published = [...catalog.values()].sort((a, b) =>
-    a.title.localeCompare(b.title),
-  );
+export function getPublishedSongs(songs) {
+  const published = normalizeSongList(songs);
   validateSongs(published);
-  return { published, migrated, drafts };
+
+  return {
+    published,
+    migrated: published,
+    drafts: [],
+  };
 }
 
 // Shared by the optional local script and the browser-only export tool.
@@ -71,19 +49,19 @@ export function generateSite({
   const absolute = (value) => new URL(value, base).href;
   const list = (value) =>
     (Array.isArray(value) ? value : value ? [value] : []).filter(Boolean);
-  const { published, migrated, drafts } = getPublishedSongs(songs, legacy);
+  const { published, migrated, drafts } = getPublishedSongs(songs);
   function link(url, label) {
     return `<a href="${e(safeUrl(url))}">${e(label)}</a>`;
   }
 
   function resourcesFor(song) {
     const links = [];
-let player = "";
+    let player = "";
 
-if (song.demo_mp3) {
-  const audioUrl = `/audio/${song.slug}.mp3`;
+    if (song.demo_mp3) {
+      const audioUrl = `/audio/${song.slug}.mp3`;
 
-  player = `
+      player = `
     <audio
       class="song-audio"
       controls
@@ -94,7 +72,7 @@ if (song.demo_mp3) {
       <a href="${e(audioUrl)}">Listen to the demo</a>
     </audio>
   `;
-}
+    }
     if (song.sheetUrl) links.push(link(song.sheetUrl, "Sheet music"));
     for (const arrangement of list(song.arrangements)) {
       const label = [

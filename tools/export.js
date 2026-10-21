@@ -5,17 +5,22 @@ const status = document.getElementById('export-status');
 async function textFile(relative) {
   const response = await fetch(new URL(relative, import.meta.url), {cache:'no-store'});
   if (!response.ok) throw new Error(`Could not load ${relative}. Open the site folder itself in Live Server.`);
-  return response.text();
+  const html = await response.text();
+
+return html.replace(
+  /<!-- Code injected by live-server -->\s*<script\b[^>]*>[\s\S]*?<\/script>/gi,
+  ""
+);
 }
 button.addEventListener('click', async () => {
   button.disabled = true;
   status.textContent = 'Reading your catalog and generating the pages…';
   try {
-    const [{default:songs}, legacyText, homeSource, shell, hymnTemplate, praiseTemplate] = await Promise.all([
-      import(`../songs.js?updated=${Date.now()}`), textFile('../data/legacy-songs.json'), textFile('../index.html'),
+    const [{default:songs}, homeSource, shell, hymnTemplate, praiseTemplate] = await Promise.all([
+      import(`../songs.js?updated=${Date.now()}`), textFile('../index.html'),
       textFile('../templates/page.html'), textFile('../templates/hymn.html'), textFile('../templates/praise-song.html')
     ]);
-    const { files, published } = generateSite({songs, legacy:JSON.parse(legacyText), homeSource, shell, hymnTemplate, praiseTemplate});
+    const { files, published } = generateSite({songs, homeSource, shell, hymnTemplate, praiseTemplate});
     const blob = zipTextFiles(files);
     const url = URL.createObjectURL(blob);
     const download = document.createElement('a'); download.href = url; download.download = 'ryancornett-updated-pages.zip';

@@ -6,6 +6,12 @@
     "url": "/songs/a-call-comes-ringing/"
   },
   {
+    "title": "A Home in Glory Waits",
+    "slug": "a-home-in-glory-waits",
+    "type": "Folk Spiritual",
+    "url": "/songs/a-home-in-glory-waits/"
+  },
+  {
     "title": "Abiding in Jesus, the Vine",
     "slug": "abiding-in-jesus-the-vine",
     "type": "Hymn",
@@ -16,6 +22,18 @@
     "slug": "all-my-ways-are-in-thy-hand",
     "type": "Psalm",
     "url": "/songs/all-my-ways-are-in-thy-hand/"
+  },
+  {
+    "title": "Born That We Might Be Born Again",
+    "slug": "born-that-we-might-be-born-again",
+    "type": "Christmas Carol",
+    "url": "/songs/born-that-we-might-be-born-again/"
+  },
+  {
+    "title": "Break the Vessel, Blow the Trumpet",
+    "slug": "break-the-vessel-blow-the-trumpet",
+    "type": "Folk Spiritual",
+    "url": "/songs/break-the-vessel-blow-the-trumpet/"
   },
   {
     "title": "Christ, Our Abiding Cornerstone",
@@ -30,6 +48,18 @@
     "url": "/songs/christ-the-prize-all-wealth-exceeding/"
   },
   {
+    "title": "Come to Christ Just as You Are",
+    "slug": "come-to-christ-just-as-you-are",
+    "type": "Hymn",
+    "url": "/songs/come-to-christ-just-as-you-are/"
+  },
+  {
+    "title": "Heaven's Filled with Prayers for You",
+    "slug": "heavens-filled-with-prayers-for-you",
+    "type": "Hymn",
+    "url": "/songs/heavens-filled-with-prayers-for-you/"
+  },
+  {
     "title": "His Goodness Will Carry Me",
     "slug": "his-goodness-will-carry-me",
     "type": "Hymn",
@@ -40,6 +70,12 @@
     "slug": "in-glory-rests-a-grand-receipt",
     "type": "Hymn",
     "url": "/songs/in-glory-rests-a-grand-receipt/"
+  },
+  {
+    "title": "In Jesus' Name",
+    "slug": "in-jesus-name",
+    "type": "Folk Spiritual",
+    "url": "/songs/in-jesus-name/"
   },
   {
     "title": "Laid Up for Us Is a Crown",
@@ -60,6 +96,12 @@
     "url": "/songs/let-there-be-light/"
   },
   {
+    "title": "My Days Like Shadows Fade",
+    "slug": "my-days-like-shadows-fade",
+    "type": "Hymn",
+    "url": "/songs/my-days-like-shadows-fade/"
+  },
+  {
     "title": "My Help and My Hope",
     "slug": "my-help-and-my-hope",
     "type": "Hymn",
@@ -76,12 +118,6 @@
     "slug": "o-father-of-the-found-and-freed",
     "type": "Hymn",
     "url": "/songs/o-father-of-the-found-and-freed/"
-  },
-  {
-    "title": "O God, Arise to Do Your Will",
-    "slug": "o-god-arise-to-do-your-will",
-    "type": "Hymn",
-    "url": "/songs/o-god-arise-to-do-your-will/"
   },
   {
     "title": "O Great and Glorious King",
@@ -108,16 +144,46 @@
     "url": "/songs/the-fruit-of-joy/"
   },
   {
+    "title": "The Hands I Nailed to the Cross",
+    "slug": "the-hands-i-nailed-to-the-cross",
+    "type": "Praise Song",
+    "url": "/songs/the-hands-i-nailed-to-the-cross/"
+  },
+  {
     "title": "The Sun Is Sinking",
     "slug": "the-sun-is-sinking",
     "type": "Folk Spiritual",
     "url": "/songs/the-sun-is-sinking/"
   },
   {
+    "title": "The Ways of God Are Higher",
+    "slug": "the-ways-of-god-are-higher",
+    "type": "Folk Spiritual",
+    "url": "/songs/the-ways-of-god-are-higher/"
+  },
+  {
     "title": "There Is Rest",
     "slug": "there-is-rest",
     "type": "Praise Song",
     "url": "/songs/there-is-rest/"
+  },
+  {
+    "title": "Those Sweet, Unnumbered Days",
+    "slug": "those-sweet-unnumbered-days",
+    "type": "Hymn",
+    "url": "/songs/those-sweet-unnumbered-days/"
+  },
+  {
+    "title": "Through Tests and Trials",
+    "slug": "through-tests-and-trials",
+    "type": "Hymn",
+    "url": "/songs/through-tests-and-trials/"
+  },
+  {
+    "title": "To Know Him More",
+    "slug": "to-know-him-more",
+    "type": "Hymn",
+    "url": "/songs/to-know-him-more/"
   },
   {
     "title": "Welcomed to the Table",
@@ -136,5 +202,11 @@
     "slug": "when-the-risen-christ-ascended",
     "type": "Hymn",
     "url": "/songs/when-the-risen-christ-ascended/"
+  },
+  {
+    "title": "You Are Wise in All Your Ways",
+    "slug": "you-are-wise-in-all-your-ways",
+    "type": "Hymn",
+    "url": "/songs/you-are-wise-in-all-your-ways/"
   }
 ]
