@@ -24,6 +24,24 @@
     "url": "/songs/christ-our-abiding-cornerstone/"
   },
   {
+    "title": "Christ, the Prize All Wealth Exceeding",
+    "slug": "christ-the-prize-all-wealth-exceeding",
+    "type": "Hymn",
+    "url": "/songs/christ-the-prize-all-wealth-exceeding/"
+  },
+  {
+    "title": "His Goodness Will Carry Me",
+    "slug": "his-goodness-will-carry-me",
+    "type": "Hymn",
+    "url": "/songs/his-goodness-will-carry-me/"
+  },
+  {
+    "title": "In Glory Rests a Grand Receipt",
+    "slug": "in-glory-rests-a-grand-receipt",
+    "type": "Hymn",
+    "url": "/songs/in-glory-rests-a-grand-receipt/"
+  },
+  {
     "title": "Laid Up for Us Is a Crown",
     "slug": "laid-up-for-us-is-a-crown",
     "type": "Hymn",
@@ -66,15 +84,33 @@
     "url": "/songs/o-god-arise-to-do-your-will/"
   },
   {
+    "title": "O Great and Glorious King",
+    "slug": "o-great-and-glorious-king",
+    "type": "Hymn",
+    "url": "/songs/o-great-and-glorious-king/"
+  },
+  {
+    "title": "O Risen Lord, Once Perished One",
+    "slug": "o-risen-lord-once-perished-one",
+    "type": "Hymn",
+    "url": "/songs/o-risen-lord-once-perished-one/"
+  },
+  {
     "title": "Rise Up Saints, Raise a Song",
     "slug": "rise-up-saints-raise-a-song",
     "type": "Hymn",
     "url": "/songs/rise-up-saints-raise-a-song/"
   },
   {
+    "title": "The Fruit of Joy",
+    "slug": "the-fruit-of-joy",
+    "type": "Hymn",
+    "url": "/songs/the-fruit-of-joy/"
+  },
+  {
     "title": "The Sun Is Sinking",
     "slug": "the-sun-is-sinking",
-    "type": "Hymn",
+    "type": "Folk Spiritual",
     "url": "/songs/the-sun-is-sinking/"
   },
   {

@@ -78,13 +78,23 @@ export function generateSite({
 
   function resourcesFor(song) {
     const links = [];
-    let player = "";
-    if (song.demo_mp3) {
-      const url = safeUrl(song.demo_mp3);
-      if (/\.mp3(?:\?|$)/i.test(url))
-        player = `<audio controls preload="none" src="${e(url)}" aria-label="${e(song.title)} demo">${link(url, "Listen to the demo")}</audio>`;
-      else links.push(link(url, "Listen to the demo"));
-    }
+let player = "";
+
+if (song.demo_mp3) {
+  const audioUrl = `/audio/${song.slug}.mp3`;
+
+  player = `
+    <audio
+      class="song-audio"
+      controls
+      preload="none"
+      aria-label="${e(song.title)} demo"
+    >
+      <source src="${e(audioUrl)}" type="audio/mpeg">
+      <a href="${e(audioUrl)}">Listen to the demo</a>
+    </audio>
+  `;
+}
     if (song.sheetUrl) links.push(link(song.sheetUrl, "Sheet music"));
     for (const arrangement of list(song.arrangements)) {
       const label = [

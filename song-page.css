@@ -39,3 +39,9 @@
   .resources, .song-text { order: initial; }
   .resources { padding: 2rem; }
 }
+
+.song-audio {
+  display: block;
+  width: 100%;
+  margin-block: 1rem 1.5rem;
+}

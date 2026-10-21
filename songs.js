@@ -689,6 +689,7 @@ const songs = [
     "Christ, the Prize All Wealth Exceeding",
     108,
     "christ-the-prize-all-wealth-exceeding",
+    "https://drive.google.com/file/d/1qAEcfSYCz2ze5BHoQZcJPKxSYDyIql-R",
     new SongMetadata(
       "Hymn",
       "REDEEMER",
@@ -755,11 +756,9 @@ const songs = [
         "3/4",
         null,
         "SATB",
-        "https://drive.google.com/file/d/1QdyOHrJkVaD3yJNmkzu5q-9l3xNN3xjN",
-        null,
         "https://drive.google.com/file/d/14j3f-eHvtpBuUgz2D3LCxLdkAng4JTxY",
         null,
-        "https://drive.google.com/file/d/1WuZH0NM0KhurMhRIVUYanSoEB9-bAHHD/view?usp=sharing",
+        "https://drive.google.com/file/d/1WuZH0NM0KhurMhRIVUYanSoEB9-bAHHD",
         [null],
       ),
     ],
@@ -769,11 +768,10 @@ const songs = [
       ["contentment", "gratitude", "stewardship", "Christ as treasure"],
       ["Philippians 4:11-13", "Matthew 6:19-21", "1 Timothy 6:6-10"],
       2026,
-      NULL,
+      null,
       false,
     ),
   ),
-  // BELOW ARE PLACEHOLDERS ***** ADD REAL INFORMATION LATER *****
 
   new Song(
     "His Goodness Will Carry Me",
@@ -860,9 +858,9 @@ const songs = [
     ],
     null,
     new HelpfulSongInfo(
-      "A confession of God’s unchanging goodness through abundance, affliction, aging, and death.",
+      "A confession of God's unchanging goodness through abundance, affliction, aging, and death.",
       ["God's goodness", "providence", "trust", "perseverance"],
-      ["Psalm 23:6", "Romans 8:28", "Philippians 4:11–13", "James 4:14"],
+      ["Psalm 23:6", "Romans 8:28", "Philippians 4:11-13", "James 4:14"],
       2026,
       null,
       true,
@@ -872,12 +870,16 @@ const songs = [
 
   new Song(
     "In Glory Rests a Grand Receipt",
-    "/songs/in-glory-rests-a-grand-receipt",
-    "Hymn",
-    "OSTEND",
-    "8.8.8.8",
-    "Ryan Cornett, 2026",
-    "Luther O. Emerson, 1863",
+    112,
+    "in-glory-rests-a-grand-receipt",
+    "https://drive.google.com/file/d/1gAjU0mdg5qnSYyVQ73VcgdLHpPQ1bdSU/view?usp=sharing",
+    new SongMetadata(
+      "Hymn",
+      "OSTEND",
+      "L.M.",
+      "Ryan Daniel Cornett",
+      "Lowell Mason",
+    ),
     [
       {
         type: "stanza",
@@ -950,21 +952,51 @@ const songs = [
         ],
       },
     ],
-    null,
-    null,
-    null,
-    null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    [new Arrangement(
+      "SATB",
+      "E flat major",
+      "4/4",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/15DMlqwAIr9KIv1_a1vLHjJL5sQ7pUD0L",
+      null,
+      "https://drive.google.com/file/d/1wmi8S6TMRAJB82zjTjvMLCQeLDOZDVTU",
+      [null]),
+      new Arrangement(
+        "SATB",
+        "E flat major",
+        "4/4",
+        "Optional: last stanza",
+        "SATB",
+        "https://drive.google.com/file/d/18AgvD_9xHuvLpL67P5DYwdvkPLVU1uwl",
+        null,
+        "https://drive.google.com/file/d/1Uxb6ip1Efb2t3syQfHjR_sKLq_PW73YJ",
+        [null]
+      )
+    ],
+    [null],
+    new HelpfulSongInfo(
+      "The language of debt, payment, and a settled account celebrates Christ's complete atonement and assured pardon.",
+      ["atonement", "justification", "forgiveness", "assurance"],
+      ["Colossians 2:13-14", "Romans 3:24-26", "Isaiah 1:18", "Hebrews 7:25"],
+      2026,
+      null,
+      false
   ),
+),
 
   new Song(
     "Let There Be Light",
-    "/songs/let-there-be-light",
-    "Hymn",
-    "LET THERE BE LIGHT",
-    "IRREGULAR",
-    "Ryan Cornett, 2026",
-    "Luther O. Emerson, 1863",
+    116,
+    "let-there-be-light",
+    "https://drive.google.com/file/d/1BrFSKXRuKvbq38C3GO4hU69CUrv7fPqN",
+    new SongMetadata(
+      "Hymn",
+      "LUX EVANGELII",
+      "C.M.D.",
+      "Ryan Daniel Cornett",
+      "Ryan Daniel Cornett",
+    ),
     [
       {
         type: "stanza",
@@ -1009,12 +1041,26 @@ const songs = [
         ],
       },
     ],
+    [new Arrangement(
+      "SATB",
+      "D major",
+      "4/4",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1CdTvmSF1A_W-1C0PgpwcLB8r22aC4-Mo",
+      null,
+      "https://drive.google.com/file/d/18w7d1ei7DMFGR2Grwim3DyzZrzw7FBKQ",
+      [null]),
+    ],
     null,
-    null,
-    null,
-    null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true,
+    new HelpfulSongInfo(
+      "Creation's light becomes an image of regeneration, Christ's sacrifice, and the believer's final glory.",
+      ["regeneration", "atonement", "light", "glorification"],
+      ["Genesis 1:3", "2 Corinthians 4:6", "Ephesians 5:14", "John 1:4-5", "Isaiah 53:10", "Leviticus 6:12-13", "Isaiah 60:19-20", "1 John 3:2", "Revelation 21:23", "2 Corinthians 3:18"],
+      2021,
+      null,
+      true
+    )
   ),
 
   new Song(
@@ -1111,12 +1157,16 @@ const songs = [
 
   new Song(
     "O Great and Glorious King",
-    "/songs/o-great-and-glorious-king",
-    "Hymn",
-    "O GREAT AND GLORIOUS KING",
-    "IRREGULAR",
-    "Ryan Cornett, 2026",
-    "Luther O. Emerson, 1863",
+    123,
+    "o-great-and-glorious-king",
+    "https://drive.google.com/file/d/1dw1PE8OziSg7v4sIyjbIfmLJXaU2Qaw9",
+    new SongMetadata(
+      "Hymn",
+      "SANDS (alt.)",
+      "8.8.8.8.8.8.8.",
+      "Ryan Daniel Cornett",
+      "William J. Kirkpatrick",
+    ),
     [
       {
         type: "stanza",
@@ -1158,21 +1208,39 @@ const songs = [
         ],
       },
     ],
-    null,
-    null,
-    null,
-    null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    [new Arrangement(
+      "SATB",
+      "A flat major",
+      "3/4",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1b2bDKkoWIuLHNtPc2Hfwhtf4u7k_YSWZ",
+      null,
+      "https://drive.google.com/file/d/1hZjr88_pY2ZLpGjb14Mg_GLouCugWjpN",
+      [null]
+      )
+    ],
+    [null],
+    new HelpfulSongInfo(
+      "A hymn of gratitude for divine deliverance and the eternal praise of the King.",
+      ["God's kingship", "deliverance", "gratitude", "heavenly worship"],
+      ["1 Samuel 7:12", "Hebrews 10:19-22", "Revelation 4:10-11", "Revelation 7:9-10"],
+      2026
+    )
   ),
 
   new Song(
     "O Risen Lord, Once Perished One",
-    "/songs/o-risen-lord-once-perished-one",
-    "Hymn",
-    "O RISEN LORD, ONCE PERISHED ONE",
-    "IRREGULAR",
-    "Ryan Cornett, 2026",
-    "Luther O. Emerson, 1863",
+    125,
+    "o-risen-lord-once-perished-one",
+    "https://drive.google.com/file/d/1GCtax0g7evSHo6UXJ3m9W1AdmK3HJx_q",
+    new SongMetadata(
+      "Hymn",
+      "VISION",
+      "L.M. w/ Refrain",
+      "Ryan Daniel Cornett",
+      "William H. Doane,",
+    ),
     [
       {
         type: "stanza",
@@ -1223,21 +1291,128 @@ const songs = [
         ],
       },
     ],
-    null,
-    null,
-    null,
-    null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    [new Arrangement(
+      "SATB",
+      "D major",
+      "4/2",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1Jio6tIzGpqayeliMfOwTE9PF_dM8fCr7",
+      null,
+      "https://drive.google.com/file/d/1Y4FR9Xslcid2yBp7LgMt23dQl8c9DDxB",
+      [null]
+      ),
+    ],
+    [null],
+    new HelpfulSongInfo(
+      "Christ's resurrection gives new life to believers and promises the final defeat of death.",
+      ["resurrection", "regeneration", "eternal life", "victory over death"],
+      ["1 Corinthians 15:20-26", "1 Corinthians 15:54-57", "John 5:24-29"],
+      2026,
+      null,
+      false
+    )
+  ),
+
+   new Song(
+    "The Fruit of Joy",
+    128,
+    "the-fruit-of-joy",
+    "https://drive.google.com/file/d/14BKDsCeOcvqUj4ie2UWujBV5GI4IKjyd",
+    new SongMetadata(
+      "Hymn",
+      "BINGHAM",
+      "C.M.",
+      "Ryan Daniel Cornett",
+      "Anonymous",
+    ),
+    [
+      {
+        type: "stanza",
+        number: 1,
+        lines: [
+          "The fruit of joy, in Heaven set,",
+          "Tastes ever sweet to me;",
+          "Its flavors make my soul forget",
+          "Old sorrows' dying tree.",
+        ],
+      },
+      {
+        type: "stanza",
+        number: 2,
+        lines: [
+          "With thankfulness my healing balm,",
+          "And gratitude, my salve,",
+          "I'm soothed with blessed, peaceful calm,",
+          "Content in who I have.",
+        ],
+      },
+      {
+        type: "stanza",
+        number: 3,
+        lines: [
+          "The daily bread from Heaven's grain",
+          "Will cheer my longing soul;",
+          "New morning mercies fall like rain",
+          "To make my spirit whole.",
+        ],
+      },
+      {
+        type: "stanza",
+        number: 4,
+        lines: [
+          "By grace through this enduring faith,",
+          "With mirth I greet the day",
+          "And smile e'en when in paths of death,",
+          "For Jesus guides my way.",
+        ],
+      },
+      {
+        type: "stanza",
+        number: 5,
+        lines: [
+          "My living Lord, my happiness,",
+          "Who called me from the night,",
+          "Is leading me to rapturous bliss",
+          "Of everlasting light.",
+        ],
+      },
+    ],
+    [new Arrangement(
+      "SATB",
+      "A major",
+      "3/4",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1GBFtvsOK7Y5bmsvSAJqTw-jnHi5N_qAl",
+      null,
+      "https://drive.google.com/file/d/1nKOwxwqwONtJBJMFstvbhTol77R5FWNz",
+      [null]
+    ),
+    ],
+    [null],
+    new HelpfulSongInfo(
+      "Everyday gratitude and renewed mercies nourish joy and contentment in Christ through life and death.",
+      ["joy", "gratitude", "contentment", "daily mercy"],
+      ["Galatians 5:22", "Lamentations 3:22-23", "Psalm 23:4", "Philippians 4:11-13"],
+      2026,
+      null,
+      false
+    ),
   ),
 
   new Song(
     "The Sun Is Sinking",
-    "/songs/the-sun-is-sinking",
-    "Folk Spiritual",
-    "THE SUN IS SINKING",
-    "IRREGULAR",
-    "Ryan Cornett, 2026",
-    "Luther O. Emerson, 1863",
+    131,
+    "the-sun-is-sinking",
+    "https://drive.google.com/file/d/1a2rngNCuRCRfgYAHL4eKPHr_EMFm7oFr",
+    new SongMetadata(
+      "Folk Spiritual",
+      "CASARI",
+      "10.10.10.6.",
+      "Laura Wade Rice",
+      "Ryan Daniel Cornett",
+    ),
     [
       {
         type: "stanza",
@@ -1280,21 +1455,41 @@ const songs = [
         ],
       },
     ],
-    null,
-    null,
-    null,
-    null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
+    [
+      new Arrangement(
+      "SATB",
+      "F sharp minor",
+      "4/4",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1PjyW5T2KzSPljnNj_28fFHYncfazlQlr",
+      null,
+      "https://drive.google.com/file/d/1EEdAIwQeTpeKZXeBTr77YNetNtqmDtYd",
+      [null]
+      )
+    ],
+    new HelpfulSongInfo(
+      "An evening prayer for God's light to reach the nations and sustain His people until heaven's morning.",
+      ["mission", "light", "guidance", "heavenly hope"],
+      ["Psalm 67:1-3", "Matthew 5:14-16", "Revelation 21:23-26"],
+      2024,
+      null,
+      false,
+    )
   ),
 
   new Song(
     "What Vastness the Redeemer Crossed",
-    "/songs/what-vastness-the-redeemer-crossed",
-    "Hymn",
-    "WHAT VASTNESS THE REDEEMER CROSSED",
-    "IRREGULAR",
-    "Ryan Cornett, 2026",
-    "Luther O. Emerson, 1863",
+    138,
+    "what-vastness-the-redeemer-crossed",
+    "https://drive.google.com/file/d/1TywoinJziVo5T2wMqIjul3BymsUPid5m",
+    new SongMetadata(
+      "Hymn",
+      "WHAT VASTNESS",
+      "8.7.8.7.D.",
+      "Ryan Daniel Cornett",
+      "Ryan Daniel Cornett"
+    ),
     [
       {
         type: "stanza",
@@ -1339,12 +1534,26 @@ const songs = [
         ],
       },
     ],
-    null,
-    null,
-    null,
-    null,
-    "A prayer for contentment, prudence, and gratitude, asking Christ to teach us to value Him in both poverty and plenty and to remember that our true treasure is kept in Heaven.",
-    true,
+    [new Arrangement(
+      "SATB",
+      "C major",
+      "3/4",
+      null,
+      "SATB",
+      "https://drive.google.com/file/d/1_vBRLh-vcEPjstOSq5xcqx0udkQtt3O9",
+      null,
+      "https://drive.google.com/file/d/1gXciEYhAOC6OrD9F7U-AFso5OQO1wvxV",
+      [null]
+    )],
+    [null],
+    new HelpfulSongInfo(
+      "The distance Christ crossed, the path He trod, and the removal of sin celebrate salvation and nearness to God.",
+      ["incarnation", "atonement", "forgiveness", "reconciliation"],
+      ["Philippians 2:6-8", "Psalm 40:2", "Psalm 103:12", "Micah 7:19", "Ephesians 2:13"],
+      2024,
+      null,
+      true
+    )
   ),
 
   new Song(
