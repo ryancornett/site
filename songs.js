@@ -585,7 +585,7 @@ const songs = [
     "In Glory Rests a Grand Receipt",
     112,
     "in-glory-rests-a-grand-receipt",
-    "https://drive.google.com/file/d/1gAjU0mdg5qnSYyVQ73VcgdLHpPQ1bdSU/view?usp=sharing",
+    "https://drive.google.com/file/d/1gAjU0mdg5qnSYyVQ73VcgdLHpPQ1bdSU",
     new SongMetadata(
       "Hymn",
       "OSTEND",
