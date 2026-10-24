@@ -3707,6 +3707,59 @@ const songs = [
       false,
     ),
   ),
+  new Song(
+    "The Tri Evlogia",
+    145,
+    "the-tri-evlogia",
+    "https://drive.google.com/file/d/1vyq97sD5IjJhuTX-2oERjE1dGbZ0Q3Wz",
+    new SongMetadata(
+      "Hymn",
+      "TRI EVLOGIA",
+      "Irregular",
+      "Based on II Corinthians 13:14",
+      "Ryan Daniel Cornett",
+    ),
+    [
+      {
+        type: "stanza",
+        number: 1,
+        lines: [
+          "The grace of the Lord Jesus Christ,",
+          "And the love of God,",
+          "And the communion of the Holy Ghost",
+          "Be with you all. Amen.",
+        ],
+      },
+    ],
+    [
+      new Arrangement(
+        "SATB",
+        "G major",
+        "4/4",
+        null,
+        "SATB",
+        "https://drive.google.com/file/d/1gyfA5Yec-G8KgnH4fhb2uuSU3gaQCrGq",
+        null,
+        "https://drive.google.com/file/d/1b4Imwb7cmqOeEwA2VksZyy0UWVEQ3CGb",
+        [null],
+      ),
+    ],
+    [null],
+    new HelpfulSongInfo(
+      "Inspired by service music and the song based on the same verse by The Verses Project featuring Matt Boswell, I crafted this tune to accompany it. 'Tri Evlogia' is Latin for 'Triple Blessing.' My hope is that churches will be blessed by this brief and simple benediction hymn.",
+      [
+        "benediction",
+        "trinity",
+        "blessing",
+      ],
+      [
+        "2 Corinthians 13:14",
+      ],
+      2025,
+      null,
+      false,
+    ),
+  ),
 
   // His Love Endures; Awake, My Soul; From the Depths; As the Lord Lives
 ];
