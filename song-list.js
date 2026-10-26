@@ -42,6 +42,23 @@ export function renderSongCards(songs) {
   return songs.map((song,index) => {
     const metadata = song.songMetadata || {};
     const info = song.helpfulSongInfo || {};
+    const arrangements = array(song.arrangements);
+
+const resources = [
+  arrangements.some(arrangement => arrangement?.pdf)
+    ? "pdf"
+    : null,
+
+  arrangements.some(arrangement =>
+    array(arrangement?.accompanimentTracks).some(track => track?.url)
+  )
+    ? "accompaniment"
+    : null,
+
+  info.lyricVideoUrl ? "video" : null,
+  info.playableOnGuitar ? "guitar" : null,
+  info.recommended ? "recommended" : null,
+].filter(Boolean).join(" ");
     const recommendation = info.recommended
   ? `<span
        class="song-recommendation"
@@ -59,7 +76,7 @@ export function renderSongCards(songs) {
     const directory =
   metadata.type === "Praise Song" ? "songs" : "hymns";
     const search = [song.title, metadata.type, metadata.tune, ...array(info.themes), ...array(info.scriptureReferences)].filter(Boolean).join(' ');
-    return `<article class="song" data-type="${type}" data-search="${escapeHtml(search)}">
+    return `<article class="song" data-type="${type}" data-resources="${resources}" data-search="${escapeHtml(search)}">
   <span class="song-number" aria-hidden="true">${String(index + 1).padStart(2,'0')}</span>
   <div>
     <h3 class="song-title">

@@ -96,3 +96,124 @@
 .accompaniment-tracks li {
   margin-block: 0.5rem;
 }
+
+/* Copy lyrics */
+.lyrics-tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.lyrics-tools button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.lyrics-tools button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.lyrics-copy-status {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.lyrics-copy-fallback {
+  flex-basis: 100%;
+  min-width: 0;
+}
+
+.lyrics-copy-fallback label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.lyrics-copy-fallback textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.35rem;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* Related songs */
+.related-songs {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.related-songs h2 {
+  color: var(--navy);
+  font-size: 2rem;
+}
+
+.related-songs > p {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.related-song-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.related-song-list li {
+  min-width: 0;
+}
+
+.related-song-list a {
+  display: block;
+  height: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  background: var(--cream);
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.related-song-list a:hover {
+  border-color: var(--blue);
+  background: #e2ede6;
+}
+
+.related-song-title {
+  display: block;
+  color: var(--navy);
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+
+.related-song-reason {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 760px) {
+  .related-song-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

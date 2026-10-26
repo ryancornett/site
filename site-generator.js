@@ -136,8 +136,8 @@ export function generateSite({
     for (const stream of list(song.streamingLinks))
       if (stream.url)
         links.push(link(stream.url, `Listen on ${stream.platform}`));
-    if (song.lyricVideoUrl)
-      links.push(link(song.lyricVideoUrl, "Watch the lyric video on YouTube"));
+    if (song.helpfulSongInfo.lyricVideoUrl)
+      links.push(link(song.helpfulSongInfo.lyricVideoUrl, "Watch the lyric video on YouTube"));
     
     const previewPdf = list(song.arrangements).find(
   arrangement => arrangement.pdf
@@ -210,6 +210,108 @@ const sheet = previewImage
     return `<div class="share" aria-label="Share this song"><button type="button" data-share hidden>Share</button><button type="button" data-copy>Copy link</button><a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonical)}">Facebook</a><a href="mailto:?subject=${encodeURIComponent(title)}&amp;body=${encodeURIComponent(canonical)}">Email</a><span class="share-status" role="status" aria-live="polite"></span></div>`;
   }
 
+  function relatedMetadata(song) {
+  const normalize = value =>
+    String(value).trim().toLowerCase().replace(/\s+/g, " ");
+
+  const info = song.helpfulSongInfo || {};
+
+  // Maps prevent repeated themes or references from inflating the score.
+  const themes = new Map(
+    list(info.themes)
+      .filter(Boolean)
+      .map(theme => [normalize(theme), String(theme)])
+  );
+
+  const chapters = new Map();
+
+  for (const reference of list(info.scriptureReferences)) {
+    // For example: "John 15:1-8" becomes "John 15".
+    const match = String(reference)
+      .trim()
+      .match(/^(.+?)\s+(\d+)(?=\s*:|\s*$)/);
+
+    if (!match) continue;
+
+    const book = match[1].replace(/\s+/g, " ").trim();
+    const chapter = Number(match[2]);
+
+    // Treat "Psalm" and "Psalms" as the same book.
+    const key =
+      `${normalize(book).replace(/^psalms$/, "psalm")} ${chapter}`;
+
+    chapters.set(key, `${book} ${chapter}`);
+  }
+
+  return { themes, chapters };
+}
+
+function relatedFor(song) {
+  const source = relatedMetadata(song);
+
+  const matches = published
+    .filter(candidate =>
+      candidate.slug !== song.slug &&
+      candidate.published !== false
+    )
+    .map(candidate => {
+      const other = relatedMetadata(candidate);
+
+      const themes = [...source.themes]
+        .filter(([key]) => other.themes.has(key))
+        .map(([, label]) => label);
+
+      const chapters = [...source.chapters]
+        .filter(([key]) => other.chapters.has(key))
+        .map(([, label]) => label);
+
+      return {
+        song: candidate,
+        themes,
+        chapters,
+        score: themes.length * 2 + chapters.length * 3,
+      };
+    })
+    .filter(match => match.score > 0)
+    .sort((a, b) =>
+      b.score - a.score ||
+      a.song.title.localeCompare(b.song.title)
+    )
+    .slice(0, 3);
+
+  if (!matches.length) return "";
+
+  const cards = matches.map(match => {
+    const related = match.song;
+    const directory =
+      related.songMetadata.type === "Praise Song" ? "songs" : "hymns";
+
+    const reasons = [
+      ...match.themes.slice(0, 2),
+      ...match.chapters.slice(0, 1),
+    ];
+
+    return `
+      <li>
+        <a href="/${directory}/${e(related.slug)}/">
+          <span class="related-song-title">${e(related.title)}</span>
+          <span class="related-song-reason">
+            Shared: ${e(reasons.join(" · "))}
+          </span>
+        </a>
+      </li>
+    `;
+  }).join("");
+
+  return `
+    <section class="related-songs" aria-labelledby="related-songs-title">
+      <h2 id="related-songs-title">You may also like</h2>
+      <p>Songs with shared themes or Scripture chapters.</p>
+      <ul class="related-song-list">${cards}</ul>
+    </section>
+  `;
+}
+
   const rendered = [];
 
   for (const song of published) {
@@ -235,6 +337,7 @@ const sheet = previewImage
       about: aboutFor(song),
       references: referencesFor(song),
       share: shareFor(canonical, song.title),
+      related: relatedFor(song),
     });
 
     const html = fill(shell, {
@@ -276,7 +379,9 @@ const sheet = previewImage
         title: song.title,
         slug: song.slug,
         type: song.songMetadata.type,
-        url: `/songs/${song.slug}/`,
+        url: `/${
+  song.songMetadata.type === "Praise Song" ? "songs" : "hymns"
+}/${song.slug}/`,
       })),
       null,
       2,

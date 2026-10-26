@@ -21,16 +21,52 @@
   document.addEventListener('click', event => { if (!event.target.closest('.site-header')) close(); });
   window.matchMedia('(min-width: 960px)').addEventListener('change', close);
   document.querySelectorAll('[data-year]').forEach(element => { element.textContent = new Date().getFullYear(); });
-  if ('IntersectionObserver' in window) {
-    const sections = [...document.querySelectorAll('main > section[id]')].filter(section => nav.querySelector(`a[href="#${section.id}"]`));
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) if (entry.isIntersecting) {
-        nav.querySelectorAll('a').forEach(link => {
-          if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
-          else link.removeAttribute('aria-current');
-        });
+  const links = [...nav.querySelectorAll("a")];
+
+const sections = [...document.querySelectorAll("main > section[id]")]
+  .filter(section =>
+    links.some(link => link.hash === `#${section.id}`)
+  );
+
+if (sections.length) {
+  const header = document.querySelector(".site-header");
+  let updateQueued = false;
+
+  function updateActiveSection() {
+    updateQueued = false;
+
+    const headerBottom = Math.max(
+      0,
+      header?.getBoundingClientRect().bottom || 0
+    );
+
+    let activeId = null;
+
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= headerBottom + 1) {
+        activeId = section.id;
       }
-    }, { rootMargin: '-18% 0px -55% 0px', threshold: 0 });
-    sections.forEach(section => observer.observe(section));
+    }
+
+    for (const link of links) {
+      if (activeId && link.hash === `#${activeId}`) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    }
   }
+
+  function scheduleUpdate() {
+    if (updateQueued) return;
+
+    updateQueued = true;
+    requestAnimationFrame(updateActiveSection);
+  }
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+
+  updateActiveSection();
+}
 })();

@@ -8,3 +8,97 @@
 .export-tool details { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
 .export-tool summary { cursor: pointer; margin-bottom: 1rem; }
 #export-status { margin-top: 1rem; font-size: .85rem; }
+
+.resource-check-button {
+  margin: 0.75rem 0 0.75rem 0.75rem;
+}
+
+.resource-report {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.resource-report h2 {
+  font-size: 2rem;
+  color: var(--navy);
+}
+
+.resource-report-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+.resource-table-wrap {
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.resource-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.resource-table th,
+.resource-table td {
+  padding: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.resource-table thead th {
+  background: var(--navy);
+  color: white;
+}
+
+.resource-table tbody th {
+  min-width: 12rem;
+  font-weight: 600;
+}
+
+.resource-table td {
+  min-width: 9rem;
+}
+
+.resource-table small {
+  display: block;
+  max-width: 20rem;
+  margin-top: 0.5rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.resource-result {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  line-height: 1.5;
+}
+
+.resource-ok {
+  background: #e2f1e8;
+  color: #215b36;
+}
+
+.resource-missing {
+  background: #fbe5e5;
+  color: #8b2020;
+}
+
+.resource-unknown {
+  background: #fff2cc;
+  color: #715300;
+}
+
+.resource-external {
+  background: #e4eef8;
+  color: #244c74;
+}
+
+.resource-none {
+  background: #eceef0;
+  color: #546079;
+}

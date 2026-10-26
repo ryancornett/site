@@ -10,9 +10,73 @@
   const empty = document.getElementById("song-empty");
 
   let songs = [...container.querySelectorAll(".song")];
-  let activeFilter = "all";
-  let pageSize = 10;
-  let currentPage = 1;
+  const storageKey = "ryan-songbook-state-v1";
+
+  const savedState = (() => {
+    try {
+      const value = JSON.parse(sessionStorage.getItem(storageKey));
+
+      return value && typeof value === "object" && !Array.isArray(value)
+        ? value
+        : {};
+    } catch {
+      return {};
+    }
+  })();
+
+  const validResources = [
+    "all",
+    "pdf",
+    "accompaniment",
+    "video",
+    "guitar",
+    "recommended",
+  ];
+
+  let activeFilter = filters.some(
+    (button) => button.dataset.filter === savedState.filter,
+  )
+    ? savedState.filter
+    : "all";
+
+  let activeResource = validResources.includes(savedState.resource)
+    ? savedState.resource
+    : "all";
+
+  let pageSize = [10, 20, 50].includes(savedState.pageSize)
+    ? savedState.pageSize
+    : 10;
+
+  const restoredPage =
+    Number.isInteger(savedState.page) && savedState.page > 0
+      ? savedState.page
+      : 1;
+
+  let currentPage = restoredPage;
+  let waitingForCatalog = true;
+
+  if (search && typeof savedState.search === "string") {
+    search.value = savedState.search;
+  }
+
+  const resourceField = document.createElement("label");
+  resourceField.className = "song-resource-filter";
+
+  resourceField.innerHTML = `
+  <span>Show resources</span>
+  <select id="song-resource-filter" aria-controls="songs-container">
+    <option value="all">All songs</option>
+    <option value="pdf">Sheet music PDF</option>
+    <option value="accompaniment">Accompaniment tracks</option>
+    <option value="video">Lyric video</option>
+    <option value="guitar">Guitar-friendly</option>
+    <option value="recommended">Ryan's recommendations</option>
+  </select>
+`;
+
+  document.getElementById("song-controls")?.append(resourceField);
+
+  const resourceSelect = resourceField.querySelector("select");
 
   const pagination = document.createElement("nav");
   pagination.className = "song-pagination";
@@ -51,34 +115,97 @@
   container.after(pagination);
 
   const sizeSelect = pagination.querySelector("#song-page-size");
+  sizeSelect.value = String(pageSize);
+  resourceSelect.value = activeResource;
   const previous = pagination.querySelector("#song-page-prev");
   const next = pagination.querySelector("#song-page-next");
   const pageStatus = pagination.querySelector("#song-page-status");
   const first = pagination.querySelector("#song-page-first");
-const last = pagination.querySelector("#song-page-last");
-const pageNumbers = pagination.querySelector("#song-page-numbers");
+  const last = pagination.querySelector("#song-page-last");
+  const pageNumbers = pagination.querySelector("#song-page-numbers");
 
-let totalPages = 1;
+  let totalPages = 1;
 
-  const normalize = value =>
+  const normalize = (value) =>
     String(value)
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/[’‘]/g, "'");
 
+  function saveSongbookState(scrollY = savedState.scrollY) {
+    try {
+      sessionStorage.setItem(
+        storageKey,
+        JSON.stringify({
+          search: search?.value || "",
+          filter: activeFilter,
+          resource: activeResource,
+          pageSize,
+          page: currentPage,
+          scrollY: Number.isFinite(scrollY) ? scrollY : 0,
+        }),
+      );
+    } catch {
+      // Browsing still works when storage is unavailable.
+    }
+  }
+
+  function restoreSavedScroll() {
+    if (!Number.isFinite(savedState.scrollY)) return;
+
+    // Respect links that intentionally target another homepage section.
+    if (location.hash && location.hash !== "#songs") return;
+
+    const historyReturn =
+      performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+    let returningFromSong = false;
+
+    try {
+      const previousPage = new URL(document.referrer);
+
+      returningFromSong =
+        previousPage.origin === location.origin &&
+        /^\/(?:hymns|songs)\/[^/]+\/?$/.test(previousPage.pathname);
+    } catch {
+      // A missing referrer is normal.
+    }
+
+    if (!historyReturn && !returningFromSong) return;
+
+    // Wait until the restored cards have been laid out.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: savedState.scrollY,
+          behavior: "instant",
+        });
+      });
+    });
+  }
+
+  // Capture the actual position when leaving the homepage.
+  window.addEventListener("pagehide", () => {
+    saveSongbookState(window.scrollY);
+  });
+
   function updateSongs() {
     const query = search?.value.trim() || "";
     const terms = normalize(query).split(/\s+/).filter(Boolean);
 
-    const matches = songs.filter(song => {
+    const matches = songs.filter((song) => {
       const text = normalize(song.dataset.search || song.textContent);
-      const matchesSearch = terms.every(term => text.includes(term));
+      const matchesSearch = terms.every((term) => text.includes(term));
       const matchesType =
-        activeFilter === "all" ||
-        song.dataset.type === activeFilter;
+        activeFilter === "all" || song.dataset.type === activeFilter;
 
-      return matchesSearch && matchesType;
+      const availableResources = (song.dataset.resources || "").split(/\s+/);
+
+      const matchesResource =
+        activeResource === "all" || availableResources.includes(activeResource);
+
+      return matchesSearch && matchesType && matchesResource;
     });
 
     totalPages = Math.max(1, Math.ceil(matches.length / pageSize));
@@ -87,11 +214,11 @@ let totalPages = 1;
     const start = (currentPage - 1) * pageSize;
     const pageSongs = matches.slice(start, start + pageSize);
 
-    songs.forEach(song => {
+    songs.forEach((song) => {
       song.hidden = true;
     });
 
-    pageSongs.forEach(song => {
+    pageSongs.forEach((song) => {
       song.hidden = false;
     });
 
@@ -100,9 +227,7 @@ let totalPages = 1;
         ? `Showing ${start + 1}–${start + pageSongs.length} of ${
             matches.length
           } ${matches.length === 1 ? "song" : "songs"}${
-            matches.length !== songs.length
-              ? ` (${songs.length} total)`
-              : ""
+            matches.length !== songs.length ? ` (${songs.length} total)` : ""
           }`
         : `0 songs (${songs.length} total)`;
     }
@@ -110,10 +235,10 @@ let totalPages = 1;
     if (empty) empty.hidden = matches.length !== 0;
     if (clear) clear.hidden = !query;
 
-    filters.forEach(button => {
+    filters.forEach((button) => {
       button.setAttribute(
         "aria-pressed",
-        String(button.dataset.filter === activeFilter)
+        String(button.dataset.filter === activeFilter),
       );
     });
 
@@ -123,40 +248,47 @@ let totalPages = 1;
     next.disabled = currentPage === totalPages;
 
     first.disabled = currentPage === 1;
-last.disabled = currentPage === totalPages;
+    last.disabled = currentPage === totalPages;
 
-// Keep existing buttons when possible, preserving keyboard focus.
-if (pageNumbers.children.length !== totalPages) {
-  pageNumbers.innerHTML = Array.from(
-    { length: totalPages },
-    (_, index) => `
+    // Keep existing buttons when possible, preserving keyboard focus.
+    if (pageNumbers.children.length !== totalPages) {
+      pageNumbers.innerHTML = Array.from(
+        { length: totalPages },
+        (_, index) => `
       <button
         type="button"
         data-page="${index + 1}"
         aria-label="Page ${index + 1}"
         aria-controls="songs-container"
       >${index + 1}</button>
-    `
-  ).join("");
-}
+    `,
+      ).join("");
+      saveSongbookState();
+    }
 
-for (const button of pageNumbers.children) {
-  if (Number(button.dataset.page) === currentPage) {
-    button.setAttribute("aria-current", "page");
-  } else {
-    button.removeAttribute("aria-current");
-  }
-}
+    for (const button of pageNumbers.children) {
+      if (Number(button.dataset.page) === currentPage) {
+        button.setAttribute("aria-current", "page");
+      } else {
+        button.removeAttribute("aria-current");
+      }
+    }
   }
 
   function restartPages() {
+    waitingForCatalog = false;
     currentPage = 1;
     updateSongs();
   }
 
   search?.addEventListener("input", restartPages);
 
-  filters.forEach(button => {
+  resourceSelect.addEventListener("change", () => {
+    activeResource = resourceSelect.value;
+    restartPages();
+  });
+
+  filters.forEach((button) => {
     button.addEventListener("click", () => {
       activeFilter = button.dataset.filter;
       restartPages();
@@ -171,7 +303,11 @@ for (const button of pageNumbers.children) {
 
   document.getElementById("reset-songs")?.addEventListener("click", () => {
     if (search) search.value = "";
+
     activeFilter = "all";
+    activeResource = "all";
+    resourceSelect.value = "all";
+
     restartPages();
     search?.focus();
   });
@@ -181,25 +317,38 @@ for (const button of pageNumbers.children) {
     restartPages();
   });
 
-function goToPage(page) {
-  currentPage = Math.min(Math.max(1, page), totalPages);
-  updateSongs();
-  container.scrollIntoView({ block: "start" });
-}
+  function goToPage(page) {
+    waitingForCatalog = false;
+    currentPage = Math.min(Math.max(1, page), totalPages);
+    updateSongs();
+    container.scrollIntoView({ block: "start" });
+  }
 
-previous.addEventListener("click", () => goToPage(currentPage - 1));
-next.addEventListener("click", () => goToPage(currentPage + 1));
-first.addEventListener("click", () => goToPage(1));
-last.addEventListener("click", () => goToPage(totalPages));
+  previous.addEventListener("click", () => goToPage(currentPage - 1));
+  next.addEventListener("click", () => goToPage(currentPage + 1));
+  first.addEventListener("click", () => goToPage(1));
+  last.addEventListener("click", () => goToPage(totalPages));
 
-pageNumbers.addEventListener("click", event => {
-  const button = event.target.closest("button[data-page]");
-  if (button) goToPage(Number(button.dataset.page));
-});
+  pageNumbers.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-page]");
+    if (button) goToPage(Number(button.dataset.page));
+  });
 
   container.addEventListener("songs:updated", () => {
     songs = [...container.querySelectorAll(".song")];
-    restartPages();
+
+    const initialRefresh = waitingForCatalog;
+
+    if (initialRefresh) {
+      currentPage = restoredPage;
+      waitingForCatalog = false;
+    }
+
+    updateSongs();
+
+    if (initialRefresh) {
+      restoreSavedScroll();
+    }
   });
 
   const controls = document.getElementById("song-controls");
@@ -207,7 +356,7 @@ pageNumbers.addEventListener("click", event => {
 
   updateSongs();
 
-  import("./song-list.js").catch(error => {
+  import("./song-list.js").catch((error) => {
     console.error("Could not load song-list.js:", error);
 
     if (count) {
@@ -226,10 +375,8 @@ pageNumbers.addEventListener("click", event => {
   try {
     const { default: songs } = await import("./songs.js");
 
-    const featured = songs.filter(song =>
-      song.published !== false &&
-      song.featured?.image &&
-      song.slug
+    const featured = songs.filter(
+      (song) => song.published !== false && song.featured?.image && song.slug,
     );
 
     if (!featured.length) return;
@@ -246,10 +393,7 @@ pageNumbers.addEventListener("click", event => {
       slide.className = "featured-slide";
       slide.setAttribute("role", "group");
       slide.setAttribute("aria-roledescription", "slide");
-      slide.setAttribute(
-        "aria-label",
-        `${index + 1} of ${featured.length}`
-      );
+      slide.setAttribute("aria-label", `${index + 1} of ${featured.length}`);
 
       slide.innerHTML = `
         <img class="featured-image" alt="">
@@ -277,8 +421,7 @@ pageNumbers.addEventListener("click", event => {
       const directory =
         song.songMetadata?.type === "Praise Song" ? "songs" : "hymns";
 
-      slide.querySelector("a").href =
-        `/${directory}/${song.slug}/`;
+      slide.querySelector("a").href = `/${directory}/${song.slug}/`;
 
       slide.hidden = index !== 0;
       return slide;
@@ -287,100 +430,99 @@ pageNumbers.addEventListener("click", event => {
     slidesContainer.replaceChildren(...slides);
 
     let current = 0;
-let timer = null;
-let playing = true;
+    let timer = null;
+    let playing = true;
 
-const rotationDelay = 8000;
-const multipleSlides = slides.length > 1;
+    const rotationDelay = 8000;
+    const multipleSlides = slides.length > 1;
 
-// Keep one icon element instead of recreating it on every update.
-toggle.innerHTML = `
+    // Keep one icon element instead of recreating it on every update.
+    toggle.innerHTML = `
   <wa-icon variant="solid" aria-hidden="true"></wa-icon>
 `;
 
-const rotationIcon = toggle.querySelector("wa-icon");
+    const rotationIcon = toggle.querySelector("wa-icon");
 
-function clearRotationTimer() {
-  clearTimeout(timer);
-  timer = null;
-}
-
-function showSlide(index, announce = false) {
-  // Wrap correctly in both directions.
-  current = ((index % slides.length) + slides.length) % slides.length;
-
-  slides.forEach((slide, index) => {
-    slide.hidden = index !== current;
-  });
-
-  position.textContent = `${current + 1} / ${slides.length}`;
-
-  if (announce) {
-    status.textContent =
-      `${current + 1} of ${slides.length}: ${featured[current].title}`;
-  }
-}
-
-function updateRotation() {
-  // Always clear the previous timer before scheduling another.
-  clearRotationTimer();
-
-  const label = playing ? "Pause rotation" : "Play rotation";
-
-  toggle.setAttribute("aria-label", label);
-  toggle.title = label;
-  rotationIcon.setAttribute("name", playing ? "pause" : "play");
-
-  if (!playing || !multipleSlides || document.hidden) return;
-
-  timer = setTimeout(() => {
-    // Never automatically hide a slide containing keyboard focus.
-    if (slidesContainer.contains(document.activeElement)) {
-      playing = false;
-      updateRotation();
-      return;
+    function clearRotationTimer() {
+      clearTimeout(timer);
+      timer = null;
     }
 
-    showSlide(current + 1);
+    function showSlide(index, announce = false) {
+      // Wrap correctly in both directions.
+      current = ((index % slides.length) + slides.length) % slides.length;
+
+      slides.forEach((slide, index) => {
+        slide.hidden = index !== current;
+      });
+
+      position.textContent = `${current + 1} / ${slides.length}`;
+
+      if (announce) {
+        status.textContent = `${current + 1} of ${slides.length}: ${featured[current].title}`;
+      }
+    }
+
+    function updateRotation() {
+      // Always clear the previous timer before scheduling another.
+      clearRotationTimer();
+
+      const label = playing ? "Pause rotation" : "Play rotation";
+
+      toggle.setAttribute("aria-label", label);
+      toggle.title = label;
+      rotationIcon.setAttribute("name", playing ? "pause" : "play");
+
+      if (!playing || !multipleSlides || document.hidden) return;
+
+      timer = setTimeout(() => {
+        // Never automatically hide a slide containing keyboard focus.
+        if (slidesContainer.contains(document.activeElement)) {
+          playing = false;
+          updateRotation();
+          return;
+        }
+
+        showSlide(current + 1);
+        updateRotation();
+      }, rotationDelay);
+    }
+
+    toggle.addEventListener("click", () => {
+      playing = !playing;
+      updateRotation();
+    });
+
+    previous.addEventListener("click", () => {
+      showSlide(current - 1, true);
+      updateRotation();
+    });
+
+    next.addEventListener("click", () => {
+      showSlide(current + 1, true);
+      updateRotation();
+    });
+
+    // Pause when someone focuses a link inside a slide.
+    // They can explicitly resume using the Play button.
+    slidesContainer.addEventListener("focusin", () => {
+      playing = false;
+      updateRotation();
+    });
+
+    // Suspend timers in background tabs.
+    // Returning starts a fresh countdown if rotation is enabled.
+    document.addEventListener("visibilitychange", updateRotation);
+
+    toggle.hidden = !multipleSlides;
+    previous.hidden = !multipleSlides;
+    next.hidden = !multipleSlides;
+
+    gallery.hidden = false;
+    hero.classList.add("has-featured");
+
+    showSlide(0);
     updateRotation();
-  }, rotationDelay);
-}
-
-toggle.addEventListener("click", () => {
-  playing = !playing;
-  updateRotation();
-});
-
-previous.addEventListener("click", () => {
-  showSlide(current - 1, true);
-  updateRotation();
-});
-
-next.addEventListener("click", () => {
-  showSlide(current + 1, true);
-  updateRotation();
-});
-
-// Pause when someone focuses a link inside a slide.
-// They can explicitly resume using the Play button.
-slidesContainer.addEventListener("focusin", () => {
-  playing = false;
-  updateRotation();
-});
-
-// Suspend timers in background tabs.
-// Returning starts a fresh countdown if rotation is enabled.
-document.addEventListener("visibilitychange", updateRotation);
-
-toggle.hidden = !multipleSlides;
-previous.hidden = !multipleSlides;
-next.hidden = !multipleSlides;
-
-gallery.hidden = false;
-hero.classList.add("has-featured");
-
-showSlide(0);
-updateRotation();
   } catch (error) {
     console.error("Featured songs could not load:", error);
   }
