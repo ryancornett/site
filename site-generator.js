@@ -74,39 +74,108 @@ export function generateSite({
   `;
     }
     if (song.sheetUrl) links.push(link(song.sheetUrl, "Sheet music"));
-    for (const arrangement of list(song.arrangements)) {
-      const label = [
-        arrangement.label,
-        arrangement.key,
-        arrangement.timeSignature,
-        arrangement.modulation && `Modulation: ${arrangement.modulation}`,
-      ]
-        .filter(Boolean)
-        .join(" · ");
-      if (arrangement.pdf) links.push(link(arrangement.pdf, `${label} — PDF`));
-      if (arrangement.chordChart)
-        links.push(link(arrangement.chordChart, `${label} — chord chart`));
-      if (arrangement.png)
-        links.push(link(arrangement.png, `${label} — sheet image`));
-      for (const track of list(arrangement.accompanimentTracks)) {
-        if (track.url)
-          links.push(
-            link(
-              track.url,
-              `${label} — ${track.instrument}${track.notes ? ` (${track.notes})` : ""}`,
-            ),
-          );
-      }
-    }
+    const arrangementResources = list(song.arrangements).map(arrangement => {
+  const label = [
+    arrangement.label,
+    arrangement.key,
+    arrangement.timeSignature,
+    arrangement.modulation
+      ? `Modulation: ${arrangement.modulation}`
+      : null,
+    typeof arrangement.tempo === "number" &&
+    Number.isFinite(arrangement.tempo) &&
+    arrangement.tempo > 0
+      ? `Suggested tempo: ${arrangement.tempo} BPM`
+      : null,
+  ].filter(Boolean).join(" · ");
+
+  const pdf = arrangement.pdf
+    ? `<p class="sheet-pdf">
+         <a href="${e(safeUrl(arrangement.pdf))}">
+           <wa-icon
+             name="file-pdf"
+             variant="solid"
+             aria-hidden="true"
+           ></wa-icon>
+           Sheet music PDF
+         </a>
+       </p>`
+    : "";
+
+  const chordChart = arrangement.chordChart
+    ? `<p class="chord-chart">
+         ${link(arrangement.chordChart, "Chord chart")}
+       </p>`
+    : "";
+
+  const tracks = list(arrangement.accompanimentTracks)
+    .filter(track => track.url)
+    .map(track => `
+      <li>
+        ${e(track.instrument || "Accompaniment")}
+        ${track.notes ? ` · ${e(track.notes)}` : ""}
+        · ${link(track.url, "MP3")}
+      </li>
+    `)
+    .join("");
+
+  if (!pdf && !chordChart && !tracks) return "";
+
+  return `
+    <div class="arrangement-resources">
+      ${label ? `<h3 class="arrangement-heading">${e(label)}</h3>` : ""}
+      ${pdf}
+      ${chordChart}
+      ${tracks ? `
+        <h4 class="accompaniment-heading">Accompaniment tracks</h4>
+        <ul class="accompaniment-tracks">${tracks}</ul>
+      ` : ""}
+    </div>
+  `;
+}).filter(Boolean);
     for (const stream of list(song.streamingLinks))
       if (stream.url)
         links.push(link(stream.url, `Listen on ${stream.platform}`));
     if (song.lyricVideoUrl)
       links.push(link(song.lyricVideoUrl, "Watch the lyric video on YouTube"));
-    const sheet = song.sheetImage
-      ? `<a class="sheet-preview" href="${e(safeUrl(song.sheetUrl || song.sheetImage))}"><img loading="lazy" src="${e(safeUrl(song.sheetImage))}" alt="Sheet music for ${e(song.title)}"></a>`
-      : "";
-    return `<h2>Listen &amp; sing</h2>${player}${links.length ? `<ul>${links.map((item) => `<li>${item}</li>`).join("")}</ul>` : !player ? "<p>Recordings and sheet music will be added as they become available.</p>" : ""}${sheet}`;
+    
+    const previewPdf = list(song.arrangements).find(
+  arrangement => arrangement.pdf
+)?.pdf;
+
+const previewImage = song.sheetImage
+  ? `<img
+       loading="lazy"
+       src="${e(safeUrl(song.sheetImage))}"
+       data-fallback-src="${e(`/img/sheet-music/${song.slug}.png`)}"
+       onerror="this.onerror = null; this.src = this.dataset.fallbackSrc;"
+       alt="Sheet music for ${e(song.title)}">
+    `
+  : "";
+
+const sheet = previewImage
+  ? previewPdf
+    ? `<a class="sheet-preview"
+          href="${e(safeUrl(previewPdf))}"
+          target="_blank"
+          rel="noopener"
+          aria-label="Open PDF sheet music for ${e(song.title)} (new tab)">
+         ${previewImage}
+       </a>`
+    : `<div class="sheet-preview">${previewImage}</div>`
+  : "";
+    return `
+  <h2>Listen &amp; sing</h2>
+  ${player}
+  ${arrangementResources.join("")}
+  ${links.length
+    ? `<ul>${links.map(item => `<li>${item}</li>`).join("")}</ul>`
+    : ""}
+  ${!player && !arrangementResources.length && !links.length
+    ? "<p>Recordings and sheet music will be added as they become available.</p>"
+    : ""}
+  ${sheet}
+`;
   }
 
   function detailsFor(song) {

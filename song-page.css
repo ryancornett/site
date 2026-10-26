@@ -45,3 +45,54 @@
   width: 100%;
   margin-block: 1rem 1.5rem;
 }
+
+.arrangement-resources {
+  margin-block: 1.5rem;
+}
+
+.arrangement-heading {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.sheet-pdf {
+  margin-block: 0.75rem;
+}
+
+.sheet-pdf a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--blue);
+  border-radius: 0.35rem;
+  color: var(--navy);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.sheet-pdf a:hover {
+  background: var(--mint);
+}
+
+.sheet-pdf wa-icon {
+  color: var(--blue);
+  font-size: 1.25rem;
+}
+
+.accompaniment-heading {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+}
+
+.accompaniment-tracks {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-block: 0.5rem 1rem;
+}
+
+.accompaniment-tracks li {
+  margin-block: 0.5rem;
+}

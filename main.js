@@ -216,3 +216,172 @@ pageNumbers.addEventListener("click", event => {
     }
   });
 })();
+
+/* Featured-song hero carousel. */
+(async () => {
+  const hero = document.getElementById("hero");
+  const gallery = document.getElementById("featured-gallery");
+  if (!hero || !gallery) return;
+
+  try {
+    const { default: songs } = await import("./songs.js");
+
+    const featured = songs.filter(song =>
+      song.published !== false &&
+      song.featured?.image &&
+      song.slug
+    );
+
+    if (!featured.length) return;
+
+    const slidesContainer = document.getElementById("featured-slides");
+    const toggle = document.getElementById("featured-toggle");
+    const previous = document.getElementById("featured-prev");
+    const next = document.getElementById("featured-next");
+    const position = document.getElementById("featured-position");
+    const status = document.getElementById("featured-status");
+
+    const slides = featured.map((song, index) => {
+      const slide = document.createElement("article");
+      slide.className = "featured-slide";
+      slide.setAttribute("role", "group");
+      slide.setAttribute("aria-roledescription", "slide");
+      slide.setAttribute(
+        "aria-label",
+        `${index + 1} of ${featured.length}`
+      );
+
+      slide.innerHTML = `
+        <img class="featured-image" alt="">
+        <div class="featured-copy">
+          <p class="eyebrow">Featured song</p>
+          <h2></h2>
+          <p class="featured-info"></p>
+          <a class="button button-light">
+            Listen &amp; view
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      `;
+
+      const image = slide.querySelector("img");
+      image.src = song.featured.image;
+      image.loading = index === 0 ? "eager" : "lazy";
+
+      slide.querySelector("h2").textContent = song.title;
+
+      const info = slide.querySelector(".featured-info");
+      info.textContent = song.featured.info || "";
+      info.hidden = !song.featured.info;
+
+      const directory =
+        song.songMetadata?.type === "Praise Song" ? "songs" : "hymns";
+
+      slide.querySelector("a").href =
+        `/${directory}/${song.slug}/`;
+
+      slide.hidden = index !== 0;
+      return slide;
+    });
+
+    slidesContainer.replaceChildren(...slides);
+
+    let current = 0;
+let timer = null;
+let playing = true;
+
+const rotationDelay = 8000;
+const multipleSlides = slides.length > 1;
+
+// Keep one icon element instead of recreating it on every update.
+toggle.innerHTML = `
+  <wa-icon variant="solid" aria-hidden="true"></wa-icon>
+`;
+
+const rotationIcon = toggle.querySelector("wa-icon");
+
+function clearRotationTimer() {
+  clearTimeout(timer);
+  timer = null;
+}
+
+function showSlide(index, announce = false) {
+  // Wrap correctly in both directions.
+  current = ((index % slides.length) + slides.length) % slides.length;
+
+  slides.forEach((slide, index) => {
+    slide.hidden = index !== current;
+  });
+
+  position.textContent = `${current + 1} / ${slides.length}`;
+
+  if (announce) {
+    status.textContent =
+      `${current + 1} of ${slides.length}: ${featured[current].title}`;
+  }
+}
+
+function updateRotation() {
+  // Always clear the previous timer before scheduling another.
+  clearRotationTimer();
+
+  const label = playing ? "Pause rotation" : "Play rotation";
+
+  toggle.setAttribute("aria-label", label);
+  toggle.title = label;
+  rotationIcon.setAttribute("name", playing ? "pause" : "play");
+
+  if (!playing || !multipleSlides || document.hidden) return;
+
+  timer = setTimeout(() => {
+    // Never automatically hide a slide containing keyboard focus.
+    if (slidesContainer.contains(document.activeElement)) {
+      playing = false;
+      updateRotation();
+      return;
+    }
+
+    showSlide(current + 1);
+    updateRotation();
+  }, rotationDelay);
+}
+
+toggle.addEventListener("click", () => {
+  playing = !playing;
+  updateRotation();
+});
+
+previous.addEventListener("click", () => {
+  showSlide(current - 1, true);
+  updateRotation();
+});
+
+next.addEventListener("click", () => {
+  showSlide(current + 1, true);
+  updateRotation();
+});
+
+// Pause when someone focuses a link inside a slide.
+// They can explicitly resume using the Play button.
+slidesContainer.addEventListener("focusin", () => {
+  playing = false;
+  updateRotation();
+});
+
+// Suspend timers in background tabs.
+// Returning starts a fresh countdown if rotation is enabled.
+document.addEventListener("visibilitychange", updateRotation);
+
+toggle.hidden = !multipleSlides;
+previous.hidden = !multipleSlides;
+next.hidden = !multipleSlides;
+
+gallery.hidden = false;
+hero.classList.add("has-featured");
+
+showSlide(0);
+updateRotation();
+  } catch (error) {
+    console.error("Featured songs could not load:", error);
+  }
+})();

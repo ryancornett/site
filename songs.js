@@ -17,6 +17,7 @@ class Arrangement {
     chordChart = null,
     png = null,
     accompanimentTracks = [],
+    tempo = null,
   ) {
     this.label = label;
     this.key = key;
@@ -27,6 +28,7 @@ class Arrangement {
     this.chordChart = chordChart;
     this.png = png;
     this.accompanimentTracks = accompanimentTracks;
+    this.tempo = tempo;
   }
 }
 
@@ -96,6 +98,7 @@ class Song {
     this.streamingLinks = streamingLinks;
     this.helpfulSongInfo = helpfulSongInfo;
     this.sheetImage = null;
+    this.featured = null;
   }
 }
 
@@ -1126,7 +1129,12 @@ const songs = [
         "https://drive.google.com/file/d/1GBFtvsOK7Y5bmsvSAJqTw-jnHi5N_qAl",
         null,
         "https://drive.google.com/file/d/1nKOwxwqwONtJBJMFstvbhTol77R5FWNz",
-        [null],
+        [
+          new AccompanimentTrack("Piano", "https://drive.google.com/file/d/1aEx9c-yYL75QtzCO44EhpXUkmsT0c9Wq", "For intro, see accompaniment introduction brackets on the sheet music."),
+          new AccompanimentTrack("Organ", "https://drive.google.com/file/d/15uG6S1Zhrz-SieYM5eMkEkpgroGPwy9N", "See note above."),
+          new AccompanimentTrack("Piano + Organ", "https://drive.google.com/file/d/1bjuUZuVYAG1FVd4opxDeUF1pOBQLVlgD", "See note above."),
+        ],
+        104,
       ),
     ],
     [null],
@@ -3764,6 +3772,27 @@ const songs = [
   // His Love Endures; Awake, My Soul; From the Depths; As the Lord Lives
 ];
 
+const featuredContent = {
+  "let-there-be-light": {
+    image: "/img/featured/hall.webp",
+    info: "Great for choir or guitar!",
+  },
+
+  "born-that-we-might-be-born-again": {
+    image: "/img/featured/angels.webp",
+    info: "Have you ever thought about why the angels visited shepherds, not kings?",
+  },
+
+  "my-hope-is-found-in-this": {
+    image: "/img/featured/strokes.webp",
+    info: "Recorded by KBC Worship, available 11/7/2026 on all streaming platforms.",
+  },
+};
+
+for (const song of songs) {
+  song.featured = featuredContent[song.slug] ?? null;
+}
+
 // Praise songs with recordings.
 // Hymns receive these paths automatically.
 const songsWithAudio = new Set(["my-hope-is-found-in-this", "there-is-rest"]);
@@ -3788,7 +3817,7 @@ for (const song of songs) {
   }
 
   if (hasSheetMusic && !song.sheetImage) {
-    song.sheetImage = `/img/sheet-music/${song.slug}.png`;
+    song.sheetImage = `/img/sheet-music/${song.slug}.webp`;
   }
 }
 
