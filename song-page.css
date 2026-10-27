@@ -217,3 +217,59 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+.sheet-pdf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.freely-given {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.25rem;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--navy);
+  vertical-align: middle;
+  cursor: help;
+}
+
+.freely-given > wa-icon {
+  color: var(--navy);
+  font-size: 0.9rem;
+}
+
+.freely-given-tip {
+  position: absolute;
+  z-index: 20;
+  right: 0;
+  bottom: calc(100% + 0.6rem);
+  width: 12rem;
+  max-width: 75vw;
+  padding: 0.75rem;
+  border: 1px solid var(--mint);
+  border-radius: 0.5rem;
+  background: var(--navy);
+  color: white;
+  box-shadow: 0 4px 16px #13275126;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: left;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.freely-given:hover .freely-given-tip,
+.freely-given:focus .freely-given-tip {
+  visibility: visible;
+  opacity: 1;
+}

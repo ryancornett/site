@@ -50,9 +50,36 @@ export function generateSite({
   const list = (value) =>
     (Array.isArray(value) ? value : value ? [value] : []).filter(Boolean);
   const { published, migrated, drafts } = getPublishedSongs(songs);
-  function link(url, label) {
-    return `<a href="${e(safeUrl(url))}">${e(label)}</a>`;
-  }
+  function freelyGivenMark() {
+  const message =
+    "Freely given for private, family, and congregational worship. " +
+    "No strings attached.";
+
+  return `
+    <span
+      class="freely-given"
+      tabindex="0"
+      role="img"
+      aria-label="${e(message)}"
+    >
+      <wa-icon
+        name="hand-holding-heart"
+        variant="solid"
+        aria-hidden="true"
+      ></wa-icon>
+
+      <span class="freely-given-tip" aria-hidden="true">
+        ${e(message)}
+      </span>
+    </span>
+  `;
+}
+  function link(url, label, freelyGiven = false) {
+  return `
+    <a href="${e(safeUrl(url))}">${e(label)}</a>
+    ${freelyGiven ? freelyGivenMark() : ""}
+  `;
+}
 
   function resourcesFor(song) {
     const links = [];
@@ -99,12 +126,13 @@ export function generateSite({
            ></wa-icon>
            Sheet music PDF
          </a>
+         ${freelyGivenMark()}
        </p>`
     : "";
 
   const chordChart = arrangement.chordChart
     ? `<p class="chord-chart">
-         ${link(arrangement.chordChart, "Chord chart")}
+         ${link(arrangement.chordChart, "Chord chart", true)}
        </p>`
     : "";
 
@@ -114,7 +142,7 @@ export function generateSite({
       <li>
         ${e(track.instrument || "Accompaniment")}
         ${track.notes ? ` · ${e(track.notes)}` : ""}
-        · ${link(track.url, "MP3")}
+        · ${link(track.url, "MP3", true)}
       </li>
     `)
     .join("");
