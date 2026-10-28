@@ -1446,22 +1446,34 @@ const songs = [
     ],
     [
       new Arrangement(
+        "Lead Sheet",
+        "E major",
+        "4/4",
+        null,
+        "Lead Sheet",
+        null,
+        "https://drive.google.com/file/d/1zYN0JPj5brBhObhikk9H838FPYaR24RK",
+        "https://drive.google.com/file/d/1JO_401rqo6UBwdfIXMFKu2FL2e2Z2Hw3",
+        [null],
+        116,
+      ),
+      new Arrangement(
         "Chord Chart",
-        "C major",
+        "E major",
         "4/4",
         null,
         "Chord Chart",
         null,
-        null,
-        null,
+        "https://drive.google.com/file/d/1xiqL5eLRGNyFJ3PGlK1nVwWdRBeq6hkE",
+        "https://drive.google.com/file/d/1JO_401rqo6UBwdfIXMFKu2FL2e2Z2Hw3",
         [null],
         116,
       ),
     ],
     [null],
     new HelpfulSongInfo(
-      "There Is Rest is a confession of faith amid doubt, suffering, guilt, and the apparent silence of God, finding unshakable assurance not in our circumstances or strength but in His immutable character. When every earthly foundation gives way, the believer can rest in the goodness, faithfulness, love, and enduring promises of God.",
-      ["assurance", "hope", "faithfulness", "God's presence"],
+      "There Is Rest is a lament, a confession of faith amid doubt, suffering, guilt, and the apparent silence of God, finding unshakable assurance not in our circumstances or strength but in His immutable character. When every earthly foundation gives way, the believer can rest in the goodness, faithfulness, love, and enduring promises of God.",
+      ["assurance", "hope", "faithfulness", "God's presence", "lament"],
       [
         "Psalm 34:15-19",
         "Psalm 119:11",
@@ -3937,7 +3949,7 @@ const songsWithAudio = new Set(["my-hope-is-found-in-this", "there-is-rest"]);
 // These can differ from the songs with recordings.
 const songsWithSheetMusic = new Set([
   "my-hope-is-found-in-this",
-  // "there-is-rest",
+  "there-is-rest",
 ]);
 
 for (const song of songs) {
