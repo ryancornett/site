@@ -51,11 +51,11 @@ export function generateSite({
     (Array.isArray(value) ? value : value ? [value] : []).filter(Boolean);
   const { published, migrated, drafts } = getPublishedSongs(songs);
   function freelyGivenMark() {
-  const message =
-    "Freely given for private, family, and congregational worship. " +
-    "No strings attached.";
+    const message =
+      "Freely given for private, family, and congregational worship. " +
+      "No strings attached.";
 
-  return `
+    return `
     <span
       class="freely-given"
       tabindex="0"
@@ -73,17 +73,36 @@ export function generateSite({
       </span>
     </span>
   `;
-}
+  }
   function link(url, label, freelyGiven = false) {
-  return `
+    return `
     <a href="${e(safeUrl(url))}">${e(label)}</a>
     ${freelyGiven ? freelyGivenMark() : ""}
   `;
-}
+  }
 
   function resourcesFor(song) {
     const links = [];
     let player = "";
+
+    const worshipVideoUrl = song.helpfulSongInfo?.worshipVideoUrl;
+
+    const worshipVideo = worshipVideoUrl
+      ? `<p class="sheet-pdf worship-video">
+       <a href="${e(safeUrl(worshipVideoUrl))}"
+          target="_blank"
+          rel="noopener"
+          aria-label="View or download worship video MP4 (opens in a new tab)">
+         <wa-icon
+           name="file-video"
+           variant="solid"
+           aria-hidden="true"
+         ></wa-icon>
+         Worship video MP4
+       </a>
+       ${freelyGivenMark()}
+     </p>`
+      : "";
 
     if (song.demo_mp3) {
       const audioUrl = `/audio/${song.slug}.mp3`;
@@ -101,23 +120,26 @@ export function generateSite({
   `;
     }
     if (song.sheetUrl) links.push(link(song.sheetUrl, "Sheet music"));
-    const arrangementResources = list(song.arrangements).map(arrangement => {
-  const label = [
-    arrangement.label,
-    arrangement.key,
-    arrangement.timeSignature,
-    arrangement.modulation
-      ? `Modulation: ${arrangement.modulation}`
-      : null,
-    typeof arrangement.tempo === "number" &&
-    Number.isFinite(arrangement.tempo) &&
-    arrangement.tempo > 0
-      ? `Suggested tempo: ${arrangement.tempo} BPM`
-      : null,
-  ].filter(Boolean).join(" · ");
+    const arrangementResources = list(song.arrangements)
+      .map((arrangement) => {
+        const label = [
+          arrangement.label,
+          arrangement.key,
+          arrangement.timeSignature,
+          arrangement.modulation
+            ? `Modulation: ${arrangement.modulation}`
+            : null,
+          typeof arrangement.tempo === "number" &&
+          Number.isFinite(arrangement.tempo) &&
+          arrangement.tempo > 0
+            ? `Suggested tempo: ${arrangement.tempo} BPM`
+            : null,
+        ]
+          .filter(Boolean)
+          .join(" · ");
 
-  const pdf = arrangement.pdf
-    ? `<p class="sheet-pdf">
+        const pdf = arrangement.pdf
+          ? `<p class="sheet-pdf">
          <a href="${e(safeUrl(arrangement.pdf))}">
            <wa-icon
              name="file-pdf"
@@ -128,80 +150,105 @@ export function generateSite({
          </a>
          ${freelyGivenMark()}
        </p>`
-    : "";
+          : "";
 
-  const chordChart = arrangement.chordChart
-    ? `<p class="chord-chart">
-         ${link(arrangement.chordChart, "Chord chart", true)}
-       </p>`
-    : "";
+        const chordChart = arrangement.chordChart
+          ? `<p class="chord-chart">
+       <a href="${e(safeUrl(arrangement.chordChart))}">
+         <wa-icon
+           name="clipboard-list"
+           variant="solid"
+           aria-hidden="true"
+         ></wa-icon>
+         Chord chart PDF
+       </a>
+       ${freelyGivenMark()}
+     </p>`
+          : "";
 
-  const tracks = list(arrangement.accompanimentTracks)
-    .filter(track => track.url)
-    .map(track => `
+        const tracks = list(arrangement.accompanimentTracks)
+          .filter((track) => track.url)
+          .map(
+            (track) => `
       <li>
         ${e(track.instrument || "Accompaniment")}
         ${track.notes ? ` · ${e(track.notes)}` : ""}
         · ${link(track.url, "MP3", true)}
       </li>
-    `)
-    .join("");
+    `,
+          )
+          .join("");
 
-  if (!pdf && !chordChart && !tracks) return "";
+        if (!pdf && !chordChart && !tracks) return "";
 
-  return `
+        return `
     <div class="arrangement-resources">
       ${label ? `<h3 class="arrangement-heading">${e(label)}</h3>` : ""}
       ${pdf}
       ${chordChart}
-      ${tracks ? `
+      ${
+        tracks
+          ? `
         <h4 class="accompaniment-heading">Accompaniment tracks</h4>
         <ul class="accompaniment-tracks">${tracks}</ul>
-      ` : ""}
+      `
+          : ""
+      }
     </div>
   `;
-}).filter(Boolean);
+      })
+      .filter(Boolean);
     for (const stream of list(song.streamingLinks))
       if (stream.url)
         links.push(link(stream.url, `Listen on ${stream.platform}`));
     if (song.helpfulSongInfo.lyricVideoUrl)
-      links.push(link(song.helpfulSongInfo.lyricVideoUrl, "Watch the lyric video on YouTube"));
-    
-    const previewPdf = list(song.arrangements).find(
-  arrangement => arrangement.pdf
-)?.pdf;
+      links.push(
+        link(
+          song.helpfulSongInfo.lyricVideoUrl,
+          "Watch the lyric video on YouTube",
+        ),
+      );
 
-const previewImage = song.sheetImage
-  ? `<img
+    const previewPdf = list(song.arrangements).find(
+      (arrangement) => arrangement.pdf,
+    )?.pdf;
+
+    const previewImage = song.sheetImage
+      ? `<img
        loading="lazy"
        src="${e(safeUrl(song.sheetImage))}"
        data-fallback-src="${e(`/img/sheet-music/${song.slug}.png`)}"
        onerror="this.onerror = null; this.src = this.dataset.fallbackSrc;"
        alt="Sheet music for ${e(song.title)}">
     `
-  : "";
+      : "";
 
-const sheet = previewImage
-  ? previewPdf
-    ? `<a class="sheet-preview"
+    const sheet = previewImage
+      ? previewPdf
+        ? `<a class="sheet-preview"
           href="${e(safeUrl(previewPdf))}"
           target="_blank"
           rel="noopener"
           aria-label="Open PDF sheet music for ${e(song.title)} (new tab)">
          ${previewImage}
        </a>`
-    : `<div class="sheet-preview">${previewImage}</div>`
-  : "";
+        : `<div class="sheet-preview">${previewImage}</div>`
+      : "";
     return `
   <h2>Listen &amp; sing</h2>
   ${player}
+  ${worshipVideo}
   ${arrangementResources.join("")}
-  ${links.length
-    ? `<ul>${links.map(item => `<li>${item}</li>`).join("")}</ul>`
-    : ""}
-  ${!player && !arrangementResources.length && !links.length
-    ? "<p>Recordings and sheet music will be added as they become available.</p>"
-    : ""}
+  ${
+    links.length
+      ? `<ul>${links.map((item) => `<li>${item}</li>`).join("")}</ul>`
+      : ""
+  }
+  ${
+    !player && !worshipVideo && !arrangementResources.length && !links.length
+      ? "<p>Recordings and sheet music will be added as they become available.</p>"
+      : ""
+  }
   ${sheet}
 `;
   }
@@ -239,87 +286,86 @@ const sheet = previewImage
   }
 
   function relatedMetadata(song) {
-  const normalize = value =>
-    String(value).trim().toLowerCase().replace(/\s+/g, " ");
+    const normalize = (value) =>
+      String(value).trim().toLowerCase().replace(/\s+/g, " ");
 
-  const info = song.helpfulSongInfo || {};
+    const info = song.helpfulSongInfo || {};
 
-  // Maps prevent repeated themes or references from inflating the score.
-  const themes = new Map(
-    list(info.themes)
-      .filter(Boolean)
-      .map(theme => [normalize(theme), String(theme)])
-  );
+    // Maps prevent repeated themes or references from inflating the score.
+    const themes = new Map(
+      list(info.themes)
+        .filter(Boolean)
+        .map((theme) => [normalize(theme), String(theme)]),
+    );
 
-  const chapters = new Map();
+    const chapters = new Map();
 
-  for (const reference of list(info.scriptureReferences)) {
-    // For example: "John 15:1-8" becomes "John 15".
-    const match = String(reference)
-      .trim()
-      .match(/^(.+?)\s+(\d+)(?=\s*:|\s*$)/);
+    for (const reference of list(info.scriptureReferences)) {
+      // For example: "John 15:1-8" becomes "John 15".
+      const match = String(reference)
+        .trim()
+        .match(/^(.+?)\s+(\d+)(?=\s*:|\s*$)/);
 
-    if (!match) continue;
+      if (!match) continue;
 
-    const book = match[1].replace(/\s+/g, " ").trim();
-    const chapter = Number(match[2]);
+      const book = match[1].replace(/\s+/g, " ").trim();
+      const chapter = Number(match[2]);
 
-    // Treat "Psalm" and "Psalms" as the same book.
-    const key =
-      `${normalize(book).replace(/^psalms$/, "psalm")} ${chapter}`;
+      // Treat "Psalm" and "Psalms" as the same book.
+      const key = `${normalize(book).replace(/^psalms$/, "psalm")} ${chapter}`;
 
-    chapters.set(key, `${book} ${chapter}`);
+      chapters.set(key, `${book} ${chapter}`);
+    }
+
+    return { themes, chapters };
   }
 
-  return { themes, chapters };
-}
+  function relatedFor(song) {
+    const source = relatedMetadata(song);
 
-function relatedFor(song) {
-  const source = relatedMetadata(song);
+    const matches = published
+      .filter(
+        (candidate) =>
+          candidate.slug !== song.slug && candidate.published !== false,
+      )
+      .map((candidate) => {
+        const other = relatedMetadata(candidate);
 
-  const matches = published
-    .filter(candidate =>
-      candidate.slug !== song.slug &&
-      candidate.published !== false
-    )
-    .map(candidate => {
-      const other = relatedMetadata(candidate);
+        const themes = [...source.themes]
+          .filter(([key]) => other.themes.has(key))
+          .map(([, label]) => label);
 
-      const themes = [...source.themes]
-        .filter(([key]) => other.themes.has(key))
-        .map(([, label]) => label);
+        const chapters = [...source.chapters]
+          .filter(([key]) => other.chapters.has(key))
+          .map(([, label]) => label);
 
-      const chapters = [...source.chapters]
-        .filter(([key]) => other.chapters.has(key))
-        .map(([, label]) => label);
+        return {
+          song: candidate,
+          themes,
+          chapters,
+          score: themes.length * 2 + chapters.length * 3,
+        };
+      })
+      .filter((match) => match.score > 0)
+      .sort(
+        (a, b) => b.score - a.score || a.song.title.localeCompare(b.song.title),
+      )
+      .slice(0, 3);
 
-      return {
-        song: candidate,
-        themes,
-        chapters,
-        score: themes.length * 2 + chapters.length * 3,
-      };
-    })
-    .filter(match => match.score > 0)
-    .sort((a, b) =>
-      b.score - a.score ||
-      a.song.title.localeCompare(b.song.title)
-    )
-    .slice(0, 3);
+    if (!matches.length) return "";
 
-  if (!matches.length) return "";
+    const cards = matches
+      .map((match) => {
+        const related = match.song;
+        const directory =
+          related.songMetadata.type === "Praise Song" ? "songs" : "hymns";
 
-  const cards = matches.map(match => {
-    const related = match.song;
-    const directory =
-      related.songMetadata.type === "Praise Song" ? "songs" : "hymns";
+        const reasons = [
+          ...match.themes.slice(0, 2),
+          ...match.chapters.slice(0, 1),
+        ];
 
-    const reasons = [
-      ...match.themes.slice(0, 2),
-      ...match.chapters.slice(0, 1),
-    ];
-
-    return `
+        return `
       <li>
         <a href="/${directory}/${e(related.slug)}/">
           <span class="related-song-title">${e(related.title)}</span>
@@ -329,16 +375,17 @@ function relatedFor(song) {
         </a>
       </li>
     `;
-  }).join("");
+      })
+      .join("");
 
-  return `
+    return `
     <section class="related-songs" aria-labelledby="related-songs-title">
       <h2 id="related-songs-title">You may also like</h2>
       <p>Songs with shared themes or Scripture chapters.</p>
       <ul class="related-song-list">${cards}</ul>
     </section>
   `;
-}
+  }
 
   const rendered = [];
 
@@ -408,8 +455,8 @@ function relatedFor(song) {
         slug: song.slug,
         type: song.songMetadata.type,
         url: `/${
-  song.songMetadata.type === "Praise Song" ? "songs" : "hymns"
-}/${song.slug}/`,
+          song.songMetadata.type === "Praise Song" ? "songs" : "hymns"
+        }/${song.slug}/`,
       })),
       null,
       2,
