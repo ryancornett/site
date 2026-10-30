@@ -94,3 +94,136 @@ if (share) {
     }
   });
 })();
+
+/* Resource details: hover, focus, and touch-friendly info buttons. */
+(() => {
+  const items = [...document.querySelectorAll(".resource-item")];
+  let active = null;
+  let closeTimer;
+
+  function hide() {
+    clearTimeout(closeTimer);
+
+    if (!active) return;
+
+    active.tip.hidden = true;
+    active.button.setAttribute("aria-expanded", "false");
+    active = null;
+  }
+
+  function position() {
+    if (!active) return;
+
+    const gap = 12;
+    const rect = active.item.getBoundingClientRect();
+    const box = active.tip.getBoundingClientRect();
+
+    const left = Math.max(
+      gap,
+      Math.min(
+        rect.left + (rect.width - box.width) / 2,
+        window.innerWidth - box.width - gap
+      )
+    );
+
+    const below = rect.bottom + 8;
+
+    const top = below + box.height <= window.innerHeight - gap
+      ? below
+      : rect.top - box.height - 8;
+
+    active.tip.style.left = `${left}px`;
+    active.tip.style.top = `${
+      Math.max(
+        gap,
+        Math.min(top, window.innerHeight - box.height - gap)
+      )
+    }px`;
+  }
+
+  function show(item, tip, button) {
+    clearTimeout(closeTimer);
+
+    if (active?.item !== item) {
+      hide();
+      active = { item, tip, button, pinned: false };
+    }
+
+    tip.hidden = false;
+    button.setAttribute("aria-expanded", "true");
+    position();
+  }
+
+  function scheduleClose(item) {
+    clearTimeout(closeTimer);
+
+    closeTimer = setTimeout(() => {
+      if (active?.item !== item || active.pinned) return;
+
+      if (
+        item.matches(":hover") ||
+        active.tip.matches(":hover") ||
+        item.contains(document.activeElement)
+      ) return;
+
+      hide();
+    }, 150);
+  }
+
+  for (const item of items) {
+    const tip = item.querySelector(".resource-tip");
+    const button = item.querySelector(".resource-info");
+
+    if (!tip || !button) continue;
+
+    // Floating chips won't be clipped by the resource pane.
+    document.body.append(tip);
+    button.hidden = false;
+
+    item.addEventListener("pointerenter", event => {
+      if (event.pointerType === "mouse") show(item, tip, button);
+    });
+
+    item.addEventListener("pointerleave", () => scheduleClose(item));
+    item.addEventListener("focusin", () => show(item, tip, button));
+    item.addEventListener("focusout", () => scheduleClose(item));
+
+    button.addEventListener("click", () => {
+      if (active?.item === item && active.pinned) {
+        hide();
+      } else {
+        show(item, tip, button);
+        active.pinned = true;
+      }
+    });
+
+    tip.addEventListener("pointerenter", () => clearTimeout(closeTimer));
+    tip.addEventListener("pointerleave", () => scheduleClose(item));
+  }
+
+  document.addEventListener("pointerdown", event => {
+    if (
+      active &&
+      !active.item.contains(event.target) &&
+      !active.tip.contains(event.target)
+    ) hide();
+  });
+
+  document.addEventListener("focusin", event => {
+    if (
+      active &&
+      !active.item.contains(event.target) &&
+      !active.tip.contains(event.target)
+    ) hide();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") hide();
+  });
+
+  window.addEventListener("resize", position);
+  window.addEventListener("scroll", position, {
+    capture: true,
+    passive: true,
+  });
+})();

@@ -45,8 +45,8 @@ class SongMetadata {
     type = "Hymn",
     tune = null,
     meter = null,
-    wordsBy = "Ryan Cornett, 2026",
-    musicBy = "Ryan Cornett, 2026",
+    wordsBy = null,
+    musicBy = null,
   ) {
     this.type = type;
     this.tune = tune;
@@ -62,7 +62,7 @@ class HelpfulSongInfo {
     themes = [],
     scriptureReferences = [],
     yearWritten = 2026,
-    lyricVideoUrl = null,
+    accompanimentVideoUrl = null,
     worshipVideoUrl = null,
     playableOnGuitar = false,
     recommended = false,
@@ -71,7 +71,7 @@ class HelpfulSongInfo {
     this.themes = themes;
     this.scriptureReferences = scriptureReferences;
     this.yearWritten = yearWritten;
-    this.lyricVideoUrl = lyricVideoUrl;
+    this.accompanimentVideoUrl = accompanimentVideoUrl;
     this.worshipVideoUrl = worshipVideoUrl;
     this.playableOnGuitar = playableOnGuitar;
     this.recommended = recommended;
@@ -114,8 +114,8 @@ const songs = [
       "Hymn",
       "ABIDING",
       "Irregular",
-      "Ryan Cornett",
-      "Ryan Cornett",
+      "Ryan Daniel Cornett",
+      "Ryan Daniel Cornett",
     ),
     [
       {
@@ -179,7 +179,11 @@ const songs = [
         "https://drive.google.com/file/d/1SJSgoave3nC57iW80sBFEjeHIz6p2W-f",
         null,
         "https://drive.google.com/file/d/1EJNqRszwwlrffQql3vuYTvhotvMThnOI",
-        [null],
+        [
+          new AccompanimentTrack("Piano", "https://drive.google.com/file/d/1fVuui8Lj5ijtwQegvJT3JXaElwVsSdSd", "For intro, see accompaniment introduction brackets on the sheet music."),
+          new AccompanimentTrack("Organ", "https://drive.google.com/file/d/1qMSxHV3BwJ8Kj8A9o0cUzATtQcLSt7VZ", "For intro, see accompaniment introduction brackets on the sheet music.."),
+          new AccompanimentTrack("Piano + Organ", "https://drive.google.com/file/d/1lLhpD6PnuY4E8L3xxQ90jeLzwr4vIjDr", "For intro, see accompaniment introduction brackets on the sheet music.."),
+        ],
         84,
       ),
     ],
@@ -189,8 +193,8 @@ const songs = [
       ["union with Christ", "abiding", "spiritual growth", "perseverance"],
       ["John 15:1-8", "Galatians 5:22-23", "Romans 11:17"],
       2026,
-      null,
-      null,
+      "https://youtu.be/9u1lAXFGPss?si=r3LNALFOkHlRSfoy",
+      "https://drive.google.com/file/d/11Dq_MPVrLUb6-HXEJuWWgWIjDDZxpA9h",
       false,
       false,
     ),
@@ -206,7 +210,7 @@ const songs = [
       "QUAERES ME",
       "8.8.8.7. w/ repeat and refrain",
       "The New Metrical Version of the Psalms, 1909; alt.",
-      "Ryan Cornett",
+      "Ryan Daniel Cornett",
     ),
     [
       {
@@ -301,7 +305,7 @@ const songs = [
       "Hymn",
       "ELLACOMBE",
       "C.M.D.",
-      "Ryan Cornett",
+      "Ryan Daniel Cornett",
       "Traditional German Melody",
     ),
     [
@@ -488,7 +492,11 @@ const songs = [
         "https://drive.google.com/file/d/14j3f-eHvtpBuUgz2D3LCxLdkAng4JTxY",
         null,
         "https://drive.google.com/file/d/1WuZH0NM0KhurMhRIVUYanSoEB9-bAHHD",
-        [null],
+        [
+          new AccompanimentTrack("Piano", "https://drive.google.com/file/d/1bAEi3qUAmQMGAZFU48vwX3TC8DEfA4W3", "For intro, see accompaniment introduction brackets on the sheet music."),
+          new AccompanimentTrack("Organ", "https://drive.google.com/file/d/1HV2wzrZVvvN5ED5W8suP1xDC_qXzCTKN", "For intro, see accompaniment introduction brackets on the sheet music.."),
+          new AccompanimentTrack("Piano + Organ", "https://drive.google.com/file/d/1PxfaIPjPY7mgRkqR-JkHW6s_x9FN5jjB", "For intro, see accompaniment introduction brackets on the sheet music."),
+        ],
         76,
       ),
     ],
@@ -975,7 +983,11 @@ const songs = [
         "https://drive.google.com/file/d/1b2bDKkoWIuLHNtPc2Hfwhtf4u7k_YSWZ",
         null,
         "https://drive.google.com/file/d/1hZjr88_pY2ZLpGjb14Mg_GLouCugWjpN",
-        [null],
+        [
+          new AccompanimentTrack("Piano", "https://drive.google.com/file/d/1s4v-eemECEn-Frm5MwnLqgqVb7xGISf3", "For intro, see accompaniment introduction brackets on the sheet music."),
+          new AccompanimentTrack("Organ", "https://drive.google.com/file/d/1FJ38KSHllmL3YMVH5ZfKcczL-ovJgCJl", "For intro, see accompaniment introduction brackets on the sheet music."),
+          new AccompanimentTrack("Piano + Organ", "https://drive.google.com/file/d/1PMmdRc3WFV_uKrEgZba7yEpIAahrxUC9", "For intro, see accompaniment introduction brackets on the sheet music."),
+        ],
         82,
       ),
     ],
@@ -1169,12 +1181,12 @@ const songs = [
           new AccompanimentTrack(
             "Organ",
             "https://drive.google.com/file/d/15uG6S1Zhrz-SieYM5eMkEkpgroGPwy9N",
-            "See note above.",
+            "For intro, see accompaniment introduction brackets on the sheet music..",
           ),
           new AccompanimentTrack(
             "Piano + Organ",
             "https://drive.google.com/file/d/1bjuUZuVYAG1FVd4opxDeUF1pOBQLVlgD",
-            "See note above.",
+            "For intro, see accompaniment introduction brackets on the sheet music..",
           ),
         ],
         104,
@@ -1803,12 +1815,12 @@ const songs = [
           new AccompanimentTrack(
             "Organ",
             "https://drive.google.com/file/d/13fvcHDei1FBQ_4di6hymre8yirwoqeZk",
-            "See note above.",
+            "For intro, see accompaniment introduction brackets on the sheet music..",
           ),
           new AccompanimentTrack(
             "Piano + Organ",
             "https://drive.google.com/file/d/1sJRJLfqQsx9UuCHZ-oBYmdrrNPrW_avl",
-            "See note above.",
+            "For intro, see accompaniment introduction brackets on the sheet music..",
           ),
         ],
         90,

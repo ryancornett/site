@@ -68,7 +68,7 @@
     <option value="all">All songs</option>
     <option value="pdf">Sheet music PDF</option>
     <option value="accompaniment">Accompaniment tracks</option>
-    <option value="video">Lyric video</option>
+    <option value="video">Accompaniment video</option>
     <option value="guitar">Guitar-friendly</option>
     <option value="recommended">Ryan's recommendations</option>
   </select>

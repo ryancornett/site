@@ -228,7 +228,7 @@ async function inspectSongResources(song, checkFile) {
     "audio"
   );
 
-  const video = song.helpfulSongInfo?.lyricVideoUrl;
+  const video = song.helpfulSongInfo?.accompanimentVideoUrl;
 
   return [
     demo,
@@ -276,7 +276,7 @@ resourceReport.innerHTML = `
           <th scope="col">PDFs</th>
           <th scope="col">Preview</th>
           <th scope="col">Accompaniment</th>
-          <th scope="col">Lyric video</th>
+          <th scope="col">Accompaniment video</th>
         </tr>
       </thead>
       <tbody></tbody>

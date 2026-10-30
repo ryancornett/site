@@ -55,7 +55,7 @@ const resources = [
     ? "accompaniment"
     : null,
 
-  info.lyricVideoUrl ? "video" : null,
+  (info.accompanimentVideoUrl || info.worshipVideoUrl) ? "video" : null,
   info.playableOnGuitar ? "guitar" : null,
   info.recommended ? "recommended" : null,
 ].filter(Boolean).join(" ");
