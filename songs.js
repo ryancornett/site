@@ -1230,8 +1230,8 @@ const songs = [
     ],
     [null],
     new HelpfulSongInfo(
-      "Everyday gratitude and renewed mercies nourish joy and contentment in Christ through life and death.",
-      ["joy", "gratitude", "contentment", "daily mercy"],
+      "After studying the fruit of the Spirit, joy, and thankfulness I learned how they are interconnected. Everyday gratitude and renewed mercies nourish joy and contentment in Christ through life and death.",
+      ["joy", "gratitude", "contentment", "mercy", "thankfulness", "thanksgiving", "daily bread"],
       [
         "Galatians 5:22",
         "Lamentations 3:22-23",
@@ -1239,7 +1239,7 @@ const songs = [
         "Philippians 4:11-13",
       ],
       2026,
-      "https://youtu.be/1GqhPhe4mnc",
+      "https://youtu.be/xUKYVEmIxbI",
       "https://drive.google.com/file/d/1319xGfj9KmKVL8cwLieBnYBcUSa0kTGN",
       false,
       false,
@@ -3991,13 +3991,14 @@ for (const song of songs) {
 
 // Praise songs with recordings.
 // Hymns receive these paths automatically.
-const songsWithAudio = new Set(["my-hope-is-found-in-this", "there-is-rest"]);
+const songsWithAudio = new Set(["my-hope-is-found-in-this", "there-is-rest", "the-hands-i-nailed-to-the-cross"]);
 
 // Praise songs with sheet-music previews.
 // These can differ from the songs with recordings.
 const songsWithSheetMusic = new Set([
   "my-hope-is-found-in-this",
   "there-is-rest",
+  "the-hands-i-nailed-to-the-cross",
 ]);
 
 for (const song of songs) {

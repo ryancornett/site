@@ -82,25 +82,28 @@ export function generateSite({
   }
 
   function resourcesFor(song) {
-  const arrangements = list(song.arrangements);
-  const primary = [];
-  const tracks = [];
-  const streaming = [];
-  let tileNumber = 0;
+    const arrangements = list(song.arrangements);
+    const primary = [];
+    const tracks = [];
+    const streaming = [];
+    let tileNumber = 0;
 
-  function tile(
-    url, icon, label, title,
-    details = "", notes = "", free = false
-  ) {
-    const id = `resource-tip-${song.slug}-${++tileNumber}`;
-
-    const accessibleName = [
+    function tile(
+      url,
+      icon,
+      label,
       title,
-      details,
-      "opens in a new tab",
-    ].filter(Boolean).join(" — ");
+      details = "",
+      notes = "",
+      free = false,
+    ) {
+      const id = `resource-tip-${song.slug}-${++tileNumber}`;
 
-    return `
+      const accessibleName = [title, details, "opens in a new tab"]
+        .filter(Boolean)
+        .join(" — ");
+
+      return `
       <li class="resource-item">
         <a
           class="resource-tile"
@@ -118,14 +121,18 @@ export function generateSite({
 
           <span>${e(label)}</span>
 
-          ${free ? `
+          ${
+            free
+              ? `
             <span class="resource-gift" aria-hidden="true">
               <wa-icon
                 name="hand-holding-heart"
                 variant="solid"
               ></wa-icon>
             </span>
-          ` : ""}
+          `
+              : ""
+          }
         </a>
 
         <button
@@ -133,7 +140,7 @@ export function generateSite({
           type="button"
           hidden
           aria-label="${e(
-            `Details: ${title}${details ? ` — ${details}` : ""}`
+            `Details: ${title}${details ? ` — ${details}` : ""}`,
           )}"
           aria-controls="${id}"
           aria-expanded="false"
@@ -151,7 +158,9 @@ export function generateSite({
           ${details ? `<p>${e(details)}</p>` : ""}
           ${notes ? `<p>${e(notes)}</p>` : ""}
 
-          ${free ? `
+          ${
+            free
+              ? `
             <p class="resource-tip-free">
               <wa-icon
                 name="hand-holding-heart"
@@ -161,120 +170,136 @@ export function generateSite({
               Freely given for private, family, and congregational
               worship. No strings attached.
             </p>
-          ` : ""}
+          `
+              : ""
+          }
 
           <p class="resource-tip-action">Opens in a new tab.</p>
         </div>
       </li>
     `;
-  }
-
-  for (const arrangement of arrangements) {
-    const details = [
-      arrangement.label,
-      arrangement.key,
-      arrangement.timeSignature,
-      arrangement.modulation
-        ? `Modulation: ${arrangement.modulation}`
-        : null,
-      Number.isFinite(arrangement.tempo) && arrangement.tempo > 0
-        ? `Suggested tempo: ${arrangement.tempo} BPM`
-        : null,
-    ].filter(Boolean).join(" · ");
-
-    if (arrangement.pdf) {
-      primary.push(tile(
-        arrangement.pdf,
-        "file-pdf",
-        "Sheet PDF",
-        "Sheet music PDF",
-        details,
-        "",
-        true
-      ));
     }
 
-    if (arrangement.chordChart) {
-      primary.push(tile(
-        arrangement.chordChart,
-        "clipboard-list",
-        "Chords PDF",
-        "Chord chart PDF",
-        details,
-        "",
-        true
-      ));
+    for (const arrangement of arrangements) {
+      const details = [
+        arrangement.label,
+        arrangement.key,
+        arrangement.timeSignature,
+        arrangement.modulation ? `Modulation: ${arrangement.modulation}` : null,
+        Number.isFinite(arrangement.tempo) && arrangement.tempo > 0
+          ? `Suggested tempo: ${arrangement.tempo} BPM`
+          : null,
+      ]
+        .filter(Boolean)
+        .join(" · ");
+
+      if (arrangement.pdf) {
+        primary.push(
+          tile(
+            arrangement.pdf,
+            "file-pdf",
+            "Sheet PDF",
+            "Sheet music PDF",
+            details,
+            "",
+            true,
+          ),
+        );
+      }
+
+      if (arrangement.chordChart) {
+        primary.push(
+          tile(
+            arrangement.chordChart,
+            "clipboard-list",
+            `${arrangement.label} PDF`,
+            `${arrangement.label} PDF`,
+            details,
+            "",
+            true,
+          ),
+        );
+      }
+
+      for (const track of list(arrangement.accompanimentTracks)) {
+        if (!track.url) continue;
+
+        tracks.push(
+          tile(
+            track.url,
+            "music",
+            `${track.instrument || "Track"} MP3`,
+            `${track.instrument || "Accompaniment"} accompaniment track`,
+            details,
+            track.notes || "",
+            true,
+          ),
+        );
+      }
     }
 
-    for (const track of list(arrangement.accompanimentTracks)) {
-      if (!track.url) continue;
-
-      tracks.push(tile(
-        track.url,
-        "music",
-        `${track.instrument || "Track"} MP3`,
-        `${track.instrument || "Accompaniment"} accompaniment track`,
-        details,
-        track.notes || "",
-        true
-      ));
+    if (
+      song.sheetUrl &&
+      !arrangements.some((arrangement) => arrangement.pdf === song.sheetUrl)
+    ) {
+      primary.push(
+        tile(
+          song.sheetUrl,
+          "file-pdf",
+          "Sheet PDF",
+          "Sheet music PDF",
+          "",
+          "",
+          true,
+        ),
+      );
     }
-  }
 
-  if (
-    song.sheetUrl &&
-    !arrangements.some(arrangement => arrangement.pdf === song.sheetUrl)
-  ) {
-    primary.push(tile(
-      song.sheetUrl,
-      "file-pdf",
-      "Sheet PDF",
-      "Sheet music PDF",
-      "",
-      "",
-      true
-    ));
-  }
+    const info = song.helpfulSongInfo || {};
 
-  const info = song.helpfulSongInfo || {};
+    if (info.accompanimentVideoUrl) {
+      primary.push(
+        tile(
+          info.accompanimentVideoUrl,
+          "circle-play",
+          "Watch video",
+          "Accompaniment video on YouTube",
+          "",
+          "Watch online.",
+        ),
+      );
+    }
 
-  if (info.accompanimentVideoUrl) {
-    primary.push(tile(
-      info.accompanimentVideoUrl,
-      "circle-play",
-      "Watch video",
-      "Accompaniment video on YouTube",
-      "",
-      "Watch online."
-    ));
-  }
+    if (info.worshipVideoUrl) {
+      primary.push(
+        tile(
+          info.worshipVideoUrl,
+          "file-video",
+          "Video MP4",
+          "Accompaniment video MP4",
+          "",
+          "Preview or download through Google Drive. " +
+            "Download before your service for offline playback.",
+          true,
+        ),
+      );
+    }
 
-  if (info.worshipVideoUrl) {
-    primary.push(tile(
-      info.worshipVideoUrl,
-      "file-video",
-      "Video MP4",
-      "Accompaniment video MP4",
-      "",
-      "Preview or download through Google Drive. " +
-        "Download before your service for offline playback.",
-      true
-    ));
-  }
+    for (const stream of list(song.streamingLinks)) {
+      if (!stream.url) continue;
 
-  for (const stream of list(song.streamingLinks)) {
-    if (!stream.url) continue;
+      streaming.push(
+        tile(
+          stream.url,
+          "headphones",
+          stream.platform || "Listen",
+          `Listen on ${stream.platform || "streaming service"}`,
+        ),
+      );
+    }
 
-    streaming.push(tile(
-      stream.url,
-      "headphones",
-      stream.platform || "Listen",
-      `Listen on ${stream.platform || "streaming service"}`
-    ));
-  }
-
-  const player = song.demo_mp3
-    ? `<audio
+    const player = song.demo_mp3
+      ? `<audio
          class="song-audio"
          controls
          preload="none"
@@ -288,71 +313,84 @@ export function generateSite({
            Listen to the demo
          </a>
        </audio>`
-    : "";
+      : "";
 
-  const previewPdf =
-    arrangements.find(arrangement => arrangement.pdf)?.pdf ||
-    arrangements.find(arrangement => arrangement.chordChart)?.chordChart ||
-    song.sheetUrl;
+    const previewPdf =
+      arrangements.find((arrangement) => arrangement.pdf)?.pdf ||
+      arrangements.find((arrangement) => arrangement.chordChart)?.chordChart ||
+      song.sheetUrl;
 
-  const image = song.sheetImage
-    ? `<img
+    const image = song.sheetImage
+      ? `<img
          loading="lazy"
          src="${e(safeUrl(song.sheetImage))}"
-         data-fallback-src="${e(
-           `/img/sheet-music/${song.slug}.png`
-         )}"
+         data-fallback-src="${e(`/img/sheet-music/${song.slug}.png`)}"
          onerror="this.onerror = null; this.src = this.dataset.fallbackSrc;"
          alt="Sheet music or chord chart for ${e(song.title)}"
        >`
-    : "";
+      : "";
 
-  const preview = image
-    ? previewPdf
-      ? `<a
+    const preview = image
+      ? previewPdf
+        ? `<a
            class="sheet-preview"
            href="${e(safeUrl(previewPdf))}"
            target="_blank"
            rel="noopener"
            aria-label="Open PDF for ${e(song.title)} (opens in a new tab)"
          >${image}</a>`
-      : `<div class="sheet-preview">${image}</div>`
-    : "";
+        : `<div class="sheet-preview">${image}</div>`
+      : "";
 
-  return `
+    return `
     <h2>Listen &amp; sing</h2>
     ${player}
 
-    ${primary.length ? `
+    ${
+      primary.length
+        ? `
       <ul class="resource-grid" aria-label="Sheet music and videos">
         ${primary.join("")}
       </ul>
-    ` : ""}
+    `
+        : ""
+    }
 
     ${preview}
 
-    ${tracks.length ? `
+    ${
+      tracks.length
+        ? `
       <h3 class="resource-group-heading">Accompaniment tracks</h3>
       <ul class="resource-grid" aria-label="Accompaniment tracks">
         ${tracks.join("")}
       </ul>
-    ` : ""}
+    `
+        : ""
+    }
 
-    ${streaming.length ? `
+    ${
+      streaming.length
+        ? `
       <h3 class="resource-group-heading">Also listen on</h3>
       <ul class="resource-grid" aria-label="Streaming services">
         ${streaming.join("")}
       </ul>
-    ` : ""}
+    `
+        : ""
+    }
 
     ${
-      !player && !primary.length && !preview &&
-      !tracks.length && !streaming.length
+      !player &&
+      !primary.length &&
+      !preview &&
+      !tracks.length &&
+      !streaming.length
         ? "<p>Recordings and sheet music will be added as they become available.</p>"
         : ""
     }
   `;
-}
+  }
 
   function detailsFor(song) {
     if (!song.lyrics && song.detailsHtml) return song.detailsHtml;
