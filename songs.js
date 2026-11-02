@@ -1231,7 +1231,15 @@ const songs = [
     [null],
     new HelpfulSongInfo(
       "After studying the fruit of the Spirit, joy, and thankfulness I learned how they are interconnected. Everyday gratitude and renewed mercies nourish joy and contentment in Christ through life and death.",
-      ["joy", "gratitude", "contentment", "mercy", "thankfulness", "thanksgiving", "daily bread"],
+      [
+        "joy",
+        "gratitude",
+        "contentment",
+        "mercy",
+        "thankfulness",
+        "thanksgiving",
+        "daily bread",
+      ],
       [
         "Galatians 5:22",
         "Lamentations 3:22-23",
@@ -1239,7 +1247,7 @@ const songs = [
         "Philippians 4:11-13",
       ],
       2026,
-      "https://youtu.be/xUKYVEmIxbI",
+      "https://youtu.be/NkHwdHr1qZ8?si=_Y2_PaSv54NoXRmK",
       "https://drive.google.com/file/d/1319xGfj9KmKVL8cwLieBnYBcUSa0kTGN",
       false,
       false,
@@ -3989,33 +3997,11 @@ for (const song of songs) {
   song.featured = featuredContent[song.slug] ?? null;
 }
 
-// Praise songs with recordings.
-// Hymns receive these paths automatically.
-const songsWithAudio = new Set(["my-hope-is-found-in-this", "there-is-rest", "the-hands-i-nailed-to-the-cross"]);
-
-// Praise songs with sheet-music previews.
-// These can differ from the songs with recordings.
-const songsWithSheetMusic = new Set([
-  "my-hope-is-found-in-this",
-  "there-is-rest",
-  "the-hands-i-nailed-to-the-cross",
-]);
-
+// Every song uses local media files named after its slug.
 for (const song of songs) {
-  const isPraiseSong = song.songMetadata?.type === "Praise Song";
+  song.demo_mp3 = `/audio/${song.slug}.mp3`;
 
-  const hasAudio = !isPraiseSong || songsWithAudio.has(song.slug);
-
-  const hasSheetMusic = !isPraiseSong || songsWithSheetMusic.has(song.slug);
-
-  // Preserve an explicitly supplied URL; otherwise use the filename convention.
-  if (hasAudio && !song.demo_mp3) {
-    song.demo_mp3 = `/audio/${song.slug}.mp3`;
-  }
-
-  if (hasSheetMusic && !song.sheetImage) {
-    song.sheetImage = `/img/sheet-music/${song.slug}.webp`;
-  }
+  song.sheetImage ||= `/img/sheet-music/${song.slug}.webp`;
 }
 
 export default songs;

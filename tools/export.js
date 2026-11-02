@@ -216,7 +216,10 @@ async function inspectSongResources(song, checkFile) {
   }
 
   const pdfs = await group(
-    arrangements.map(arrangement => arrangement.pdf).filter(Boolean),
+    arrangements.flatMap(arrangement => [
+  arrangement.pdf,
+  arrangement.chordChart,
+]).filter(Boolean),
     "pdf"
   );
 

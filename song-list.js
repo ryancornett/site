@@ -45,7 +45,9 @@ export function renderSongCards(songs) {
     const arrangements = array(song.arrangements);
 
 const resources = [
-  arrangements.some(arrangement => arrangement?.pdf)
+  arrangements.some(arrangement =>
+  arrangement?.pdf || arrangement?.chordChart
+)
     ? "pdf"
     : null,
 
