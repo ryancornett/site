@@ -1682,3 +1682,59 @@ p + p {
 #newsletter {
   background: var(--paper);
 }
+
+.about-socials {
+  margin-top: 2rem;
+}
+
+.about-socials .eyebrow {
+  margin-bottom: 0.85rem;
+  color: var(--muted);
+}
+
+.about-socials .socials {
+  justify-content: flex-start;
+  max-width: none;
+  gap: 0.65rem;
+}
+
+.about-socials .socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--navy);
+  text-decoration: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.about-socials .socials wa-icon {
+  font-size: 1.2rem;
+}
+
+.about-socials .socials a:hover,
+.about-socials .socials a:focus-visible {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: var(--navy);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-socials .socials a {
+    transition: none;
+  }
+
+  .about-socials .socials a:hover,
+  .about-socials .socials a:focus-visible {
+    transform: none;
+  }
+}
