@@ -96,6 +96,7 @@ export function generateSite({
       details = "",
       notes = "",
       free = false,
+      family = "classic",
     ) {
       const id = `resource-tip-${song.slug}-${++tileNumber}`;
 
@@ -115,6 +116,7 @@ export function generateSite({
         >
           <wa-icon
             name="${e(icon)}"
+            family="${e(family)}"
             variant="solid"
             aria-hidden="true"
           ></wa-icon>
@@ -285,18 +287,60 @@ export function generateSite({
       );
     }
 
+    const streamingIcons = {
+      spotify: "spotify",
+      youtube: "youtube",
+      youtubemusic: "youtube",
+      applemusic: "itunes-note",
+      amazonmusic: "amazon",
+      pandora: "pandora",
+    };
+
     for (const stream of list(song.streamingLinks)) {
       if (!stream.url) continue;
+
+      const platform = stream.platform || "Listen";
+
+      const platformKey = platform.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+      const brandIcon = streamingIcons[platformKey];
 
       streaming.push(
         tile(
           stream.url,
-          "headphones",
-          stream.platform || "Listen",
-          `Listen on ${stream.platform || "streaming service"}`,
+          brandIcon || "headphones",
+          platform,
+          `Listen on ${platform}`,
+          "",
+          "",
+          false,
+          brandIcon ? "brands" : "classic",
         ),
       );
     }
+
+    const albumArtPaths = [
+  ...new Set(
+    list(song.streamingLinks)
+      .map(stream =>
+        typeof stream.albumArt === "string"
+          ? stream.albumArt.trim()
+          : ""
+      )
+      .filter(Boolean)
+  ),
+];
+
+const albumArtwork = albumArtPaths
+  .map(path => `
+    <img
+      src="${e(safeUrl(path))}"
+      alt="Album artwork for ${e(song.title)}"
+      loading="lazy"
+      decoding="async"
+    >
+  `)
+  .join("");
 
     const player = song.demo_mp3
       ? `<audio
@@ -369,16 +413,19 @@ export function generateSite({
         : ""
     }
 
-    ${
-      streaming.length
-        ? `
-      <h3 class="resource-group-heading">Also listen on</h3>
-      <ul class="resource-grid" aria-label="Streaming services">
-        ${streaming.join("")}
-      </ul>
-    `
-        : ""
-    }
+    ${streaming.length ? `
+  <h3 class="resource-group-heading">Also listen on</h3>
+
+  ${albumArtwork ? `
+    <div class="album-artwork">
+      ${albumArtwork}
+    </div>
+  ` : ""}
+
+  <ul class="resource-grid" aria-label="Streaming services">
+    ${streaming.join("")}
+  </ul>
+` : ""}
 
     ${
       !player &&

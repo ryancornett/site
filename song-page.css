@@ -471,7 +471,9 @@
   text-align: center;
   text-decoration: none;
   overflow-wrap: anywhere;
-  transition: background 150ms ease, border-color 150ms ease;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
 }
 
 .resource-tile:hover {
@@ -575,4 +577,20 @@
 .resource-tip .resource-tip-action {
   color: #c7d2d9;
   font-size: 0.75rem;
+}
+
+.album-artwork {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.album-artwork img {
+  display: block;
+  width: min(100%, 14rem);
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
 }
