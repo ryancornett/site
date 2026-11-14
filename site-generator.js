@@ -52,8 +52,7 @@ export function generateSite({
   const { published, migrated, drafts } = getPublishedSongs(songs);
   function freelyGivenMark() {
     const message =
-      "Freely given for private, family, and congregational worship. " +
-      "No strings attached.";
+      "Freely given for private, family, & congregational worship, and for reproduction (audio, video, print, et al.).";
 
     return `
     <span
@@ -320,27 +319,27 @@ export function generateSite({
     }
 
     const albumArtPaths = [
-  ...new Set(
-    list(song.streamingLinks)
-      .map(stream =>
-        typeof stream.albumArt === "string"
-          ? stream.albumArt.trim()
-          : ""
-      )
-      .filter(Boolean)
-  ),
-];
+      ...new Set(
+        list(song.streamingLinks)
+          .map((stream) =>
+            typeof stream.albumArt === "string" ? stream.albumArt.trim() : "",
+          )
+          .filter(Boolean),
+      ),
+    ];
 
-const albumArtwork = albumArtPaths
-  .map(path => `
+    const albumArtwork = albumArtPaths
+      .map(
+        (path) => `
     <img
       src="${e(safeUrl(path))}"
       alt="Album artwork for ${e(song.title)}"
       loading="lazy"
       decoding="async"
     >
-  `)
-  .join("");
+  `,
+      )
+      .join("");
 
     const player = song.demo_mp3
       ? `<audio
@@ -413,19 +412,27 @@ const albumArtwork = albumArtPaths
         : ""
     }
 
-    ${streaming.length ? `
+    ${
+      streaming.length
+        ? `
   <h3 class="resource-group-heading">Also listen on</h3>
 
-  ${albumArtwork ? `
+  ${
+    albumArtwork
+      ? `
     <div class="album-artwork">
       ${albumArtwork}
     </div>
-  ` : ""}
+  `
+      : ""
+  }
 
   <ul class="resource-grid" aria-label="Streaming services">
     ${streaming.join("")}
   </ul>
-` : ""}
+`
+        : ""
+    }
 
     ${
       !player &&
